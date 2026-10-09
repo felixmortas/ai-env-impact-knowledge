@@ -2,3 +2,6 @@
 /.vscode
 _bmad
 .claude
+node_modules/
+dist/
+.astro/
