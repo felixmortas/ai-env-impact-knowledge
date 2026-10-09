@@ -86,6 +86,8 @@ Exemples d'instructions pour limiter la sortie
 
 \textbf{Astuce} : Certains chatbots, comme Claude, proposent de sélectionner le type de réponse. Privilégiez les options \emph{« court »} ou \emph{« concis »} pour optimiser l'efficacité.
 
+Au contraire, l'utilisation de certains verbes d'action comme « justifie », « explique », « analyse » ou « recommande » a tendance à augmenter la quantité de texte généré \cite{adamska2026greenpromptingcharacterizingpromptdriven}.
+
 \subsubsection{Arrêter la génération}
 Si, dès le début de la réponse du chatbot, vous constatez qu'elle ne correspond \textbf{absolument pas} à ce que vous attendiez, \textbf{interrompez-la immédiatement} en cliquant sur le bouton \emph{« Stop »} (généralement représenté par un carré rempli dans un cercle).
 
@@ -290,8 +292,6 @@ Les principaux fournisseurs de cloud indiquent la localisation de leurs data cen
 \item
   Hostinger :
   \href{https://www.hostinger.com/support/1583267-where-are-hostinger-servers-located/}{\ul{https://www.hostinger.com/support/1583267-where-are-hostinger-servers-located/}}
-\item
-  ...
 \end{itemize}
 
 Une fois la région du fournisseur de cloud pré-sélectionnée, il faut évaluer son PUE pour déterminer laquelle a la meilleure efficacité énergétique.
@@ -334,7 +334,6 @@ Enfin, il faut regarder le WUE des data centers des fournisseurs. Bien qu'il ne 
   \href{https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf}
 \end{itemize}
 
-
 \subsubsection{Moteur d'inférence}
 Certains fournisseurs optimisent leurs modèles pour certains moteurs d'inférence \cite{nvidia2026llminference}. Le moteur adéquat est généralement renseigné dans le document de présentation du modèle.
 
@@ -360,8 +359,6 @@ Le \textbf{batch processing} consiste à envoyer un grand nombre de requêtes à
 En général, les fournisseurs de LLM via API proposent le \emph{batch processing} à \textbf{moitié prix} par rapport au traitement classique. Bien qu'il n'existe pas de données précises dans la littérature quantifiant cette réduction, on peut supposer que la variation du prix est corrélée à celle de l'impact énergétique.
 
 Si vous n'avez pas besoin des réponses du LLM en temps réel et que vous avez un \textbf{volume important de requêtes quotidiennes}, il est préférable d'envoyer toutes les requêtes \textbf{en une seule fois}, par exemple à la fin de la journée.
-
-
 
 \subsubsection{Modèles récents}
 Il est essentiel de \textbf{rester informé} sur les nouveaux modèles, car certains peuvent offrir des performances équivalentes à celles de votre modèle actuel \textbf{tout en consommant significativement moins d'énergie}, grâce à une optimisation ou innovation.
