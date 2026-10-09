@@ -1,0 +1,33 @@
+\documentclass[
+]{report}
+\usepackage{biblatex} %Imports biblatex package
+\usepackage{amsmath,amssymb} %amsmath (pour les équations mathématiques avancées) et amssymb (pour des symboles mathématiques supplémentaires)
+\usepackage{subfiles}
+\usepackage{longtable}
+
+\usepackage{graphicx}
+
+\begin{document}
+
+Sources à explorer :
+https://github.com/samuelrince/awesome-green-ai
+
+\title{L'impact environnemental de l'IA générative : comment le réduire peut vous faire gagner en efficacité ?}
+
+On dit qu'un message envoyé à ChatGPT émet x g de cO2e et consomme 1 bouteille d'eau \cite{}. Mais est-ce bien réel ?
+Et bien ... pas du tout ! Du moins, une telle affirmation n'est pas pertinente et met en lumière un gros manque de rigueur scientifique. 
+D'après mes calculs, ce message dans ChatGPT et la réponse qu'il a apporté auront émis x gCO2e et consommé x mL d'eau.
+[IMAGE]
+Cependant, cette conversation de 10 messages m'aidant à coder un site internet avec Mistral Coder aura émis x g CO2e et consommé x mL d'eau.
+[IMAGE]
+Pourquoi une telle différence ? Et bien enfaite, l'impact environnemental d'un message à l'IA, ça dépend de plein de choses. C'est ce que nous allons voir dans cet article.
+
+\subfile{sections/intro}
+\subfile{sections/understand}
+\subfile{sections/measure} % Developper les outils (calculateur) et méthodes (bibliothèques de suivi, compteur tokens observateur) pour calculer son empreinte carbone
+\subfile{sections/reduce} % Fouiller les formations openAI anthropic google etc pour trouver des techniques permettant de réduire l'impact environnemental.
+\subfile{sections/conclusion}
+
+\bibliography{references}   % Link to .bib file (without extension)
+
+\end{document}
