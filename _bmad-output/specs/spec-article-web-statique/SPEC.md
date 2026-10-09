@@ -45,7 +45,7 @@ Opportunité à saisir : l'article de Felix Mortas (5 sections, 66 références)
 
 - **CAP-8**
   - **intent:** Un lecteur peut lire la page en français, anglais ou espagnol, et passer de l'une à l'autre.
-  - **success:** Chaque langue a sa propre URL (`/fr/`, `/en/`, `/es/`) avec `lang` et `hreflang` corrects ; boutons, libellés, messages et dates sont localisés ; un sélecteur de langue renvoie vers la même section quand elle existe ; la racine mène au français ; le build échoue si une chaîne d'interface manque dans une langue ou si les squelettes (titres hiérarchisés, nombre de figures, de tableaux) divergent entre langues.
+  - **success:** Chaque langue a sa propre URL (`/fr/`, `/en/`, `/es/`) avec `lang` et `hreflang` corrects ; boutons, libellés, messages et dates sont localisés ; un sélecteur de langue renvoie vers la même section quand elle existe ; la racine mène au français ; le build échoue si une chaîne d'interface manque dans une langue. Aucune vérification de structure entre langues : le Markdown livré fait foi.
 
 - **CAP-9**
   - **intent:** Le lecteur se repère dans l'article grâce à une table des matières épurée qui suit sa progression de lecture.
@@ -60,7 +60,7 @@ Opportunité à saisir : l'article de Felix Mortas (5 sections, 66 références)
 - Les dates de publication et de dernière modification sont saisies manuellement, jamais déduites de git ni de l'horloge.
 - L'outil de build s'installe en une étape documentée ou est conteneurisé.
 - Les constructions de `markdown-constructs.md` doivent toutes avoir un rendu explicite.
-- Les trois langues ont la même structure : mêmes titres hiérarchisés, mêmes figures et tableaux ; le build le vérifie.
+- Les traductions EN et ES seront fournies plus tard, sans vérification de structure par le build : le Markdown livré fait foi.
 - Ajouter une langue ne demande aucun changement de code : uniquement ses Markdown, ses chaînes d'interface et ses valeurs d'édition localisées.
 - Aucune chaîne d'interface n'est écrite en dur dans les gabarits.
 - Les images sont au format web (PNG, SVG ou WebP) .
@@ -85,7 +85,7 @@ Une personne sans connaissance technique ouvre `https://felixmortas.com/ai-env-i
 
 - Une page longue par langue.
 - URL de base `https://felixmortas.com/`, valeur de config ; URLs de langue sous cette base.
-- Source : un fichier `.md` par section dans `src/<lang>/`, préfixé d'un numéro d'ordre ; titre de l'article en front matter ; `references.bib` et `images/` partagés, sauf image à texte localisé placée dans `src/<lang>/images/`.
+- Source : un fichier `.md` par section dans `src/<lang>/`, préfixé d'un numéro d'ordre ; titre de l'article en front matter ; `references.bib` (dans `src/`) et un unique dossier `images/` partagés par toutes les langues.
 - Citations au format `[@clé]` (convention pandoc).
 - Indices et exposants (CO₂e, m³) écrits en Unicode dans les Markdown (`CO₂e`, `m³`) ; le build n'a rien à convertir.
 - Le contenu actuel (`main.md` + `sections/*.md`, à la racine) devra être déplacé dans `src/fr/` ; `main.md` y inclut les sections par `[sections/x](sections/x.md)` et porte le titre `#` de l'article. Le build décale les titres des sections d'un niveau.
