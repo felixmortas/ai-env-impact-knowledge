@@ -8,15 +8,15 @@ Mais ces chiffres reflètent-ils vraiment la réalité ?
 
 D’après mes calculs, ce simple message envoyé à DeepSeek a émis 0,28 gCO₂e et consommé 0,06 mL d’eau.
 
-![](images/small-prompt-1.png){width=80%}
-![](images/small-prompt-2.png){width=80%}
-![](images/small-prompt-3.png){width=80%}
+![Message court envoyé à DeepSeek : demande d'amélioration d'un paragraphe (1/3)](images/small-prompt-1.png){width=80%}
+![Message court envoyé à DeepSeek : début de la réponse (2/3)](images/small-prompt-2.png){width=80%}
+![Message court envoyé à DeepSeek : fin de la réponse et corrections apportées (3/3)](images/small-prompt-3.png){width=80%}
 
-Pourtant, ce message bien plus complexe envoyé à Claude a, lui, émis 3,23 g de CO$_2$e et consommé 0,8 mL d’eau.
+Pourtant, ce message bien plus complexe envoyé à Claude a, lui, émis 3,23 g de CO₂e et consommé 0,8 mL d’eau.
 
-![](images/big-prompt-1.png){width=80%}
-![](images/big-prompt-2.png){width=80%}
-![](images/big-prompt-3.png){width=80%}
+![Message complexe envoyé à Claude : spécification du modèle de calcul (1/3)](images/big-prompt-1.png){width=80%}
+![Message complexe envoyé à Claude : fin de la demande et début de la réponse (2/3)](images/big-prompt-2.png){width=80%}
+![Message complexe envoyé à Claude : pipeline de calcul et document livré (3/3)](images/big-prompt-3.png){width=80%}
 
 **Comment expliquer une telle différence ?**
 
@@ -24,17 +24,17 @@ L’impact environnemental d’une interaction avec une IA dépend de nombreux p
 
 Dans cet article, nous allons décrypter ce qui se cache derrière ces chiffres et comprendre ce qui fait réellement varier l’empreinte environnementale de nos échanges avec l’IA.
 
-<!-- Sections incluses (anciennement \subfile) -->
-[sections/intro](sections/intro.tex)
+<!-- Sections incluses (anciennement subfile) -->
+[sections/intro](sections/intro.md)
 
-[sections/understand](sections/understand.tex)
+[sections/understand](sections/understand.md)
 
-[sections/measure](sections/measure.tex)
+[sections/measure](sections/measure.md)
 <!-- Développer les outils (calculateur) et méthodes (bibliothèques de suivi, compteur tokens observateur) pour calculer son empreinte carbone -->
 
-[sections/reduce](sections/reduce.tex)
+[sections/reduce](sections/reduce.md)
 <!-- Fouiller les formations openAI anthropic google etc pour trouver des techniques permettant de réduire l'impact environnemental. -->
 
-[sections/conclusion](sections/conclusion.tex)
+[sections/conclusion](sections/conclusion.md)
 
 <!-- Bibliographie : references.bib -->

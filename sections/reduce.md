@@ -18,9 +18,9 @@ Si la réponse attendue à votre question est simple (par exemple : le nombre d'
 Si vous avez le réflexe de formuler votre question dans votre chatbot avec des mots-clés pour gagner du temps, sachez que vous pouvez directement saisir ces mots-clés dans votre moteur de recherche. La réponse sera tout aussi rapide et accessible via plusieurs sources.
 *Exemples : « Plus grande planète », « vitesse de la lumière ».*
 
-Une recherche moyenne sur Google est estimée à consommer **0,3 Wh** d'énergie et à émettre 0,2 g de CO$_2$e émis en 2009 [@holzele2009powering], mais cette valeur n'est certainement plus valable. Une étude récente estime les nouvelles valeurs à 0,03 Wh et 0,02 g de CO$_2$e, soit 10x moins que précédemment [@vanderbauwhede2025estimatingincreaseemissionscaused].
-Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistral Large 2 avec 400 tokens en sortie émet 1,14 g de CO$_2$e [@mistralai2025environmental].
-Google estime ces valeurs à 0,24 Wh et 0,03 g de CO$_2$e pour une requête médiane à Gemini [@elsworth2025measuringenvironmentalimpactdelivering].
+Une recherche moyenne sur Google est estimée à consommer **0,3 Wh** d'énergie et à émettre 0,2 g de CO₂e émis en 2009 [@holzele2009powering], mais cette valeur n'est certainement plus valable. Une étude récente estime les nouvelles valeurs à 0,03 Wh et 0,02 g de CO₂e, soit 10x moins que précédemment [@vanderbauwhede2025estimatingincreaseemissionscaused].
+Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistral Large 2 avec 400 tokens en sortie émet 1,14 g de CO₂e [@mistralai2025environmental].
+Google estime ces valeurs à 0,24 Wh et 0,03 g de CO₂e pour une requête médiane à Gemini [@elsworth2025measuringenvironmentalimpactdelivering].
 
 **Attention** : comme indiqué dans les parties précédentes, il n'est pas pertinent de donner une valeur précise à l'impact environnemental d'une requête moyenne adressée à un LLM. Cet impact dépend en effet de nombreux facteurs, déjà mentionnés plus haut.
 
@@ -148,7 +148,7 @@ Au fil de la conversation, plusieurs branches peuvent se créer à différents n
 - D'**économiser le nombre de tokens** envoyés au modèle.
 - De créer une **méthode de prompting hiérarchisée et spécialisée**.
 
-![Exemple d'arborescence des branches d'une conversation avec un chatbot.](images/conv-branching-diagram.pdf){width=80%}
+![Exemple d'arborescence des branches d'une conversation avec un chatbot.](images/conv-branching-diagram.png){width=80%}
 
 ### Créer une nouvelle conversation pour chaque nouveau sujet
 

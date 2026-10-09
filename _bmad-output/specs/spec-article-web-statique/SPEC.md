@@ -63,7 +63,8 @@ Opportunité à saisir : l'article de Felix Mortas (5 sections, 66 références)
 - Les trois langues ont la même structure : mêmes titres hiérarchisés, mêmes figures et tableaux ; le build le vérifie.
 - Ajouter une langue ne demande aucun changement de code : uniquement ses Markdown, ses chaînes d'interface et ses valeurs d'édition localisées.
 - Aucune chaîne d'interface n'est écrite en dur dans les gabarits.
-- Les images sont au format web (PNG, SVG ou WebP).
+- Les images sont au format web (PNG, SVG ou WebP) .
+- Chaque image a une légende non vide, utilisée comme `alt` ; le build échoue sinon.
 - Licence : CC BY-NC 4.0, qui interdit tout usage commercial même en vous citant
 
 ## Non-goals
@@ -86,7 +87,8 @@ Une personne sans connaissance technique ouvre `https://felixmortas.com/ai-env-i
 - URL de base `https://felixmortas.com/`, valeur de config ; URLs de langue sous cette base.
 - Source : un fichier `.md` par section dans `src/<lang>/`, préfixé d'un numéro d'ordre ; titre de l'article en front matter ; `references.bib` et `images/` partagés, sauf image à texte localisé placée dans `src/<lang>/images/`.
 - Citations au format `[@clé]` (convention pandoc).
-- Indices et exposants (CO₂e, m³) en Unicode ou en syntaxe Markdown.
+- Indices et exposants (CO₂e, m³) écrits en Unicode dans les Markdown (`CO₂e`, `m³`) ; le build n'a rien à convertir.
+- Le contenu actuel (`main.md` + `sections/*.md`, à la racine) devra être déplacé dans `src/fr/` ; `main.md` y inclut les sections par `[sections/x](sections/x.md)` et porte le titre `#` de l'article. Le build décale les titres des sections d'un niveau.
 - L'entrée BibTeX est de type `@misc` (auteur, titre, année, URL, note d'accès) générée depuis la config.
 - Prénom, nom, email, URL GitHub et URL LinkedIn sont saisis par Felix dans la config ; le build échoue tant qu'une valeur reste un placeholder, date de publication comprise.
 - Mise en page sobre, thème clair/sombre automatique.

@@ -45,15 +45,15 @@ Les tokens générés par le modèle de **raisonnement** sont **non visibles** p
 Ainsi, nous comprenons que le nombre de tokens traités, en particulier les tokens de sortie, a un fort impact sur l'environnement.
 Pour mesurer cet impact et quantifier son empreinte carbone, énergétique et hydrique, trois indicateurs clés peuvent être suivis, aussi bien pour les tokens d'entrée que pour les tokens de sortie :
 
-- les émissions de gaz à effet de serre, exprimées en masse de CO$_2$ équivalent (t, kg, g, mg, etc.) ;
+- les émissions de gaz à effet de serre, exprimées en masse de CO₂ équivalent (t, kg, g, mg, etc.) ;
 - la consommation d'énergie, exprimée en watt-heures (kWh, Wh, etc.) ;
-- la consommation d'eau, exprimée en volume (m$^3$, L, mL, etc.).
+- la consommation d'eau, exprimée en volume (m³, L, mL, etc.).
 
 ## Choisir où héberger son modèle
 
 ### Les facteurs d'émission par pays
 
-Une IA générative, comme un LLM (*Large Language Model*), est un programme exécuté sur un ordinateur. Cela peut être votre machine personnelle, mais cela se fait généralement dans des centres de données. Son fonctionnement nécessite de l'énergie, ce qui engendre un impact environnemental, mesuré ici en **gCO$_2$e/kWh**.
+Une IA générative, comme un LLM (*Large Language Model*), est un programme exécuté sur un ordinateur. Cela peut être votre machine personnelle, mais cela se fait généralement dans des centres de données. Son fonctionnement nécessite de l'énergie, ce qui engendre un impact environnemental, mesuré ici en **gCO₂e/kWh**.
 
 Les différents services permettant d'utiliser un LLM, et consommant de l'électricité, sont les suivants :
 
@@ -107,7 +107,7 @@ Cette eau dîte consommée est en réalité évaporée dans l'atmosphère. L'eau
 
 Quelques exemples de WUE :
 
-| **WUE (L/kWh)** | **Source** | **Consommation d'eau annuelle (m$^3$)** | **Équivalent (piscines olympiques)** |
+| **WUE (L/kWh)** | **Source** | **Consommation d'eau annuelle (m³)** | **Équivalent (piscines olympiques)** |
 |:----------------|:-----------------------|----------:|------:|
 | 0,12  | Amazon                | Inconnu   | --    |
 | 0,255 | Microsoft             | 8 170 000 | 3 268 |
