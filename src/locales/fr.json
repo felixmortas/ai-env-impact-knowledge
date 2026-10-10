@@ -2,5 +2,12 @@
   "page.title": "Impact environnemental de l'IA",
   "page.lang": "fr",
   "references.title": "Références",
-  "references.backlink": "Retour à l'appel de citation"
+  "references.backlink": "Retour à l'appel de citation",
+  "author.by": "Par",
+  "author.published": "Publié le",
+  "author.modified": "Dernière modification le",
+  "author.license": "Licence :",
+  "author.contact": "Écrire à l'auteur",
+  "author.github": "GitHub",
+  "author.linkedin": "LinkedIn"
 }

@@ -6,7 +6,7 @@ import { join } from 'node:path';
 const full = readFileSync('dist/fr/index.html', 'utf8');
 // `html` = corps de l'article, sans la section « Références » (générée depuis le .bib).
 assert.ok(full.includes('<section class="references"'), 'section Références absente');
-const html = full.split('<section class="references"')[0];
+const html = full.split('<section class="references"')[0].replace(/<aside class="author-block"[\s\S]*?<\/aside>/, '');
 const sources = ['src/fr/main.md', ...readdirSync('src/fr/sections').map((f) => join('src/fr/sections', f))]
   .map((f) => readFileSync(f, 'utf8'))
   .join('\n');
@@ -202,4 +202,20 @@ test('mise en page : thème sombre automatique, colonne bornée, pas de ressourc
 test('mise en page : la feuille de style est livrée dans la page', () => {
   assert.match(full, /<style[^>]*>[\s\S]*--measure[\s\S]*prefers-color-scheme:\s*dark/);
   assert.match(full, /<meta name="color-scheme" content="light dark"/);
+});
+
+test('bloc auteur : valeurs visibles, email absent du texte visible, lien mailto', () => {
+  const config = JSON.parse(readFileSync('src/config.json', 'utf8'));
+  const bloc = full.match(/<aside class="author-block"[\s\S]*?<\/aside>/)?.[0] ?? '';
+  assert.ok(bloc, 'bloc auteur absent');
+  assert.equal((full.match(/<h1[ >]/g) ?? []).length, 1, 'un seul h1');
+  assert.match(full, /<\/h1>\s*<aside class="author-block"/, 'bloc juste après le h1');
+  const visible = bloc.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+  assert.ok(visible.includes(`${config.firstName} ${config.lastName}`));
+  assert.ok(visible.includes('GitHub') && visible.includes('LinkedIn'));
+  assert.ok(visible.includes(config.license.name));
+  assert.ok(!visible.includes(config.email), 'email en clair dans le texte visible');
+  assert.match(bloc, /<a href="mailto:[^"]+">Écrire à l(?:'|&#39;)auteur<\/a>/);
+  assert.ok(bloc.includes(`href="${config.license.url}"`));
+  assert.equal((bloc.match(/<time datetime="\d{4}-\d{2}-\d{2}">[^<]+<\/time>/g) ?? []).length, 2);
 });

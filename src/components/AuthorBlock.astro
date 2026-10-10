@@ -1,0 +1,21 @@
+---
+import { t } from '../i18n';
+import { getConfig } from '../lib/config';
+import { formatDate } from '../lib/format-date';
+
+const config = getConfig();
+const lang = t('page.lang');
+---
+<aside class="author-block" aria-label={t('author.by')}>
+  <p class="author-name">{t('author.by')} {config.firstName} {config.lastName}</p>
+  <ul class="author-links">
+    <li><a href={`mailto:${config.email}`}>{t('author.contact')}</a></li>
+    <li><a href={config.githubUrl}>{t('author.github')}</a></li>
+    <li><a href={config.linkedinUrl}>{t('author.linkedin')}</a></li>
+  </ul>
+  <p class="author-meta">
+    {t('author.published')} <time datetime={config.publishedDate}>{formatDate(config.publishedDate, lang)}</time>
+    · {t('author.modified')} <time datetime={config.modifiedDate}>{formatDate(config.modifiedDate, lang)}</time>
+  </p>
+  <p class="author-meta">{t('author.license')} <a href={config.license.url}>{config.license.name}</a></p>
+</aside>

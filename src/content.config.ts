@@ -27,11 +27,16 @@ const article = defineCollection({
       });
       store.clear();
       const rendered = await renderMarkdown(markdown);
+      // Sépare le h1 du reste pour insérer le bloc auteur juste en dessous.
+      const h1End = rendered.html.indexOf('</h1>');
+      if (h1End === -1) throw new Error('Titre h1 introuvable dans le rendu');
+      const h1Html = rendered.html.slice(0, h1End + 5);
+      const bodyHtml = rendered.html.slice(h1End + 5);
       store.set({
         id: 'fr',
-        data: { title, references },
+        data: { title, references, h1Html },
         body: markdown,
-        rendered: { ...rendered, html: applyTableCaptions(rendered.html) },
+        rendered: { ...rendered, html: applyTableCaptions(bodyHtml) },
       });
       watcher?.add(fileURLToPath(new URL('./fr', import.meta.url)));
       watcher?.add(fileURLToPath(new URL('./references.bib', import.meta.url)));

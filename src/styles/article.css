@@ -130,3 +130,20 @@ figcaption {
   outline: 2px solid var(--link);
   outline-offset: 2px;
 }
+
+.author-block {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.author-block p { margin: 0.25rem 0; }
+
+.author-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}

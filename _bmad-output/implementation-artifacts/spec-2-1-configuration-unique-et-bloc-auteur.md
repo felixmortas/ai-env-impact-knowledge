@@ -2,7 +2,7 @@
 title: 'Story 2.1 : Configuration unique et bloc auteur'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -79,3 +79,38 @@ L'email dans le HTML source reste dans le `href` (inévitable pour un `mailto:`)
 **Commands:**
 - `npm test` -- expected: tests verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Configuration et validation**
+
+- Point d'entrée : validation stricte (placeholder, champs, dates, URLs https, email).
+  [`config.ts:36`](../../src/lib/config.ts#L36)
+
+- Source unique éditée à la main ; placeholders volontaires tant que l'auteur n'a pas répondu.
+  [`config.json:1`](../../src/config.json#L1)
+
+- Dates ISO formatées selon la langue, en UTC, sans horloge.
+  [`format-date.ts:2`](../../src/lib/format-date.ts#L2)
+
+**Affichage**
+
+- Bloc auteur : email seulement dans le `href`, texte neutre.
+  [`AuthorBlock.astro:1`](../../src/components/AuthorBlock.astro#L1)
+
+- Le h1 est séparé du corps pour insérer le bloc juste dessous.
+  [`content.config.ts:30`](../../src/content.config.ts#L30)
+
+- Intégration sous le titre.
+  [`index.astro:12`](../../src/pages/fr/index.astro#L12)
+
+**Tests et doc**
+
+- Tests de config : placeholder, champ absent, date, email, URL.
+  [`config.test.ts:1`](../../src/lib/config.test.ts#L1)
+
+- Test de rendu du bloc (un seul h1, bloc juste après).
+  [`rendu.test.ts:207`](../../src/rendu.test.ts#L207)
+
+- Champs à éditer et mise à jour de `modifiedDate`.
+  [`README.md:48`](../../README.md#L48)

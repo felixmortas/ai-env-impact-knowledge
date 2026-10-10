@@ -33,3 +33,10 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-1-7-lecture-integrale-et-mise-en-page-sobre.md`
   summary: Gabarit : pas de lien d'évitement, de balise `<article>`, de `description`/`lang` en prop, de styles `pre`/`blockquote`/`h5-h6` ni d'impression.
   evidence: Hors périmètre de la story (métadonnées et blocs prévus aux epics 2 et 3) ; aucun `pre`/`blockquote` dans le rendu actuel.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-1-configuration-unique-et-bloc-auteur.md`
+  summary: Valider la config dès le démarrage du serveur de dev (intégration Astro) plutôt qu'au premier rendu du bloc auteur.
+  evidence: `getConfig()` n'est appelé que dans `AuthorBlock.astro` ; l'erreur apparaît tardivement.
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-1-configuration-unique-et-bloc-auteur.md`
+  summary: Remplacer la liste manuelle de fichiers de test dans `package.json` par un glob.
+  evidence: chaque story ajoute un fichier à la main ; risque d'oubli.

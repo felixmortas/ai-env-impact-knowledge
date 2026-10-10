@@ -45,6 +45,12 @@ Le gabarit partagé `src/layouts/Base.astro` fournit `<html lang>` (via `t('page
 
 Vérification manuelle à 375 px (aucun outil de test navigateur n'est installé) : `npm run build && npm run preview`, ouvrir `/fr/` dans un navigateur, activer le mode appareil (375 px de large) et exécuter dans la console `document.documentElement.scrollWidth <= window.innerWidth` : le résultat doit être `true` ; les tableaux défilent dans leur conteneur. Pour le thème sombre, émuler `prefers-color-scheme: dark` dans les outils de développement.
 
+## Configuration et bloc auteur
+
+`src/config.json` est la seule source des informations d'auteur, de dates et de licence (bloc affiché sous le titre, puis métadonnées et BibTeX dans les stories suivantes). Champs à éditer à la main : `firstName`, `lastName`, `email`, `githubUrl`, `linkedinUrl`, `publishedDate`, `modifiedDate` (format `AAAA-MM-JJ`), `license` (`name`, `url`) et `siteUrl`. Les dates sont globales à toutes les langues, jamais déduites de git ni de l'horloge : `publishedDate` ne change plus après publication ; mettre à jour `modifiedDate` à la main à chaque correction publiée de l'article.
+
+`src/lib/config.ts` valide strictement la configuration : le build échoue, en nommant le champ, si une valeur est absente, vide, reste le placeholder `À_RENSEIGNER` ou si une date est invalide. L'email n'apparaît que dans le `href` du lien `mailto:` (texte visible neutre).
+
 ## Chaînes d'interface
 
 Toutes les chaînes d'interface sont dans `src/locales/fr.json` et lues via `src/i18n.ts`. Une clé absente fait échouer le build en nommant la clé.
