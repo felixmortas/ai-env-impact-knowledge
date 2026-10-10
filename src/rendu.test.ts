@@ -6,7 +6,7 @@ import { join } from 'node:path';
 const full = readFileSync('dist/fr/index.html', 'utf8');
 // `html` = corps de l'article, sans la section « Références » (générée depuis le .bib).
 assert.ok(full.includes('<section class="references"'), 'section Références absente');
-const html = full.split('<section class="references"')[0].replace(/<aside class="author-block"[\s\S]*?<\/aside>/, '');
+const html = full.split('<section class="references"')[0].replace(/<aside class="author-block"[\s\S]*?<\/aside>/, '').replace(/<nav class="toc"[\s\S]*?<\/nav>/, '');
 const sources = ['src/fr/main.md', ...readdirSync('src/fr/sections').map((f) => join('src/fr/sections', f))]
   .map((f) => readFileSync(f, 'utf8'))
   .join('\n');
@@ -243,4 +243,49 @@ test('citation : le bouton Copier reçoit exactement l\'entrée affichée', () =
   assert.ok(island);
   const props = JSON.parse(island.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&'));
   assert.equal(props.text[1], entry);
+});
+
+test('table des matières : liens ancrés vers des id existants, ordre de l\'article, sans titres de paragraphe', () => {
+  const m = /<nav class="toc" aria-label="Table des matières">([\s\S]*?)<\/nav>/.exec(full);
+  assert.ok(m, 'nav de la table absent');
+  const hrefs = [...m[1].matchAll(/<a href="#([^"]+)">([^<]*)<\/a>/g)];
+  assert.ok(hrefs.length >= 6);
+  const ids = [...full.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]);
+  let last = -1;
+  for (const [, id] of hrefs) {
+    assert.ok(ids.includes(id), `id manquant : ${id}`);
+    const pos = full.indexOf(`id="${id}"`, full.indexOf('</nav>'));
+    assert.ok(pos > last, `ordre non respecté : ${id}`);
+    last = pos;
+  }
+  assert.equal(hrefs[hrefs.length - 1][1], 'references');
+  assert.match(m[1], /<ol>[\s\S]*<ol>/, 'pas d\'imbrication');
+  assert.doesNotMatch(m[1], /<li>\s*<\/li>|<ol>\s*<\/ol>/);
+  assert.doesNotMatch(m[1], /Pourquoi \?|Exemple concret|Règle générale/);
+  const h1Id = /<h1 id="([^"]+)"/.exec(full)![1];
+  assert.ok(!hrefs.some(([, id]) => id === h1Id), 'le h1 figure dans la table');
+});
+
+test('table des matières : correspond exactement aux titres h2 à h5 de l\'article, avec la bonne imbrication', () => {
+  const m = /<nav class="toc" aria-label="Table des matières">([\s\S]*?)<\/nav>/.exec(full)!;
+  const heads = [...html.matchAll(/<h([2-5]) id="([^"]+)"/g)].map((x) => ({ depth: Number(x[1]), id: x[2] }));
+  assert.ok(heads.length > 0);
+  const links = [...m[1].matchAll(/<a href="#([^"]+)">/g)].map((x) => x[1]);
+  assert.deepEqual(links, [...heads.map((x) => x.id), 'references']);
+  // Profondeur d'imbrication des <ol> = rang de niveau dans l'article (h2 → 1, h3 → 2, h4 → 3…) lorsqu'il n'y a pas de saut.
+  let depth = 0;
+  const nesting = new Map<string, number>();
+  for (const tok of m[1].matchAll(/<ol>|<\/ol>|<a href="#([^"]+)">/g)) {
+    if (tok[0] === '<ol>') depth++;
+    else if (tok[0] === '</ol>') depth--;
+    else nesting.set(tok[1], depth);
+  }
+  let prev = 1;
+  for (const { depth: d, id } of heads) {
+    const n = nesting.get(id)!;
+    assert.ok(n >= 1 && n <= d - 1, `imbrication incohérente pour ${id}`);
+    assert.ok(n <= prev + 1, `saut d'imbrication pour ${id}`);
+    prev = n;
+  }
+  assert.equal(heads.find((x) => x.depth === 3) && nesting.get(heads.find((x) => x.depth === 3)!.id), 2);
 });

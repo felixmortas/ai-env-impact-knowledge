@@ -72,3 +72,7 @@ Le JavaScript n'est utilisé que pour partager (îlot React `src/components/Shar
 ## Citation BibTeX
 
 Le bloc « Citer » (`src/components/CiteBlock.astro`, `<details>` lisible sans JavaScript) affiche une entrée `@misc` construite à la compilation par `src/lib/bibtex.ts` : `author` (nom, prénom) et l'année (extraite de `publishedDate`) viennent de `src/config.json` ; `title` est le titre de l'article de la langue ; `url` est l'URL canonique (`siteUrl` + `/fr/`) ; `note` est le gabarit `cite.accessNote` de `src/locales/fr.json` rempli avec `modifiedDate` (jamais l'horloge). La clé est `<nom><année><premier mot significatif du titre>`, sans accent. Les caractères spéciaux (`& % _ # $ { } ~ ^ \`) sont échappés ; aucune adresse email n'entre dans l'entrée. Modifier `config.json` puis rebuild met l'entrée à jour. Le bouton Copier (îlot React `src/components/CopyButton.tsx`) copie l'entrée exacte et affiche « Entrée copiée ». Tests : `src/lib/bibtex.test.ts`.
+
+## Table des matières
+
+La table (`src/components/Toc.astro`, `<nav>` étiqueté par `toc.label`) est générée à la compilation depuis les titres `h2` à `h5` rendus (`src/lib/toc.ts`), avec les mêmes `id` que le contenu, plus l'entrée « Références ». Le `h1` et les titres de paragraphe en gras n'y figurent pas. Liste `ol` imbriquée de liens ancrés, placée sous le bloc auteur, fonctionnelle sans JavaScript. Tests : `src/lib/toc.test.ts` et `src/rendu.test.ts`.

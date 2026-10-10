@@ -2,7 +2,7 @@
 title: 'Story 2.4 : Table des matières sans JavaScript'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -50,11 +50,11 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/toc.ts` -- construire l'arbre depuis `headings` (h2–h5) ; ajouter Références -- FR9
-- [ ] `src/components/Toc.astro` + intégration au gabarit -- FR9
-- [ ] Styles : lisibles, focus visible, aucune perte de texte de l'article -- FR9
-- [ ] Tests : arbre, `href` ↔ `id`, absence des titres de paragraphe -- FR9
-- [ ] `README.md` -- indiquer que la table est générée des titres
+- [x] `src/lib/toc.ts` -- construire l'arbre depuis `headings` (h2–h5) ; ajouter Références -- FR9
+- [x] `src/components/Toc.astro` + intégration au gabarit -- FR9
+- [x] Styles : lisibles, focus visible, aucune perte de texte de l'article -- FR9
+- [x] Tests : arbre, `href` ↔ `id`, absence des titres de paragraphe -- FR9
+- [x] `README.md` -- indiquer que la table est générée des titres
 
 **Acceptance Criteria:**
 - Given `dist/fr/index.html`, when on liste les liens de la table, then chaque `href="#…"` correspond à un `id` du document et l'ordre suit celui de l'article.
@@ -74,3 +74,34 @@ Cette story garantit la base FR9 sans JS. 2.5 réutilisera le même balisage : c
 - `npm test` -- expected: tests verts
 - `npm run test:rendu` -- expected: tests de rendu verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Construction de l'arbre**
+
+- Point d'entrée : liste plate h2–h5 → arbre, sans nœud vide en cas de saut de niveau.
+  [`toc.ts:8`](../../src/lib/toc.ts#L8)
+
+- Rendu statique récursif en `ol` imbriquées de liens ancrés.
+  [`TocList.astro:7`](../../src/components/TocList.astro#L7)
+
+**Intégration à la page**
+
+- `headings` de `render()` + entrée « Références » ajoutée à la main.
+  [`index.astro:12`](../../src/pages/fr/index.astro#L12)
+
+- `nav` étiqueté via `t('toc.label')`.
+  [`Toc.astro:10`](../../src/components/Toc.astro#L10)
+
+**Style et documentation**
+
+- Bloc sobre, sans puces ; focus visible hérité.
+  [`article.css:182`](../../src/styles/article.css#L182)
+
+**Tests**
+
+- Cas limites de l'arbre : niveaux sautés, h1/h6, Références.
+  [`toc.test.ts:1`](../../src/lib/toc.test.ts#L1)
+
+- Rendu : liens ↔ titres réels, imbrication, absence des titres de paragraphe.
+  [`rendu.test.ts:248`](../../src/rendu.test.ts#L248)
