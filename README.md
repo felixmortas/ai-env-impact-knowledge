@@ -30,6 +30,8 @@ Autres commandes :
 
 `src/content.config.ts` charge `src/fr/main.md` via `src/lib/assemble-article.ts` : chaque lien `[sections/x](sections/x.md)` est remplacé par le contenu du fichier (titres `#`→`h2`, `##`→`h3`…), les commentaires HTML sont retirés, une inclusion introuvable fait échouer le build. Le rendu est fait par Astro, sans conversion typographique (`smartypants: false`) pour rester fidèle à la source.
 
+Les tableaux pipe sont légendés par une ligne `Table: légende {#tab:id}` placée **sous** le tableau (convention Pandoc) : `src/lib/tables.ts` la convertit en `<caption>` (sans l'identifiant) et enveloppe le tableau dans un conteneur à défilement horizontal local. Un `Table:` sans tableau juste au-dessus fait échouer le build. La ligne `Source : …` qui suit reste un paragraphe sous le tableau.
+
 ## Chaînes d'interface
 
 Toutes les chaînes d'interface sont dans `src/locales/fr.json` et lues via `src/i18n.ts`. Une clé absente fait échouer le build en nommant la clé.

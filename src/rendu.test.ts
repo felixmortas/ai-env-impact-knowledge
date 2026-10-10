@@ -59,3 +59,23 @@ test('caractères spéciaux littéraux', () => {
   const typo = (t: string) => (t.match(/[‘’“”]/g) ?? []).length;
   assert.equal(typo(html), typo(sources), 'guillemets typographiques ajoutés ou perdus');
 });
+
+test('tableaux : légende en <caption>, identifiant retiré, Source juste après', () => {
+  assert.doesNotMatch(html, /\{#|Table:/);
+  const tableaux = [...html.matchAll(/<div class="table-scroll"><table>\s*<caption>([^<]+)<\/caption>[\s\S]*?<\/table><\/div>\s*<p>(Source : [\s\S]*?)<\/p>/g)];
+  const legendes = [...sources.matchAll(/^Table: (.*?) \{#tab:[^}]+\}$/gm)].map((m) => m[1]);
+  assert.equal(tableaux.length, legendes.length);
+  assert.deepEqual(tableaux.map((m) => decode(m[1])), legendes.map(decode));
+  assert.match(tableaux[0][2], /^Source : Rapports environnementaux$/);
+});
+
+test('tableaux : -- littéral et alignements conservés', () => {
+  assert.equal((html.match(/<td style="text-align: right">--<\/td>/g) ?? []).length, 2);
+  assert.ok(html.includes('<th style="text-align: left"><strong>WUE (L/kWh)</strong></th>'));
+  assert.ok(html.includes('<td style="text-align: right">8 170 000</td>'));
+  assert.doesNotMatch(html, /<td[^>]*>[–—]<\/td>/);
+});
+
+test('tableaux : conteneur à défilement horizontal local', () => {
+  assert.match(readFileSync('src/styles/article.css', 'utf8'), /\.table-scroll\s*{[^}]*overflow-x:\s*auto/);
+});

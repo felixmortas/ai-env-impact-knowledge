@@ -2,7 +2,7 @@
 title: 'Story 1.4 : Tableaux'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/implementation-artifacts/epic-1-context.md'
@@ -48,11 +48,11 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/tables.ts` -- associer chaque `Table: légende {#id}` au tableau qui le précède ; produire `table`/`caption` sans identifiant ; échouer si `Table:` est orphelin -- FR17
-- [ ] `src/lib/assemble-article.ts` ou pipeline de rendu -- brancher la transformation, `Source : …` reste le paragraphe suivant -- FR17
-- [ ] `src/styles/article.css` -- conteneur à défilement horizontal local -- UX-DR5
-- [ ] `src/lib/tables.test.ts`, `src/rendu.test.ts` -- couvrir la matrice -- FR17, FR19
-- [ ] `README.md` -- documenter la convention `Table:`
+- [x] `src/lib/tables.ts` -- associer chaque `Table: légende {#id}` au tableau qui le précède ; produire `table`/`caption` sans identifiant ; échouer si `Table:` est orphelin -- FR17
+- [x] `src/lib/assemble-article.ts` ou pipeline de rendu -- brancher la transformation, `Source : …` reste le paragraphe suivant -- FR17
+- [x] `src/styles/article.css` -- conteneur à défilement horizontal local -- UX-DR5
+- [x] `src/lib/tables.test.ts`, `src/rendu.test.ts` -- couvrir la matrice -- FR17, FR19
+- [x] `README.md` -- documenter la convention `Table:`
 
 **Acceptance Criteria:**
 - Given `dist/fr/index.html`, when on cherche `{#` ou `Table:`, then aucune occurrence n'est visible.
@@ -73,3 +73,32 @@ La légende est **sous** le tableau dans la source (convention Pandoc) ; `captio
 - `npm test` -- expected: tests verts
 - `npm run test:rendu` -- expected: tests de rendu verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Transformation des légendes**
+
+- Marque `Table:` avant rendu, échoue si orphelin (fichier et ligne).
+  [`tables.ts:15`](../../src/lib/tables.ts#L15)
+
+- Après rendu : `<caption>` en premier enfant, tableau enveloppé.
+  [`tables.ts:44`](../../src/lib/tables.ts#L44)
+
+**Branchement**
+
+- Marquage appliqué à chaque section incluse.
+  [`assemble-article.ts:41`](../../src/lib/assemble-article.ts#L41)
+
+- Post-traitement du HTML rendu par le loader.
+  [`content.config.ts:18`](../../src/content.config.ts#L18)
+
+**Style et tests**
+
+- Défilement horizontal local du tableau.
+  [`article.css:8`](../../src/styles/article.css#L8)
+
+- Cas de la matrice sur le module.
+  [`tables.test.ts:1`](../../src/lib/tables.test.ts#L1)
+
+- Cas de rendu sur `dist/fr/index.html`.
+  [`rendu.test.ts:63`](../../src/rendu.test.ts#L63)

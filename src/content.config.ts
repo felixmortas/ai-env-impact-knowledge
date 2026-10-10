@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { fileURLToPath } from 'node:url';
 import { assembleArticle } from './lib/assemble-article';
+import { applyTableCaptions } from './lib/tables';
 
 const article = defineCollection({
   loader: {
@@ -9,11 +10,12 @@ const article = defineCollection({
       const mainPath = fileURLToPath(new URL('./fr/main.md', import.meta.url));
       const { title, markdown } = assembleArticle(mainPath);
       store.clear();
+      const rendered = await renderMarkdown(markdown);
       store.set({
         id: 'fr',
         data: { title },
         body: markdown,
-        rendered: await renderMarkdown(markdown),
+        rendered: { ...rendered, html: applyTableCaptions(rendered.html) },
       });
       watcher?.add(fileURLToPath(new URL('./fr', import.meta.url)));
     },

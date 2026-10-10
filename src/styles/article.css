@@ -3,3 +3,8 @@ main,
 main a {
   overflow-wrap: anywhere;
 }
+
+/* Un tableau large défile dans son conteneur, jamais la page. */
+.table-scroll {
+  overflow-x: auto;
+}

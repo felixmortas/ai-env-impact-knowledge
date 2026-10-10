@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { markTableCaptions } from './tables.ts';
 
 const INCLUDE = /^\[sections\/[^\]\n]+\]\((sections\/[^)\n]+\.md)\)\s*$/;
 const COMMENT = /<!--[\s\S]*?-->/g;
@@ -26,7 +27,7 @@ export function shiftHeadings(markdown: string): string {
 /** Assemble `main.md` : chaque ligne d'inclusion est remplacée par le contenu du fichier, titres décalés. */
 export function assembleArticle(mainPath: string): Article {
   const dir = dirname(mainPath);
-  const main = stripComments(readFileSync(mainPath, 'utf8'));
+  const main = markTableCaptions(stripComments(readFileSync(mainPath, 'utf8')), mainPath);
   const lines = main.split('\n').map((line) => {
     const match = INCLUDE.exec(line);
     if (!match) return line;
@@ -37,7 +38,7 @@ export function assembleArticle(mainPath: string): Article {
     } catch {
       throw new Error(`Inclusion introuvable : "${match[1]}" (référencée dans ${mainPath})`);
     }
-    return shiftHeadings(stripComments(content).trim());
+    return markTableCaptions(shiftHeadings(stripComments(content).trim()), file);
   });
   const markdown = lines.join('\n');
   const title = /^# (.+)$/m.exec(markdown)?.[1].trim();
