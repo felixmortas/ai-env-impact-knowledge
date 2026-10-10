@@ -179,9 +179,9 @@ test('complétude : 2 tableaux, 8 images, titres de section', () => {
   assert.equal((html.match(/<h1/g) ?? []).length, 1);
 });
 
-test('sans JavaScript : seul l\'îlot de partage est scripté, aucun bouton rendu, aucune ressource tierce', () => {
-  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; le seul îlot est le bouton de partage.
-  assert.equal((full.match(/<astro-island/g) ?? []).length, 1);
+test('sans JavaScript : seuls les îlots de partage et de copie sont scriptés, aucun bouton rendu, aucune ressource tierce', () => {
+  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; les seuls îlots sont les boutons Partager et Copier.
+  assert.equal((full.match(/<astro-island/g) ?? []).length, 2);
   assert.match(full, /component-export="default"[^>]*client="only"/);
   assert.doesNotMatch(full, /<button/i);
   assert.doesNotMatch(full, /<script[^>]+src="https?:/i);
@@ -223,4 +223,24 @@ test('bloc auteur : valeurs visibles, email absent du texte visible, lien mailto
   assert.match(bloc, /<a href="mailto:[^"]+">Écrire à l(?:'|&#39;)auteur<\/a>/);
   assert.ok(bloc.includes(`href="${config.license.url}"`));
   assert.equal((bloc.match(/<time datetime="\d{4}-\d{2}-\d{2}">[^<]+<\/time>/g) ?? []).length, 2);
+});
+
+test('citation : bloc <details> avec entrée @misc lisible sans JavaScript', () => {
+  const m = /<details class="cite-block"[\s\S]*?<\/details>/.exec(full);
+  assert.ok(m);
+  assert.match(m[0], /<pre[^>]*><code>@misc\{mortas2026impact,/);
+  assert.match(m[0], /author = \{Mortas, Felix\}/);
+  assert.match(m[0], /url = \{https:\/\/[^}]*\/fr\/\}/);
+  assert.match(m[0], /note = \{Consulté en ligne/);
+  assert.doesNotMatch(m[0], /@felixmortas|contact@/);
+});
+
+test('citation : le bouton Copier reçoit exactement l\'entrée affichée', () => {
+  const pre = /<pre[^>]*><code>([\s\S]*?)<\/code><\/pre>/.exec(full);
+  assert.ok(pre);
+  const entry = pre[1].replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+  const island = [...full.matchAll(/<astro-island[^>]*props="([^"]*)"/g)].map((m) => m[1]).find((p) => p.includes('&quot;text&quot;'));
+  assert.ok(island);
+  const props = JSON.parse(island.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&'));
+  assert.equal(props.text[1], entry);
 });

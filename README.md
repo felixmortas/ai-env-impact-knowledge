@@ -68,3 +68,7 @@ Le site est servi à `https://felixmortas.com/ai-env-impact-knowledge` (`site` e
 ## Partage
 
 Le JavaScript n'est utilisé que pour partager (îlot React `src/components/ShareButton.tsx`, `client:only` : le bouton n'existe pas dans le HTML statique, donc rien de cassé sans JS). Le bouton appelle la Web Share API avec le titre et l'URL canonique (`siteUrl` + `/fr/`, `src/lib/urls.ts`, indépendante de l'URL courante) ; sans Web Share, il copie cette URL et affiche « Lien copié » dans une région `aria-live`. Si la copie est refusée, un message d'échec s'affiche avec l'URL sélectionnable. La logique est dans `src/lib/share.ts` (testée avec `npm test`).
+
+## Citation BibTeX
+
+Le bloc « Citer » (`src/components/CiteBlock.astro`, `<details>` lisible sans JavaScript) affiche une entrée `@misc` construite à la compilation par `src/lib/bibtex.ts` : `author` (nom, prénom) et l'année (extraite de `publishedDate`) viennent de `src/config.json` ; `title` est le titre de l'article de la langue ; `url` est l'URL canonique (`siteUrl` + `/fr/`) ; `note` est le gabarit `cite.accessNote` de `src/locales/fr.json` rempli avec `modifiedDate` (jamais l'horloge). La clé est `<nom><année><premier mot significatif du titre>`, sans accent. Les caractères spéciaux (`& % _ # $ { } ~ ^ \`) sont échappés ; aucune adresse email n'entre dans l'entrée. Modifier `config.json` puis rebuild met l'entrée à jour. Le bouton Copier (îlot React `src/components/CopyButton.tsx`) copie l'entrée exacte et affiche « Entrée copiée ». Tests : `src/lib/bibtex.test.ts`.

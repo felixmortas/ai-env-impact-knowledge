@@ -4,6 +4,7 @@ import { getConfig } from '../lib/config';
 import { formatDate } from '../lib/format-date';
 import { canonicalUrl } from '../lib/urls';
 import ShareButton from './ShareButton';
+import CiteBlock from './CiteBlock.astro';
 
 const config = getConfig();
 const lang = t('page.lang');
@@ -26,3 +27,4 @@ const { title } = Astro.props;
     <ShareButton client:only="react" title={title} url={canonicalUrl(lang)} label={t('share.label')} copied={t('share.copied')} failed={t('share.failed')} urlLabel={t('share.url')} />
   </div>
 </aside>
+<CiteBlock title={title} />

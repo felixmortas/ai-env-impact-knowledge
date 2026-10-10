@@ -13,5 +13,10 @@
   "share.label": "Partager",
   "share.copied": "Lien copié",
   "share.failed": "Impossible de copier le lien. Copiez-le manuellement :",
-  "share.url": "Lien de l'article"
+  "share.url": "Lien de l'article",
+  "cite.label": "Citer",
+  "cite.copy": "Copier",
+  "cite.copied": "Entrée copiée",
+  "cite.failed": "Impossible de copier l'entrée. Sélectionnez-la manuellement.",
+  "cite.accessNote": "Consulté en ligne ; dernière modification : {date}"
 }
