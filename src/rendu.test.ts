@@ -124,3 +124,82 @@ test('citations : numéros de première occurrence croissants dans l\'ordre de l
   }
   assert.ok(max > 0);
 });
+
+// ---- Story 1.7 : complétude, gabarit, thème, absence de JavaScript ----
+
+const texteHtml = (s: string) =>
+  decode(s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&#x26;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')).replace(/\s+/g, ' ');
+
+// Source sans commentaires, clés de citation, images, légendes, URL et syntaxe de lien/tableau.
+const sourceNue = sources
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/^\[sections\/[^\]]+\]\([^)]*\)$/gm, '')
+  .replace(/^!\[.*$/gm, '')
+  .replace(/^Table: .*$/gm, '')
+  .replace(/\[@[^\]]*\]/g, '')
+  .replace(/\]\(https?:[^)]*\)/g, ']')
+  .replace(/<https?:[^>]*>/g, '');
+
+test('complétude : chaque paragraphe de la source est présent dans le HTML', () => {
+  // Comparaison sur les seuls caractères alphanumériques : insensible aux espaces, ponctuation et balisage.
+  const alnum = (t: string) => t.normalize('NFC').replace(/[^\p{L}\p{N}]/gu, '');
+  const corps = alnum(texteHtml(html.replace(/<a class="cite"[^>]*>\[\d+\]<\/a>/g, '')));
+  const manquants: string[] = [];
+  let total = 0;
+  for (const bloc of sourceNue.split(/\n\s*\n/)) {
+    const lignes = bloc.split('\n').filter((l) => l.trim() && !/^\s*\|/.test(l) && !/^#{1,6}\s/.test(l));
+    for (const ligne of lignes) {
+      const brut = ligne.replace(/^\s*(?:[-*]|\d+\.)\s+/, '').replace(/[*_`\[\]]/g, '').replace(/\s+/g, ' ').trim();
+      if (brut.length < 15) continue;
+      total++;
+      // Les 60 premiers caractères de chaque ligne suffisent à détecter une perte.
+      const extrait = brut.slice(0, 60).trim();
+      if (!corps.includes(alnum(extrait))) manquants.push(extrait);
+    }
+  }
+  assert.ok(total > 50, `trop peu de paragraphes comparés : ${total}`);
+  assert.deepEqual(manquants, [], `paragraphes manquants :\n${manquants.join('\n')}`);
+});
+
+test('complétude : chaque nombre de la source est présent dans le HTML', () => {
+  const corps = texteHtml(html);
+  const nombres = new Set(
+    [...sourceNue.replace(/\|/g, ' ').matchAll(/\d+(?:[ ,.]\d+)*/g)].map((m) => m[0].trim()),
+  );
+  // Frontières de nombre : « 5 » ne doit pas être satisfait par « 15 » ou « 2005 ».
+  const manquants = [...nombres].filter(
+    (n) => !new RegExp(`(?<![\\d])${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\d])`).test(corps),
+  );
+  assert.deepEqual(manquants, [], `nombres manquants : ${manquants.join(', ')}`);
+});
+
+test('complétude : 2 tableaux, 8 images, titres de section', () => {
+  assert.equal((html.match(/<table/g) ?? []).length, 2);
+  assert.equal((html.match(/<figure/g) ?? []).length, 8);
+  assert.equal((html.match(/<h1/g) ?? []).length, 1);
+});
+
+test('sans JavaScript : aucun script ni ressource tierce dans la page', () => {
+  assert.doesNotMatch(full, /<script/i);
+  assert.doesNotMatch(full, /\s(?:src|href)="https?:\/\/[^"]*(?:fonts\.|cdn|analytics)/i);
+  assert.doesNotMatch(full, /<link[^>]+rel="stylesheet"[^>]+href="https?:/i);
+});
+
+test('gabarit : lang, viewport, un seul <main>', () => {
+  assert.match(full, /<html lang="fr"/);
+  assert.match(full, /<meta name="viewport" content="width=device-width, initial-scale=1"/);
+  assert.equal((full.match(/<main[ >]/g) ?? []).length, 1);
+});
+
+test('mise en page : thème sombre automatique, colonne bornée, pas de ressource distante', () => {
+  const css = readFileSync('src/styles/article.css', 'utf8');
+  assert.match(css, /@media \(prefers-color-scheme: dark\)/);
+  assert.match(css, /max-width:\s*var\(--measure\)/);
+  assert.match(css, /--measure:\s*70ch/);
+  assert.doesNotMatch(css, /@import|url\(\s*['"]?https?:/);
+});
+
+test('mise en page : la feuille de style est livrée dans la page', () => {
+  assert.match(full, /<style[^>]*>[\s\S]*--measure[\s\S]*prefers-color-scheme:\s*dark/);
+  assert.match(full, /<meta name="color-scheme" content="light dark"/);
+});

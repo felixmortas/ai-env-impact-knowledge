@@ -24,3 +24,12 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-1-6-citations-cliquables-et-liste-de-references.md`
   summary: Les numéros de ligne des erreurs de citation peuvent être décalés après `markImages` ; les `[@…]` dans des blocs de code font échouer le build.
   evidence: Aucune occurrence aujourd'hui dans les sections ; échec explicite et non silencieux.
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-7-lecture-integrale-et-mise-en-page-sobre.md`
+  summary: Le non-débordement à 375 px n'est vérifié que manuellement (README) ; aucun outil navigateur automatisé n'est installé.
+  evidence: Spec : outil navigateur soumis à accord (Ask First) ; trois relecteurs signalent l'absence de protection de non-régression.
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-7-lecture-integrale-et-mise-en-page-sobre.md`
+  summary: Le test de complétude ne compare que les 60 premiers caractères de chaque ligne et ignore les lignes courtes et les titres ; `npm test` n'exécute pas `src/rendu.test.ts` (seulement `test:rendu`).
+  evidence: Relecteurs Blind Hunter et Verification Gap ; limites connues, build préalable requis pour le rendu.
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-7-lecture-integrale-et-mise-en-page-sobre.md`
+  summary: Gabarit : pas de lien d'évitement, de balise `<article>`, de `description`/`lang` en prop, de styles `pre`/`blockquote`/`h5-h6` ni d'impression.
+  evidence: Hors périmètre de la story (métadonnées et blocs prévus aux epics 2 et 3) ; aucun `pre`/`blockquote` dans le rendu actuel.

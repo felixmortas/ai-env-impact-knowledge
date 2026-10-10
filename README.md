@@ -39,6 +39,12 @@ Les tableaux pipe sont légendés par une ligne `Table: légende {#tab:id}` plac
 - **Le build échoue** sur une clé citée absente du `.bib` (message : clé, fichier, ligne), sur une syntaxe de citation non gérée (par ex. `[@a, p. 3]`) et sur une entrée `.bib` mal formée ou en double.
 - Une entrée du `.bib` jamais citée n'est pas affichée ; un avertissement de build la nomme.
 
+## Mise en page et vérifications
+
+Le gabarit partagé `src/layouts/Base.astro` fournit `<html lang>` (via `t('page.lang')`), le `<head>` et `<main>`, avec des emplacements nommés (`head`, `before-main`, `after-main`) pour les métadonnées et blocs des epics suivants. `src/styles/article.css` porte la mise en page : colonne de 70 caractères centrée, variables de couleur claires/sombres (`prefers-color-scheme`), aucune police ni ressource distante. Aucun JavaScript n'est livré ; `npm run test:rendu` vérifie l'absence de `<script>` et la complétude du contenu (paragraphes, nombres, 2 tableaux, 8 figures).
+
+Vérification manuelle à 375 px (aucun outil de test navigateur n'est installé) : `npm run build && npm run preview`, ouvrir `/fr/` dans un navigateur, activer le mode appareil (375 px de large) et exécuter dans la console `document.documentElement.scrollWidth <= window.innerWidth` : le résultat doit être `true` ; les tableaux défilent dans leur conteneur. Pour le thème sombre, émuler `prefers-color-scheme: dark` dans les outils de développement.
+
 ## Chaînes d'interface
 
 Toutes les chaînes d'interface sont dans `src/locales/fr.json` et lues via `src/i18n.ts`. Une clé absente fait échouer le build en nommant la clé.

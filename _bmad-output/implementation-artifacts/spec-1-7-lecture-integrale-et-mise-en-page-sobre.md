@@ -2,7 +2,7 @@
 title: 'Story 1.7 : Lecture intégrale et mise en page sobre'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/implementation-artifacts/epic-1-context.md'
@@ -72,3 +72,26 @@ Le gabarit est le point d'extension des epics 2 et 3 (bloc auteur, table des mat
 - `npm test` -- expected: tests verts
 - `npm run test:rendu` -- expected: tests de rendu verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Gabarit partagé**
+
+- Point d'extension des epics 2 et 3 : `lang` via `t()`, emplacements nommés.
+  [`Base.astro:1`](../../src/layouts/Base.astro#L1)
+
+- La page française délègue son document HTML au gabarit.
+  [`index.astro:4`](../../src/pages/fr/index.astro#L4)
+
+**Mise en page sobre**
+
+- Variables claires/sombres, colonne de 70ch, typographie système.
+  [`article.css:27`](../../src/styles/article.css#L27)
+
+**Vérifications**
+
+- Complétude du contenu, absence de script, CSS livré dans la page.
+  [`rendu.test.ts:128`](../../src/rendu.test.ts#L128)
+
+- Procédure manuelle de contrôle à 375 px.
+  [`README.md:42`](../../README.md#L42)
