@@ -179,8 +179,13 @@ test('complétude : 2 tableaux, 8 images, titres de section', () => {
   assert.equal((html.match(/<h1/g) ?? []).length, 1);
 });
 
-test('sans JavaScript : aucun script ni ressource tierce dans la page', () => {
-  assert.doesNotMatch(full, /<script/i);
+test('sans JavaScript : seul l\'îlot de partage est scripté, aucun bouton rendu, aucune ressource tierce', () => {
+  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; le seul îlot est le bouton de partage.
+  assert.equal((full.match(/<astro-island/g) ?? []).length, 1);
+  assert.match(full, /component-export="default"[^>]*client="only"/);
+  assert.doesNotMatch(full, /<button/i);
+  assert.doesNotMatch(full, /<script[^>]+src="https?:/i);
+  assert.match(full, /&quot;https:\/\/[^&]*\/fr\/&quot;/);
   assert.doesNotMatch(full, /\s(?:src|href)="https?:\/\/[^"]*(?:fonts\.|cdn|analytics)/i);
   assert.doesNotMatch(full, /<link[^>]+rel="stylesheet"[^>]+href="https?:/i);
 });

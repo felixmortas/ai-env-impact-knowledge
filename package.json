@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test src/i18n.test.ts src/lib/assemble-article.test.ts src/lib/tables.test.ts src/lib/images.test.ts src/lib/citations.test.ts src/lib/config.test.ts",
+    "test": "node --test src/i18n.test.ts src/lib/assemble-article.test.ts src/lib/tables.test.ts src/lib/images.test.ts src/lib/citations.test.ts src/lib/config.test.ts src/lib/urls.test.ts src/lib/share.test.ts",
     "test:rendu": "npm run build && node --test src/rendu.test.ts",
     "check:idempotence": "bash scripts/check-idempotence.sh"
   },

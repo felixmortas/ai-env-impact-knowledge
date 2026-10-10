@@ -10,7 +10,7 @@ const { Content } = await render(entry);
 ---
 <Base title={entry.data.title}>
       <Fragment set:html={entry.data.h1Html} />
-      <AuthorBlock />
+      <AuthorBlock title={entry.data.title} />
       <Content />
       <section class="references" aria-labelledby="references">
         <h2 id="references">{t('references.title')}</h2>

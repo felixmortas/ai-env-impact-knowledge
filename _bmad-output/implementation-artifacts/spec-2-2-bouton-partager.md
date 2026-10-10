@@ -2,7 +2,7 @@
 title: 'Story 2.2 : Bouton Partager'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -50,12 +50,12 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/urls.ts` -- URL canonique par langue, avec test -- FR4
-- [ ] `src/components/CopyFeedback.tsx` -- confirmation visible et annoncée -- UX-DR3
-- [ ] `src/components/ShareButton.tsx` -- Web Share API puis repli presse-papiers ; gérer `AbortError` et refus -- FR4
-- [ ] Intégration au gabarit avec hydratation minimale ; chaînes dans `fr.json` -- FR4
-- [ ] Tests unitaires de la logique (fonction pure `share(deps)` avec doubles de `navigator`) -- FR4
-- [ ] `README.md` -- noter que JS n'est utilisé que pour partager
+- [x] `src/lib/urls.ts` -- URL canonique par langue, avec test -- FR4
+- [x] `src/components/CopyFeedback.tsx` -- confirmation visible et annoncée -- UX-DR3
+- [x] `src/components/ShareButton.tsx` -- Web Share API puis repli presse-papiers ; gérer `AbortError` et refus -- FR4
+- [x] Intégration au gabarit avec hydratation minimale ; chaînes dans `fr.json` -- FR4
+- [x] Tests unitaires de la logique (fonction pure `share(deps)` avec doubles de `navigator`) -- FR4
+- [x] `README.md` -- noter que JS n'est utilisé que pour partager
 
 **Acceptance Criteria:**
 - Given un navigateur avec Web Share, when on active le bouton, then `navigator.share` reçoit le titre de l'article et l'URL canonique de `/fr/`.
@@ -75,3 +75,32 @@ Isoler la logique dans une fonction pure injectant `navigator` pour la tester av
 **Commands:**
 - `npm test` -- expected: tests verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Logique de partage**
+
+- Fonction pure : Web Share, `AbortError` ignoré, repli presse-papiers, échec explicite.
+  [`share.ts:16`](../../src/lib/share.ts#L16)
+
+- URL canonique issue de `siteUrl`, jamais de `location`.
+  [`urls.ts:4`](../../src/lib/urls.ts#L4)
+
+**Îlot React et intégration**
+
+- Îlot : anti-double-clic, focus sur l'URL en cas d'échec.
+  [`ShareButton.tsx:17`](../../src/components/ShareButton.tsx#L17)
+
+- Région `aria-live` toujours présente, succès temporisé.
+  [`CopyFeedback.tsx:21`](../../src/components/CopyFeedback.tsx#L21)
+
+- Hébergement `client:only` : aucun bouton sans JavaScript.
+  [`AuthorBlock.astro:25`](../../src/components/AuthorBlock.astro#L25)
+
+**Tests et documentation**
+
+- Six cas du partage, dont annulation et refus de copie.
+  [`share.test.ts:7`](../../src/lib/share.test.ts#L7)
+
+- Îlot unique, props canoniques, aucun bouton statique.
+  [`rendu.test.ts:182`](../../src/rendu.test.ts#L182)

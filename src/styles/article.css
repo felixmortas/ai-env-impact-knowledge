@@ -147,3 +147,30 @@ figcaption {
   flex-wrap: wrap;
   gap: 0.25rem 1rem;
 }
+
+.author-actions { margin: 0.5rem 0 0; }
+
+.share { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+
+.share-button {
+  font: inherit;
+  color: var(--link);
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+}
+
+.copy-feedback { color: var(--muted); }
+.copy-feedback-error { color: inherit; font-weight: 600; }
+
+.share-url {
+  font: inherit;
+  width: 100%;
+  max-width: 100%;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--muted);
+  padding: 0.25rem 0.5rem;
+}

@@ -9,5 +9,9 @@
   "author.license": "Licence :",
   "author.contact": "Écrire à l'auteur",
   "author.github": "GitHub",
-  "author.linkedin": "LinkedIn"
+  "author.linkedin": "LinkedIn",
+  "share.label": "Partager",
+  "share.copied": "Lien copié",
+  "share.failed": "Impossible de copier le lien. Copiez-le manuellement :",
+  "share.url": "Lien de l'article"
 }
