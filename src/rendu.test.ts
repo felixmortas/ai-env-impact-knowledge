@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const html = readFileSync('dist/fr/index.html', 'utf8');
@@ -78,4 +78,19 @@ test('tableaux : -- littéral et alignements conservés', () => {
 
 test('tableaux : conteneur à défilement horizontal local', () => {
   assert.match(readFileSync('src/styles/article.css', 'utf8'), /\.table-scroll\s*{[^}]*overflow-x:\s*auto/);
+});
+
+test('images : 8 figure, alt = figcaption, largeur 80 %, fichiers publiés, pas de {width', () => {
+  assert.doesNotMatch(html, /\{width/);
+  const figures = [...html.matchAll(/<figure class="figure" style="width: (\d+)%"><img src="([^"]+)" alt="([^"]*)"[^>]*><figcaption>([^<]*)<\/figcaption><\/figure>/g)];
+  assert.equal(figures.length, 8);
+  assert.equal((html.match(/<figure/g) ?? []).length, 8);
+  for (const [, width, src, alt, legende] of figures) {
+    assert.equal(width, '80');
+    assert.equal(alt, legende);
+    assert.ok(src.startsWith('/ai-env-impact-knowledge/images/'), src);
+    const fichier = join('dist', src.replace('/ai-env-impact-knowledge/', ''));
+    assert.match(fichier, /\.(png|svg|webp)$/);
+    assert.ok(existsSync(fichier), fichier);
+  }
 });

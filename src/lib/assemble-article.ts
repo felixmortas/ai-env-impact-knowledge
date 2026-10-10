@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { markImages, type ImageOptions } from './images.ts';
 import { markTableCaptions } from './tables.ts';
 
 const INCLUDE = /^\[sections\/[^\]\n]+\]\((sections\/[^)\n]+\.md)\)\s*$/;
@@ -25,9 +26,10 @@ export function shiftHeadings(markdown: string): string {
 }
 
 /** Assemble `main.md` : chaque ligne d'inclusion est remplacée par le contenu du fichier, titres décalés. */
-export function assembleArticle(mainPath: string): Article {
+export function assembleArticle(mainPath: string, images: ImageOptions = { root: resolve(dirname(mainPath), '../..') }): Article {
   const dir = dirname(mainPath);
-  const main = markTableCaptions(stripComments(readFileSync(mainPath, 'utf8')), mainPath);
+  const prepare = (md: string, file: string) => markImages(markTableCaptions(md, file), file, images);
+  const main = prepare(stripComments(readFileSync(mainPath, 'utf8')), mainPath);
   const lines = main.split('\n').map((line) => {
     const match = INCLUDE.exec(line);
     if (!match) return line;
@@ -38,7 +40,7 @@ export function assembleArticle(mainPath: string): Article {
     } catch {
       throw new Error(`Inclusion introuvable : "${match[1]}" (référencée dans ${mainPath})`);
     }
-    return markTableCaptions(shiftHeadings(stripComments(content).trim()), file);
+    return prepare(shiftHeadings(stripComments(content).trim()), file);
   });
   const markdown = lines.join('\n');
   const title = /^# (.+)$/m.exec(markdown)?.[1].trim();

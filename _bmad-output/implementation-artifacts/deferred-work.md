@@ -14,3 +14,6 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-1-4-tableaux.md`
   summary: Le conteneur `.table-scroll` n'est pas accessible au clavier (`tabindex`, `role="region"`, nom accessible) et la légende n'a pas de style.
   evidence: relevé par la revue ; relève de la mise en page et de l'accessibilité (story 1.7).
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-5-images-et-legendes.md`
+  summary: markImages ne protège pas les blocs de code et les images ne sont pas servies sous astro dev.
+  evidence: signalé par les relecteurs ; sans effet sur le contenu actuel (aucun bloc de code contenant une image, build statique seul).

@@ -8,7 +8,10 @@ const article = defineCollection({
     name: 'article-fr',
     load: async ({ store, renderMarkdown, watcher }) => {
       const mainPath = fileURLToPath(new URL('./fr/main.md', import.meta.url));
-      const { title, markdown } = assembleArticle(mainPath);
+      const { title, markdown } = assembleArticle(mainPath, {
+        root: fileURLToPath(new URL('../', import.meta.url)),
+        base: import.meta.env.BASE_URL.replace(/\/+$/, ''),
+      });
       store.clear();
       const rendered = await renderMarkdown(markdown);
       store.set({

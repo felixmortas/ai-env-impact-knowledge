@@ -2,7 +2,7 @@
 title: 'Story 1.5 : Images et légendes'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/implementation-artifacts/epic-1-context.md'
@@ -48,11 +48,11 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/images.ts` -- transformer chaque image en `figure`/`img`/`figcaption`, calculer la largeur, échouer sur légende vide, fichier absent ou format non web -- FR18, NFR9
-- [ ] Brancher la transformation dans l'assemblage / le rendu ; publier `images/` dans `dist/images/` -- FR18
-- [ ] `src/styles/article.css` -- `figure` centrée, `img` fluide -- UX-DR5
-- [ ] `src/lib/images.test.ts`, `src/rendu.test.ts` -- couvrir la matrice, 8 `figure` dans la page -- FR18
-- [ ] Obtenir de l'auteur `images/conv-branching-diagram.png` (export du PDF existant) avant de clore la story
+- [x] `src/lib/images.ts` -- transformer chaque image en `figure`/`img`/`figcaption`, calculer la largeur, échouer sur légende vide, fichier absent ou format non web -- FR18, NFR9
+- [x] Brancher la transformation dans l'assemblage / le rendu ; publier `images/` dans `dist/images/` -- FR18
+- [x] `src/styles/article.css` -- `figure` centrée, `img` fluide -- UX-DR5
+- [x] `src/lib/images.test.ts`, `src/rendu.test.ts` -- couvrir la matrice, 8 `figure` dans la page -- FR18
+- [x] Obtenir de l'auteur `images/conv-branching-diagram.png` (export du PDF existant) avant de clore la story
 
 **Acceptance Criteria:**
 - Given `dist/fr/index.html`, when on compte les `figure`, then il y en a 8, chacune avec `img` dont l'`alt` égale le texte du `figcaption`.
@@ -73,3 +73,35 @@ Le chemin source `images/x.png` est relatif à la racine du dépôt (et non à `
 - `npm test` -- expected: tests verts
 - `npm run test:rendu` -- expected: tests de rendu verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Transformation des images**
+
+- Point d'entrée : image → figure/img/figcaption, avec toutes les validations qui font échouer le build.
+  [`images.ts:48`](../../src/lib/images.ts#L48)
+
+- Lecture des dimensions PNG sans dépendance, pour éviter le décalage de mise en page.
+  [`images.ts:20`](../../src/lib/images.ts#L20)
+
+**Intégration au build**
+
+- Application aux sections et à `main.md`, chemins résolus depuis la racine du dépôt.
+  [`assemble-article.ts:29`](../../src/lib/assemble-article.ts#L29)
+
+- Racine et base de déploiement transmises à l'assemblage.
+  [`content.config.ts:11`](../../src/content.config.ts#L11)
+
+- Copie déterministe de `images/` vers `dist/images/`.
+  [`astro.config.mjs:8`](../../astro.config.mjs#L8)
+
+**Style et tests**
+
+- Figure centrée, image fluide.
+  [`article.css:12`](../../src/styles/article.css#L12)
+
+- Matrice des cas limites.
+  [`images.test.ts:41`](../../src/lib/images.test.ts#L41)
+
+- 8 figures, alt = légende, fichiers publiés.
+  [`rendu.test.ts:83`](../../src/rendu.test.ts#L83)
