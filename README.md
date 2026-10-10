@@ -23,6 +23,7 @@ Autres commandes :
 - `npm run dev` : serveur de développement ;
 - `npm run preview` : aperçu de `dist/` ;
 - `npm test` : tests unitaires (chaînes d'interface, assemblage de l'article) ;
+- `npm run test:rendu` : construit le site puis vérifie le HTML de `dist/fr/index.html` (gras/italique, titres de paragraphe, listes, liens, caractères spéciaux) ;
 - `npm run check:idempotence` : deux builds successifs, comparaison octet par octet de `dist/`.
 
 ## Contenu de l'article

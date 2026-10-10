@@ -1,0 +1,5 @@
+/* Les URL longues ne doivent jamais provoquer de défilement horizontal. */
+main,
+main a {
+  overflow-wrap: anywhere;
+}

@@ -2,7 +2,7 @@
 title: 'Story 1.3 : Texte courant, listes, liens et caractères'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/implementation-artifacts/epic-1-context.md'
@@ -47,10 +47,10 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/styles/article.css` -- règle anti-débordement pour liens et texte ; importée dans la page -- FR14
-- [ ] `src/rendu.test.ts` -- tests sur `dist/fr/index.html` : gras/italique, titres de paragraphe sans balise de titre, nombre de `ul`/`ol`, 20 liens externes avec `href` exact, caractères spéciaux littéraux -- FR12, FR13, FR14, FR16, FR19
-- [ ] `package.json`, `README.md` -- script `test:rendu` ; décrire les tests de rendu
-- [ ] Si un test échoue à cause du rendu d'Astro (par ex. `**Exemple** :` avec espace), corriger côté pipeline de rendu, jamais dans le Markdown
+- [x] `src/styles/article.css` -- règle anti-débordement pour liens et texte ; importée dans la page -- FR14
+- [x] `src/rendu.test.ts` -- tests sur `dist/fr/index.html` : gras/italique, titres de paragraphe sans balise de titre, nombre de `ul`/`ol`, 20 liens externes avec `href` exact, caractères spéciaux littéraux -- FR12, FR13, FR14, FR16, FR19
+- [x] `package.json`, `README.md` -- script `test:rendu` ; décrire les tests de rendu
+- [x] Si un test échoue à cause du rendu d'Astro (par ex. `**Exemple** :` avec espace), corriger côté pipeline de rendu, jamais dans le Markdown
 
 **Acceptance Criteria:**
 - Given `dist/fr/index.html`, when on cherche chacun des 9 titres de paragraphe, then chacun est dans un `<strong>` à l'intérieur d'un `<p>` et aucun `h1`–`h6` ne porte ce texte.
