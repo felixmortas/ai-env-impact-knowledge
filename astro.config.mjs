@@ -7,5 +7,7 @@ export default defineConfig({
   base: '/ai-env-impact-knowledge',
   output: 'static',
   trailingSlash: 'always',
+  // Le Markdown est la source de vérité : aucune conversion typographique.
+  markdown: { smartypants: false },
   integrations: [react()],
 });

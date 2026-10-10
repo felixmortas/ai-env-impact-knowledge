@@ -22,8 +22,12 @@ Autres commandes :
 
 - `npm run dev` : serveur de développement ;
 - `npm run preview` : aperçu de `dist/` ;
-- `npm test` : tests unitaires de l'accès aux chaînes d'interface ;
+- `npm test` : tests unitaires (chaînes d'interface, assemblage de l'article) ;
 - `npm run check:idempotence` : deux builds successifs, comparaison octet par octet de `dist/`.
+
+## Contenu de l'article
+
+`src/content.config.ts` charge `src/fr/main.md` via `src/lib/assemble-article.ts` : chaque lien `[sections/x](sections/x.md)` est remplacé par le contenu du fichier (titres `#`→`h2`, `##`→`h3`…), les commentaires HTML sont retirés, une inclusion introuvable fait échouer le build. Le rendu est fait par Astro, sans conversion typographique (`smartypants: false`) pour rester fidèle à la source.
 
 ## Chaînes d'interface
 

@@ -1,17 +1,21 @@
 ---
+import { getEntry, render } from 'astro:content';
 import { t } from '../../i18n';
+
+const entry = await getEntry('article', 'fr');
+if (!entry) throw new Error("Article français introuvable (src/fr/main.md)");
+const { Content } = await render(entry);
 ---
 <!doctype html>
 <html lang={t('page.lang')}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t('page.title')}</title>
+    <title>{entry.data.title}</title>
   </head>
   <body>
     <main>
-      <h1>{t('home.heading')}</h1>
-      <p>{t('home.placeholder')}</p>
+      <Content />
     </main>
   </body>
 </html>
