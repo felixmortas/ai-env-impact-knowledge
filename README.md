@@ -22,7 +22,7 @@ Autres commandes :
 
 - `npm run dev` : serveur de développement ;
 - `npm run preview` : aperçu de `dist/` ;
-- `npm test` : tests unitaires (chaînes d'interface, assemblage de l'article) ;
+- `npm test` : tests unitaires (langues, chaînes d'interface, assemblage de l'article) ;
 - `npm run test:rendu` : construit le site puis vérifie le HTML de `dist/fr/index.html` (gras/italique, titres de paragraphe, listes, liens, caractères spéciaux) ;
 - `npm run check:idempotence` : deux builds successifs, comparaison octet par octet de `dist/`.
 
@@ -41,7 +41,7 @@ Les tableaux pipe sont légendés par une ligne `Table: légende {#tab:id}` plac
 
 ## Mise en page et vérifications
 
-Le gabarit partagé `src/layouts/Base.astro` fournit `<html lang>` (via `t('page.lang')`), le `<head>` et `<main>`, avec des emplacements nommés (`head`, `before-main`, `after-main`) pour les métadonnées et blocs des epics suivants. `src/styles/article.css` porte la mise en page : colonne de 70 caractères centrée, variables de couleur claires/sombres (`prefers-color-scheme`), aucune police ni ressource distante. Le texte ne dépend d'aucun JavaScript ; `npm run test:rendu` vérifie qu'aucun bouton n'est rendu côté serveur et la complétude du contenu (paragraphes, nombres, 2 tableaux, 8 figures).
+Le gabarit partagé `src/layouts/Base.astro` fournit `<html lang>` (propriété `lang`), le `<head>` et `<main>`, avec des emplacements nommés (`head`, `before-main`, `after-main`) pour les métadonnées et blocs des epics suivants. `src/styles/article.css` porte la mise en page : colonne de 70 caractères centrée, variables de couleur claires/sombres (`prefers-color-scheme`), aucune police ni ressource distante. Le texte ne dépend d'aucun JavaScript ; `npm run test:rendu` vérifie qu'aucun bouton n'est rendu côté serveur et la complétude du contenu (paragraphes, nombres, 2 tableaux, 8 figures).
 
 Vérification manuelle à 375 px (aucun outil de test navigateur n'est installé) : `npm run build && npm run preview`, ouvrir `/fr/` dans un navigateur, activer le mode appareil (375 px de large) et exécuter dans la console `document.documentElement.scrollWidth <= window.innerWidth` : le résultat doit être `true` ; les tableaux défilent dans leur conteneur. Pour le thème sombre, émuler `prefers-color-scheme: dark` dans les outils de développement.
 
@@ -57,9 +57,19 @@ Vérification navigateur : `npm run build && npm run preview`, ouvrir `/fr/`. (1
 
 `src/lib/config.ts` valide strictement la configuration : le build échoue, en nommant le champ, si une valeur est absente, vide, reste le placeholder `À_RENSEIGNER` ou si une date est invalide. L'email n'apparaît que dans le `href` du lien `mailto:` (texte visible neutre).
 
-## Chaînes d'interface
+## Chaînes d'interface et langues
 
-Toutes les chaînes d'interface sont dans `src/locales/fr.json` et lues via `src/i18n.ts`. Une clé absente fait échouer le build en nommant la clé.
+Toutes les chaînes d'interface sont dans `src/locales/<lang>.json` et lues via `t(lang, clé)` (`src/i18n.ts`) ; les clés sont typées d'après `fr.json`, langue de référence. Les valeurs d'édition localisées (par exemple la description de la page) vivent aussi dans ces fichiers. `<html lang>` vient du code de langue de l'URL.
+
+Les langues sont découvertes par `src/lib/languages.ts` : une langue = un dossier `src/<lang>/` (avec `main.md`) **et** un fichier `src/locales/<lang>.json`. Le build échoue, en nommant la langue (et la clé), si un dossier n'a pas de fichier de chaînes, si un fichier de chaînes n'a pas de dossier, ou s'il manque une clé présente dans `fr.json`. Le contenu des Markdown n'est jamais comparé entre langues.
+
+### Ajouter une langue
+
+1. Copier les Markdown traduits dans `src/<lang>/` (`main.md` + `sections/`), sans toucher à `src/references.bib`, `images/` ni `src/config.json` (partagés).
+2. Créer `src/locales/<lang>.json` avec toutes les clés de `src/locales/fr.json`.
+3. `npm run build` : `dist/<lang>/index.html` est produit avec `lang="<lang>"`, les dates sont formatées selon la langue. Aucun changement de code. La racine mène toujours à `/fr/`.
+
+`npm run test:langues` rejoue ce scénario (ajout, clé manquante, orphelin) dans une copie temporaire du projet ; aucun faux contenu EN/ES n'est versionné.
 
 ## Choix techniques
 
@@ -73,11 +83,11 @@ Le site est servi à `https://felixmortas.com/ai-env-impact-knowledge` (`site` e
 
 ## Partage
 
-Le JavaScript n'est utilisé que pour partager (îlot React `src/components/ShareButton.tsx`, `client:only` : le bouton n'existe pas dans le HTML statique, donc rien de cassé sans JS). Le bouton appelle la Web Share API avec le titre et l'URL canonique (`siteUrl` + `/fr/`, `src/lib/urls.ts`, indépendante de l'URL courante) ; sans Web Share, il copie cette URL et affiche « Lien copié » dans une région `aria-live`. Si la copie est refusée, un message d'échec s'affiche avec l'URL sélectionnable. La logique est dans `src/lib/share.ts` (testée avec `npm test`).
+Le JavaScript n'est utilisé que pour partager (îlot React `src/components/ShareButton.tsx`, `client:only` : le bouton n'existe pas dans le HTML statique, donc rien de cassé sans JS). Le bouton appelle la Web Share API avec le titre et l'URL canonique (`siteUrl` + `/<lang>/`, `src/lib/urls.ts`, indépendante de l'URL courante) ; sans Web Share, il copie cette URL et affiche « Lien copié » dans une région `aria-live`. Si la copie est refusée, un message d'échec s'affiche avec l'URL sélectionnable. La logique est dans `src/lib/share.ts` (testée avec `npm test`).
 
 ## Citation BibTeX
 
-Le bloc « Citer » (`src/components/CiteBlock.astro`, `<details>` lisible sans JavaScript) affiche une entrée `@misc` construite à la compilation par `src/lib/bibtex.ts` : `author` (nom, prénom) et l'année (extraite de `publishedDate`) viennent de `src/config.json` ; `title` est le titre de l'article de la langue ; `url` est l'URL canonique (`siteUrl` + `/fr/`) ; `note` est le gabarit `cite.accessNote` de `src/locales/fr.json` rempli avec `modifiedDate` (jamais l'horloge). La clé est `<nom><année><premier mot significatif du titre>`, sans accent. Les caractères spéciaux (`& % _ # $ { } ~ ^ \`) sont échappés ; aucune adresse email n'entre dans l'entrée. Modifier `config.json` puis rebuild met l'entrée à jour. Le bouton Copier (îlot React `src/components/CopyButton.tsx`) copie l'entrée exacte et affiche « Entrée copiée ». Tests : `src/lib/bibtex.test.ts`.
+Le bloc « Citer » (`src/components/CiteBlock.astro`, `<details>` lisible sans JavaScript) affiche une entrée `@misc` construite à la compilation par `src/lib/bibtex.ts` : `author` (nom, prénom) et l'année (extraite de `publishedDate`) viennent de `src/config.json` ; `title` est le titre de l'article de la langue ; `url` est l'URL canonique (`siteUrl` + `/<lang>/`) ; `note` est le gabarit `cite.accessNote` de `src/locales/fr.json` rempli avec `modifiedDate` (jamais l'horloge). La clé est `<nom><année><premier mot significatif du titre>`, sans accent. Les caractères spéciaux (`& % _ # $ { } ~ ^ \`) sont échappés ; aucune adresse email n'entre dans l'entrée. Modifier `config.json` puis rebuild met l'entrée à jour. Le bouton Copier (îlot React `src/components/CopyButton.tsx`) copie l'entrée exacte et affiche « Entrée copiée ». Tests : `src/lib/bibtex.test.ts`.
 
 ## Table des matières
 

@@ -2,7 +2,7 @@
 title: 'Story 2.6 : Arborescence multilingue'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -53,12 +53,12 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/languages.ts` -- découvrir les langues, valider dossiers, fichiers de chaînes et clés -- FR8
-- [ ] `src/i18n.ts` -- `t(lang, clé)` ; tous les appelants mis à jour ; clés typées -- FR8
-- [ ] `src/content.config.ts`, `src/pages/[lang]/index.astro` -- une page par langue, `lang` correct -- FR8
-- [ ] Tests avec fixtures temporaires (ajout d'une langue sans changement de code ; chaîne manquante ; dossier ou locale orphelin) -- FR8
-- [ ] `README.md` -- procédure « ajouter une langue »
-- [ ] Adapter `scripts/check-idempotence.sh` au nouveau découpage
+- [x] `src/lib/languages.ts` -- découvrir les langues, valider dossiers, fichiers de chaînes et clés -- FR8
+- [x] `src/i18n.ts` -- `t(lang, clé)` ; tous les appelants mis à jour ; clés typées -- FR8
+- [x] `src/content.config.ts`, `src/pages/[lang]/index.astro` -- une page par langue, `lang` correct -- FR8
+- [x] Tests avec fixtures temporaires (ajout d'une langue sans changement de code ; chaîne manquante ; dossier ou locale orphelin) -- FR8
+- [x] `README.md` -- procédure « ajouter une langue »
+- [x] Adapter `scripts/check-idempotence.sh` au nouveau découpage
 
 **Acceptance Criteria:**
 - Given `src/fr/` seul, when on construit, then `dist/fr/index.html` existe avec `lang="fr"` et le comportement de l'epic 1 est inchangé.
@@ -78,3 +78,38 @@ Les valeurs d'édition localisées (par exemple la description de la page, 3.1) 
 **Commands:**
 - `npm test` -- expected: tests verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Découverte et validation des langues**
+
+- Point d'entrée : découverte des langues et validation croisée dossiers, locales et clés.
+  [`languages.ts:59`](../../src/lib/languages.ts#L59)
+
+- `t(lang, clé)` avec clés typées d'après `fr.json`.
+  [`i18n.ts:22`](../../src/i18n.ts#L22)
+
+**Une page par langue**
+
+- Le loader crée une entrée de contenu par langue découverte.
+  [`content.config.ts:16`](../../src/content.config.ts#L16)
+
+- Route dynamique `/<lang>/` générée par `getStaticPaths`.
+  [`index.astro:10`](../../src/pages/[lang]/index.astro#L10)
+
+- `lang` transmis au gabarit et aux composants.
+  [`Base.astro`](../../src/layouts/Base.astro)
+
+**Vérifications et documentation**
+
+- Builds réels avec fixture `en` temporaire.
+  [`langues-build.test.ts`](../../src/langues-build.test.ts)
+
+- Validation unitaire avec fixtures temporaires.
+  [`languages.test.ts`](../../src/lib/languages.test.ts)
+
+- Idempotence bouclée sur chaque langue.
+  [`check-idempotence.sh`](../../scripts/check-idempotence.sh)
+
+- Procédure « Ajouter une langue ».
+  [`README.md`](../../README.md)

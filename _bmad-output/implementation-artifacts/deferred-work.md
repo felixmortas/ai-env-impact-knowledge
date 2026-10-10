@@ -50,3 +50,13 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-2-5-table-des-matieres-qui-suit-la-lecture.md`
   summary: Aucun test navigateur/hydratation de l'îlot (aria-current, aria-valuenow) ; cibles tactiles des points < 44 px.
   evidence: Seuls les tests purs et le HTML SSR sont automatisés ; points de 1,5 × 2,25 rem.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-6-arborescence-multilingue.md`
+  summary: `defaultSrcDir()` et `getStaticPaths` dépendent de `process.cwd()` alors que le loader utilise `import.meta.url`.
+  evidence: un build ou des tests lancés hors de la racine du projet ne trouveraient pas `src/locales`.
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-6-arborescence-multilingue.md`
+  summary: `t()` met les locales en cache sans invalidation, et l'ajout d'une langue n'est pas pris en compte par `astro dev` sans redémarrage.
+  evidence: cache `Map` au niveau du module dans `src/i18n.ts`.
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-6-arborescence-multilingue.md`
+  summary: `test:langues` (builds réels, environ 40 s) n'est pas inclus dans `npm test`, et `check:idempotence` ne couvre qu'une langue dans le dépôt.
+  evidence: `package.json` ; aucune langue autre que `fr` n'est versionnée.

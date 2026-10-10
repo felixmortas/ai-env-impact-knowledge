@@ -7,24 +7,23 @@ import ShareButton from './ShareButton';
 import CiteBlock from './CiteBlock.astro';
 
 const config = getConfig();
-const lang = t('page.lang');
-interface Props { title: string }
-const { title } = Astro.props;
+interface Props { title: string; lang: string }
+const { title, lang } = Astro.props;
 ---
-<aside class="author-block" aria-label={t('author.by')}>
-  <p class="author-name">{t('author.by')} {config.firstName} {config.lastName}</p>
+<aside class="author-block" aria-label={t(lang, 'author.by')}>
+  <p class="author-name">{t(lang, 'author.by')} {config.firstName} {config.lastName}</p>
   <ul class="author-links">
-    <li><a href={`mailto:${config.email}`}>{t('author.contact')}</a></li>
-    <li><a href={config.githubUrl}>{t('author.github')}</a></li>
-    <li><a href={config.linkedinUrl}>{t('author.linkedin')}</a></li>
+    <li><a href={`mailto:${config.email}`}>{t(lang, 'author.contact')}</a></li>
+    <li><a href={config.githubUrl}>{t(lang, 'author.github')}</a></li>
+    <li><a href={config.linkedinUrl}>{t(lang, 'author.linkedin')}</a></li>
   </ul>
   <p class="author-meta">
-    {t('author.published')} <time datetime={config.publishedDate}>{formatDate(config.publishedDate, lang)}</time>
-    · {t('author.modified')} <time datetime={config.modifiedDate}>{formatDate(config.modifiedDate, lang)}</time>
+    {t(lang, 'author.published')} <time datetime={config.publishedDate}>{formatDate(config.publishedDate, lang)}</time>
+    · {t(lang, 'author.modified')} <time datetime={config.modifiedDate}>{formatDate(config.modifiedDate, lang)}</time>
   </p>
-  <p class="author-meta">{t('author.license')} <a href={config.license.url}>{config.license.name}</a></p>
+  <p class="author-meta">{t(lang, 'author.license')} <a href={config.license.url}>{config.license.name}</a></p>
   <div class="author-actions">
-    <ShareButton client:only="react" title={title} url={canonicalUrl(lang)} label={t('share.label')} copied={t('share.copied')} failed={t('share.failed')} urlLabel={t('share.url')} />
+    <ShareButton client:only="react" title={title} url={canonicalUrl(lang)} label={t(lang, 'share.label')} copied={t(lang, 'share.copied')} failed={t(lang, 'share.failed')} urlLabel={t(lang, 'share.url')} />
   </div>
 </aside>
-<CiteBlock title={title} />
+<CiteBlock title={title} lang={lang} />

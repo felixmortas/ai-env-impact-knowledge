@@ -1,0 +1,39 @@
+---
+import { getEntry, render } from 'astro:content';
+import { t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import AuthorBlock from '../../components/AuthorBlock.astro';
+import TocProgress from '../../components/TocProgress';
+import { buildToc } from '../../lib/toc';
+import { discoverLanguages } from '../../lib/languages';
+
+export function getStaticPaths() {
+  return discoverLanguages().map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const entry = await getEntry('article', lang);
+if (!entry) throw new Error(`Article introuvable pour la langue "${lang}" (src/${lang}/main.md)`);
+const { Content, headings } = await render(entry);
+const referencesHeading = { depth: 2, slug: 'references', text: t(lang, 'references.title') };
+---
+<Base title={entry.data.title} lang={lang}>
+      <Fragment set:html={entry.data.h1Html} />
+      <AuthorBlock title={entry.data.title} lang={lang} />
+      <TocProgress client:load nodes={buildToc(headings, [referencesHeading])} label={t(lang, 'toc.label')} progressLabel={t(lang, 'toc.progress')} />
+      <Content />
+      <section class="references" aria-labelledby="references">
+        <h2 id="references">{t(lang, 'references.title')}</h2>
+        <ol class="references-list">
+          {entry.data.references.map((ref: { key: string; number: number; calls: number; text: string; url?: string }) => (
+            <li id={`ref-${ref.key}`}>
+              {ref.text}
+              {ref.url && <> <a href={ref.url}>{ref.url}</a></>}
+              {Array.from({ length: ref.calls }, (_, k) => (
+                <> <a class="backlink" href={`#cite-${ref.number}-${k + 1}`} aria-label={`${t(lang, 'references.backlink')} ${k + 1}`}>↩</a></>
+              ))}
+            </li>
+          ))}
+        </ol>
+      </section>
+</Base>

@@ -3,11 +3,15 @@ import assert from 'node:assert/strict';
 import { createT, t } from './i18n.ts';
 
 test('retourne la chaîne quand la clé est présente', () => {
-  assert.equal(createT({ a: 'bonjour' })('a'), 'bonjour');
-  assert.equal(t('page.lang'), 'fr');
+  assert.equal(createT('fr', { a: 'bonjour' })('a'), 'bonjour');
+  assert.equal(t('fr', 'toc.label'), 'Table des matières');
 });
 
-test('échoue en nommant la clé quand elle est absente', () => {
-  assert.throws(() => createT({})('cle.absente'), /cle\.absente/);
-  assert.throws(() => t('cle.absente'), /cle\.absente/);
+test("l'erreur nomme la langue et la clé", () => {
+  assert.throws(() => createT('en', {})('cle.absente'), /en\.json.*cle\.absente/);
+  assert.throws(() => t('fr', 'cle.absente' as never), /fr\.json.*cle\.absente/);
+});
+
+test('langue sans fichier de chaînes : erreur nommant la langue', () => {
+  assert.throws(() => t('zz', 'toc.label'), /"zz"/);
 });
