@@ -17,3 +17,10 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-1-5-images-et-legendes.md`
   summary: markImages ne protège pas les blocs de code et les images ne sont pas servies sous astro dev.
   evidence: signalé par les relecteurs ; sans effet sur le contenu actuel (aucun bloc de code contenant une image, build statique seul).
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-6-citations-cliquables-et-liste-de-references.md`
+  summary: Le parseur BibTeX maison ne gère pas les macros `@string`, la concaténation `#`, les accents LaTeX ni un `@` hors entrée.
+  evidence: Signalé par deux relecteurs ; sans effet sur le `.bib` actuel (build et tests verts).
+- source_spec: `_bmad-output/implementation-artifacts/spec-1-6-citations-cliquables-et-liste-de-references.md`
+  summary: Les numéros de ligne des erreurs de citation peuvent être décalés après `markImages` ; les `[@…]` dans des blocs de code font échouer le build.
+  evidence: Aucune occurrence aujourd'hui dans les sections ; échec explicite et non silencieux.

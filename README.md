@@ -32,6 +32,13 @@ Autres commandes :
 
 Les tableaux pipe sont légendés par une ligne `Table: légende {#tab:id}` placée **sous** le tableau (convention Pandoc) : `src/lib/tables.ts` la convertit en `<caption>` (sans l'identifiant) et enveloppe le tableau dans un conteneur à défilement horizontal local. Un `Table:` sans tableau juste au-dessus fait échouer le build. La ligne `Source : …` qui suit reste un paragraphe sous le tableau.
 
+## Citations et références
+
+`src/lib/citations.ts` remplace chaque `[@clé]` (et `[@a; @b]`) par un lien numérique `[n]` (n = rang de première citation) vers l'entrée `#ref-clé` de la section « Références » en fin de page ; chaque entrée a un lien de retour (↩) par appel. `src/lib/bibliography.ts` lit `src/references.bib` (parseur maison, sans dépendance). Le `.bib` n'est jamais modifié.
+
+- **Le build échoue** sur une clé citée absente du `.bib` (message : clé, fichier, ligne), sur une syntaxe de citation non gérée (par ex. `[@a, p. 3]`) et sur une entrée `.bib` mal formée ou en double.
+- Une entrée du `.bib` jamais citée n'est pas affichée ; un avertissement de build la nomme.
+
 ## Chaînes d'interface
 
 Toutes les chaînes d'interface sont dans `src/locales/fr.json` et lues via `src/i18n.ts`. Une clé absente fait échouer le build en nommant la clé.

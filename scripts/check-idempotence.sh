@@ -14,6 +14,11 @@ grep -q 'url=/ai-env-impact-knowledge/fr/' dist/index.html \
 grep -q '<html lang="fr"' dist/fr/index.html \
   || { echo "ECHEC : dist/fr/index.html absent ou sans lang=\"fr\"" >&2; exit 1; }
 
+grep -q '<h2 id="references">Références</h2>' dist/fr/index.html \
+  || { echo "ECHEC : section Références absente de dist/fr/index.html" >&2; exit 1; }
+! grep -q '\[@' dist/fr/index.html \
+  || { echo "ECHEC : clé de citation brute [@ dans dist/fr/index.html" >&2; exit 1; }
+
 cp -r dist "$tmp/a"
 rm -rf dist
 npm run build

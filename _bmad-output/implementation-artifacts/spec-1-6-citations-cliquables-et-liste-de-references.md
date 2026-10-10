@@ -2,7 +2,7 @@
 title: 'Story 1.6 : Citations cliquables et liste de références'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/implementation-artifacts/epic-1-context.md'
@@ -78,3 +78,48 @@ Cette story clôt la chaîne de transformations de texte (1.4, 1.5, 1.6) : passe
 - `npm test` -- expected: tests verts
 - `npm run test:rendu` -- expected: tests de rendu verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Remplacement des citations**
+
+- Point d'entrée : numérotation par première citation, échec sur clé absente ou syntaxe non gérée.
+  [`citations.ts:19`](../../src/lib/citations.ts#L19)
+
+- Câblage dans la chaîne de transformations, après tableaux et images.
+  [`assemble-article.ts:36`](../../src/lib/assemble-article.ts#L36)
+
+**Bibliographie**
+
+- Parseur BibTeX maison (sans dépendance), erreurs nommant l'entrée.
+  [`bibliography.ts:21`](../../src/lib/bibliography.ts#L21)
+
+- Mise en forme sans champ inventé ; URL http(s) exigée.
+  [`bibliography.ts:150`](../../src/lib/bibliography.ts#L150)
+
+**Rendu**
+
+- Chargement du `.bib` et données de références dans la collection.
+  [`content.config.ts:13`](../../src/content.config.ts#L13)
+
+- Section « Références » avec liens de retour, sans JavaScript.
+  [`index.astro:20`](../../src/pages/fr/index.astro#L20)
+
+**Données corrigées (avec accord de l'auteur)**
+
+- Clé `MLENERGY` remplacée par la clé existante du `.bib`.
+  [`measure.md:46`](../../src/fr/sections/measure.md#L46)
+
+- URL cassées (lien Markdown collé) : `openai2024memoire` et `mane2026context`.
+  [`references.bib:527`](../../src/references.bib#L527)
+
+**Tests et docs**
+
+- Matrice d'E/S couverte par les tests unitaires.
+  [`citations.test.ts:1`](../../src/lib/citations.test.ts#L1)
+
+- Rendu : zéro `[@`, cibles des liens, ordre des numéros.
+  [`rendu.test.ts:100`](../../src/rendu.test.ts#L100)
+
+- Contrôles d'idempotence et documentation.
+  [`check-idempotence.sh:17`](../../scripts/check-idempotence.sh#L17)

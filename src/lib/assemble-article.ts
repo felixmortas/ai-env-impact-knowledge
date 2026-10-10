@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { markImages, type ImageOptions } from './images.ts';
 import { markTableCaptions } from './tables.ts';
+import type { createCitations } from './citations.ts';
 
 const INCLUDE = /^\[sections\/[^\]\n]+\]\((sections\/[^)\n]+\.md)\)\s*$/;
 const COMMENT = /<!--[\s\S]*?-->/g;
@@ -26,9 +27,16 @@ export function shiftHeadings(markdown: string): string {
 }
 
 /** Assemble `main.md` : chaque ligne d'inclusion est remplacée par le contenu du fichier, titres décalés. */
-export function assembleArticle(mainPath: string, images: ImageOptions = { root: resolve(dirname(mainPath), '../..') }): Article {
+export function assembleArticle(
+  mainPath: string,
+  images: ImageOptions = { root: resolve(dirname(mainPath), '../..') },
+  citations?: ReturnType<typeof createCitations>,
+): Article {
   const dir = dirname(mainPath);
-  const prepare = (md: string, file: string) => markImages(markTableCaptions(md, file), file, images);
+  const prepare = (md: string, file: string) => {
+    const prepared = markImages(markTableCaptions(md, file), file, images);
+    return citations ? citations.cite(prepared, file) : prepared;
+  };
   const main = prepare(stripComments(readFileSync(mainPath, 'utf8')), mainPath);
   const lines = main.split('\n').map((line) => {
     const match = INCLUDE.exec(line);

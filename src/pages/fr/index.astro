@@ -17,6 +17,20 @@ const { Content } = await render(entry);
   <body>
     <main>
       <Content />
+      <section class="references" aria-labelledby="references">
+        <h2 id="references">{t('references.title')}</h2>
+        <ol class="references-list">
+          {entry.data.references.map((ref: { key: string; number: number; calls: number; text: string; url?: string }) => (
+            <li id={`ref-${ref.key}`}>
+              {ref.text}
+              {ref.url && <> <a href={ref.url}>{ref.url}</a></>}
+              {Array.from({ length: ref.calls }, (_, k) => (
+                <> <a class="backlink" href={`#cite-${ref.number}-${k + 1}`} aria-label={`${t('references.backlink')} ${k + 1}`}>↩</a></>
+              ))}
+            </li>
+          ))}
+        </ol>
+      </section>
     </main>
   </body>
 </html>

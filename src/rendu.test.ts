@@ -3,7 +3,10 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const html = readFileSync('dist/fr/index.html', 'utf8');
+const full = readFileSync('dist/fr/index.html', 'utf8');
+// `html` = corps de l'article, sans la section « Références » (générée depuis le .bib).
+assert.ok(full.includes('<section class="references"'), 'section Références absente');
+const html = full.split('<section class="references"')[0];
 const sources = ['src/fr/main.md', ...readdirSync('src/fr/sections').map((f) => join('src/fr/sections', f))]
   .map((f) => readFileSync(f, 'utf8'))
   .join('\n');
@@ -62,10 +65,12 @@ test('caractères spéciaux littéraux', () => {
 
 test('tableaux : légende en <caption>, identifiant retiré, Source juste après', () => {
   assert.doesNotMatch(html, /\{#|Table:/);
-  const tableaux = [...html.matchAll(/<div class="table-scroll"><table>\s*<caption>([^<]+)<\/caption>[\s\S]*?<\/table><\/div>\s*<p>(Source : [\s\S]*?)<\/p>/g)];
+  const tableaux = [...html.matchAll(/<div class="table-scroll"><table>\s*<caption>([\s\S]+?)<\/caption>[\s\S]*?<\/table><\/div>\s*<p>(Source : [\s\S]*?)<\/p>/g)];
   const legendes = [...sources.matchAll(/^Table: (.*?) \{#tab:[^}]+\}$/gm)].map((m) => m[1]);
   assert.equal(tableaux.length, legendes.length);
-  assert.deepEqual(tableaux.map((m) => decode(m[1])), legendes.map(decode));
+  // Les appels de citation sont rendus en liens `[n]` : on compare avec le numéro neutralisé.
+  const norm = (t: string) => decode(t.replace(/<[^>]+>/g, '').replace(/\[@[^\]]*\]|\[\d+\]/g, '[#]'));
+  assert.deepEqual(tableaux.map((m) => norm(m[1])), legendes.map(norm));
   assert.match(tableaux[0][2], /^Source : Rapports environnementaux$/);
 });
 
@@ -93,4 +98,29 @@ test('images : 8 figure, alt = figcaption, largeur 80 %, fichiers publiés, pas 
     assert.match(fichier, /\.(png|svg|webp)$/);
     assert.ok(existsSync(fichier), fichier);
   }
+});
+
+test('citations : aucune clé brute, chaque lien #ref-… a une cible, retours valides', () => {
+  assert.ok(!full.includes('[@'), 'clé brute [@ présente');
+  const ids = new Set([...full.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const refs = [...full.matchAll(/href="#(ref-[^"]+)"/g)].map((m) => m[1]);
+  assert.ok(refs.length >= 75, `appels attendus >= 75, obtenus ${refs.length}`);
+  for (const r of refs) assert.ok(ids.has(r), `cible absente : ${r}`);
+  const backs = [...full.matchAll(/href="#(cite-[^"]+)"/g)].map((m) => m[1]);
+  assert.equal(backs.length, refs.length, 'un lien de retour par appel');
+  for (const b of backs) assert.ok(ids.has(b), `appel d'origine absent : ${b}`);
+});
+
+test('section Références : h2 final et appel numéroté dans une légende de tableau', () => {
+  assert.match(full, /<h2 id="references">Références<\/h2>/);
+  assert.match(full, /<caption>[^]*?<a class="cite"[^>]*>\[\d+\]<\/a>[^]*?<\/caption>/);
+});
+
+test('citations : numéros de première occurrence croissants dans l\'ordre de lecture', () => {
+  let max = 0;
+  for (const m of full.matchAll(/class="cite" id="cite-(\d+)-1"/g)) {
+    assert.equal(Number(m[1]), max + 1, `numéro hors ordre : ${m[1]}`);
+    max++;
+  }
+  assert.ok(max > 0);
 });

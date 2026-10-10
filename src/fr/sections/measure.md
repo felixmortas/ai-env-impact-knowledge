@@ -43,7 +43,7 @@ Cette calculatrice, comme toute méthode d’estimation, présente des limites :
 
 ### D'autres bons outils
 
-- Zeus Project par ML.ENERGY : pour mesurer directement l'énergie consommée sur la machine [@zeus-nsdi23], et le ML.ENERGY Leaderboard pour comparer la consommation énergétique des modèles ouverts [@MLENERGY].
+- Zeus Project par ML.ENERGY : pour mesurer directement l'énergie consommée sur la machine [@zeus-nsdi23], et le ML.ENERGY Leaderboard pour comparer la consommation énergétique des modèles ouverts [@chung2025mlenergybenchmarkautomatedinference].
 - Un modèle de données ouvertes et interconnectées pour construire des scénarios d'empreinte carbone, améliorant la qualité et la transparence des données dès la conception [@ruf2023openlinkeddatamodel].
 - CodeCarbon : une bibliothèque Python pour mesurer en direct la consommation énergétique de la machine (ordinateur personnel et même serveur) [@courty2026codecarbon]. Attention, car elle ne prend pas en compte le code exécuté à travers des API.
 - EcoLogits par CodeCarbon : un calculateur web et une bibliothèque Python pour estimer l'empreinte carbone de l'IA générative à travers l'API, en utilisant le token comme unité de mesure [@ecologits_calculator]. L'outil se couple très bien avec CodeCarbon.
