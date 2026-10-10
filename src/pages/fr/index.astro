@@ -3,7 +3,8 @@ import { getEntry, render } from 'astro:content';
 import { t } from '../../i18n';
 import Base from '../../layouts/Base.astro';
 import AuthorBlock from '../../components/AuthorBlock.astro';
-import Toc from '../../components/Toc.astro';
+import TocProgress from '../../components/TocProgress';
+import { buildToc } from '../../lib/toc';
 
 const entry = await getEntry('article', 'fr');
 if (!entry) throw new Error("Article français introuvable (src/fr/main.md)");
@@ -13,7 +14,7 @@ const referencesHeading = { depth: 2, slug: 'references', text: t('references.ti
 <Base title={entry.data.title}>
       <Fragment set:html={entry.data.h1Html} />
       <AuthorBlock title={entry.data.title} />
-      <Toc headings={headings} references={referencesHeading} />
+      <TocProgress client:load nodes={buildToc(headings, [referencesHeading])} label={t('toc.label')} progressLabel={t('toc.progress')} />
       <Content />
       <section class="references" aria-labelledby="references">
         <h2 id="references">{t('references.title')}</h2>

@@ -179,10 +179,13 @@ test('complétude : 2 tableaux, 8 images, titres de section', () => {
   assert.equal((html.match(/<h1/g) ?? []).length, 1);
 });
 
-test('sans JavaScript : seuls les îlots de partage et de copie sont scriptés, aucun bouton rendu, aucune ressource tierce', () => {
-  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; les seuls îlots sont les boutons Partager et Copier.
-  assert.equal((full.match(/<astro-island/g) ?? []).length, 2);
+test('sans JavaScript : seuls les îlots de partage, de copie et de suivi de la table sont scriptés, aucun bouton rendu, aucune ressource tierce', () => {
+  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; les îlots sont les boutons Partager et Copier et la table des matières (rendue au build, liste de liens présente sans JS).
+  assert.equal((full.match(/<astro-island/g) ?? []).length, 3);
   assert.match(full, /component-export="default"[^>]*client="only"/);
+  assert.match(full, /<astro-island[^>]*TocProgress[^>]*client="load"/);
+  assert.match(full, /<nav class="toc"[^>]*><ol>/);
+  assert.doesNotMatch(full, /role="progressbar"/, 'jauge rendue sans JavaScript');
   assert.doesNotMatch(full, /<button/i);
   assert.doesNotMatch(full, /<script[^>]+src="https?:/i);
   assert.match(full, /&quot;https:\/\/[^&]*\/fr\/&quot;/);
@@ -248,7 +251,7 @@ test('citation : le bouton Copier reçoit exactement l\'entrée affichée', () =
 test('table des matières : liens ancrés vers des id existants, ordre de l\'article, sans titres de paragraphe', () => {
   const m = /<nav class="toc" aria-label="Table des matières">([\s\S]*?)<\/nav>/.exec(full);
   assert.ok(m, 'nav de la table absent');
-  const hrefs = [...m[1].matchAll(/<a href="#([^"]+)">([^<]*)<\/a>/g)];
+  const hrefs = [...m[1].matchAll(/(<a href="#([^"]+)"[^>]*>)([^<]*)<\/a>/g)].map((x) => [x[1], x[2], x[3]] as [string, string, string]);
   assert.ok(hrefs.length >= 6);
   const ids = [...full.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]);
   let last = -1;
@@ -259,6 +262,12 @@ test('table des matières : liens ancrés vers des id existants, ordre de l\'art
     last = pos;
   }
   assert.equal(hrefs[hrefs.length - 1][1], 'references');
+  // Nom accessible (points mobiles) et niveau de titre (taille des points) présents dans le HTML servi.
+  for (const [a, id, text] of hrefs) {
+    assert.ok(a.includes(`aria-label="${text}"`), `aria-label absent ou différent : ${id}`);
+    assert.match(a, /data-depth="[2-5]"/, `data-depth absent : ${id}`);
+  }
+  assert.doesNotMatch(m[1], /aria-current/, 'aria-current rendu sans JavaScript');
   assert.match(m[1], /<ol>[\s\S]*<ol>/, 'pas d\'imbrication');
   assert.doesNotMatch(m[1], /<li>\s*<\/li>|<ol>\s*<\/ol>/);
   assert.doesNotMatch(m[1], /Pourquoi \?|Exemple concret|Règle générale/);
@@ -270,12 +279,12 @@ test('table des matières : correspond exactement aux titres h2 à h5 de l\'arti
   const m = /<nav class="toc" aria-label="Table des matières">([\s\S]*?)<\/nav>/.exec(full)!;
   const heads = [...html.matchAll(/<h([2-5]) id="([^"]+)"/g)].map((x) => ({ depth: Number(x[1]), id: x[2] }));
   assert.ok(heads.length > 0);
-  const links = [...m[1].matchAll(/<a href="#([^"]+)">/g)].map((x) => x[1]);
+  const links = [...m[1].matchAll(/<a href="#([^"]+)"[^>]*>/g)].map((x) => x[1]);
   assert.deepEqual(links, [...heads.map((x) => x.id), 'references']);
   // Profondeur d'imbrication des <ol> = rang de niveau dans l'article (h2 → 1, h3 → 2, h4 → 3…) lorsqu'il n'y a pas de saut.
   let depth = 0;
   const nesting = new Map<string, number>();
-  for (const tok of m[1].matchAll(/<ol>|<\/ol>|<a href="#([^"]+)">/g)) {
+  for (const tok of m[1].matchAll(/<ol>|<\/ol>|<a href="#([^"]+)"[^>]*>/g)) {
     if (tok[0] === '<ol>') depth++;
     else if (tok[0] === '</ol>') depth--;
     else nesting.set(tok[1], depth);

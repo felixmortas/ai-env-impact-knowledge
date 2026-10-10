@@ -2,7 +2,7 @@
 title: 'Story 2.5 : Table des matières qui suit la lecture'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -73,3 +73,40 @@ Isoler les calculs (entrée active, ratio de progression) dans des fonctions pur
 **Commands:**
 - `npm test` -- expected: tests verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Calcul pur (section active, progression)**
+
+- Entrée du design : fonctions pures testables avec mesures injectées.
+  [`toc-progress.ts:19`](../../src/lib/toc-progress.ts#L19)
+
+- Ratio de progression borné, tolérant aux mesures invalides.
+  [`toc-progress.ts:31`](../../src/lib/toc-progress.ts#L31)
+
+**Îlot React (SSR + suivi)**
+
+- Îlot rendu au build ; `aria-current` et jauge ajoutés à l'hydratation.
+  [`TocProgress.tsx:65`](../../src/components/TocProgress.tsx#L65)
+
+- Branchement dans la page à la place de l'ancienne table Astro.
+  [`index.astro:17`](../../src/pages/fr/index.astro#L17)
+
+**Styles (desktop, mobile en points)**
+
+- Table fixe en marge dès 1200 px.
+  [`article.css:198`](../../src/styles/article.css#L198)
+
+- Barre collante de points, taille selon le niveau de titre.
+  [`article.css:214`](../../src/styles/article.css#L214)
+
+**Tests et documentation**
+
+- Tests unitaires du calcul avec cas limites.
+  [`toc-progress.test.ts:1`](../../src/lib/toc-progress.test.ts#L1)
+
+- Assertions SSR : `aria-label`, `data-depth`, absence de jauge sans JS.
+  [`rendu.test.ts:251`](../../src/rendu.test.ts#L251)
+
+- Procédure de vérification navigateur.
+  [`README.md:48`](../../README.md#L48)

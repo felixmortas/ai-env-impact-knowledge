@@ -45,6 +45,12 @@ Le gabarit partagé `src/layouts/Base.astro` fournit `<html lang>` (via `t('page
 
 Vérification manuelle à 375 px (aucun outil de test navigateur n'est installé) : `npm run build && npm run preview`, ouvrir `/fr/` dans un navigateur, activer le mode appareil (375 px de large) et exécuter dans la console `document.documentElement.scrollWidth <= window.innerWidth` : le résultat doit être `true` ; les tableaux défilent dans leur conteneur. Pour le thème sombre, émuler `prefers-color-scheme: dark` dans les outils de développement.
 
+## Table des matières qui suit la lecture
+
+`src/components/TocProgress.tsx` est un îlot `client:load` : la liste de liens ancrés est rendue au build (donc présente sans JavaScript), puis l'hydratation ajoute `aria-current="true"` sur l'entrée de la section visible et une jauge de progression (`role="progressbar"`). Les calculs (section active, ratio) sont des fonctions pures dans `src/lib/toc-progress.ts`, testées avec des mesures injectées. Dès 1200 px la table est fixée dans la marge gauche ; jusqu'à 640 px elle devient une barre collante de points non nommés (taille selon le niveau `h2` à `h5`, `aria-label` = titre, texte masqué visuellement) ; la transition de la jauge est désactivée avec `prefers-reduced-motion: reduce`.
+
+Vérification navigateur : `npm run build && npm run preview`, ouvrir `/fr/`. (1) Desktop : faire défiler, l'entrée active est en gras et la jauge avance de 0 à 100 %. (2) 375 px (mode appareil) : la table est une ligne de points, `document.documentElement.scrollWidth <= window.innerWidth`, Tab puis Entrée sur un point mène à la section et le lecteur d'écran annonce le titre. (3) Désactiver JavaScript (outils de développement) : la liste de liens ancrés fonctionne, sans jauge. (4) Émuler `prefers-reduced-motion: reduce` : plus de transition sur la jauge.
+
 ## Configuration et bloc auteur
 
 `src/config.json` est la seule source des informations d'auteur, de dates et de licence (bloc affiché sous le titre, puis métadonnées et BibTeX dans les stories suivantes). Champs à éditer à la main : `firstName`, `lastName`, `email`, `githubUrl`, `linkedinUrl`, `publishedDate`, `modifiedDate` (format `AAAA-MM-JJ`), `license` (`name`, `url`) et `siteUrl`. Les dates sont globales à toutes les langues, jamais déduites de git ni de l'horloge : `publishedDate` ne change plus après publication ; mettre à jour `modifiedDate` à la main à chaque correction publiée de l'article.

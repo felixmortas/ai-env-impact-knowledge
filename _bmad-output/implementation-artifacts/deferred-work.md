@@ -40,3 +40,13 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-2-1-configuration-unique-et-bloc-auteur.md`
   summary: Remplacer la liste manuelle de fichiers de test dans `package.json` par un glob.
   evidence: chaque story ajoute un fichier à la main ; risque d'oubli.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-5-table-des-matieres-qui-suit-la-lecture.md`
+  summary: Vérifier au navigateur que `display: contents` sur `ol`/`li` (mode points mobile) conserve la sémantique de liste pour les lecteurs d'écran.
+  evidence: Certains navigateurs retirent les rôles list/listitem avec `display: contents` ; aucun test automatisé ne le couvre.
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-5-table-des-matieres-qui-suit-la-lecture.md`
+  summary: Réserver la hauteur de la jauge avant hydratation (décalage de mise en page) et ajouter styles `forced-colors` et `print` pour la table fixe/points.
+  evidence: La jauge n'est rendue qu'après hydratation ; les points utilisent un fond `::before` invisible en mode contraste forcé.
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-5-table-des-matieres-qui-suit-la-lecture.md`
+  summary: Aucun test navigateur/hydratation de l'îlot (aria-current, aria-valuenow) ; cibles tactiles des points < 44 px.
+  evidence: Seuls les tests purs et le HTML SSR sont automatisés ; points de 1,5 × 2,25 rem.
