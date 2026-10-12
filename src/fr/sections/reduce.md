@@ -288,3 +288,19 @@ Il est essentiel de **rester informé** sur les nouveaux modèles, car certains 
 Pour la génération d'images par exemple, une étude suggère que les choix du type de modèle devraient tenir compte de la longueur prévue de la sortie : les modèles autorégressifs (les plus utilisés) restent préférables pour les réponses courtes (moins de 1024 tokens), tandis que les modèles de diffusion offrent des avantages indéniables pour les tâches de génération plus longues [@ruf2026diffusion].
 
 Attention, changer de modèle peut induire une nouvelle phase de développement (tests, fine-tuning) impliquant un impact environnemental significatif.
+
+#### « La quantization » : Réduire la précision des calculs réduit les besoins en énergie
+
+« Quantizer » un modèle consiste à réduire la précision de ses calculs. On passe de nombres avec beaucoup de chiffres après la virgule à des nombres sans aucun chiffre après la virgule. En réduisant la précision des calculs, on peut, dans certaines conditions, réduire la quantité d'énergie consommée par le modèle [@delavande2026understandingefficiencyquantizationbatching; @poddar2025sustainablenlpinsightsbenchmarking].
+Bien sûr, cette réduction de chiffres après la virgule entraîne une perte de précision dans les calculs. Mais aujourd'hui, il est possible d'utiliser des modèles « quantizés » ayant de très bonnes performances, réduisant ainsi notre impact environnemental.
+
+#### La distillation : quand l'élève dépasse le maître
+
+Une technique permettant de réduire la taille des modèles et, par conséquent, leur consommation énergétique à l'exécution, est la distillation des connaissances.
+C'est notamment cette technique qui a été utilisée pour créer DeepSeek, avec une fraction du coût énergétique de ChatGPT [@young2025deepseek].
+Elle consiste à utiliser un modèle professeur, de très grande taille, pour générer des données qui serviront ensuite à affiner l'entraînement d'un autre modèle, appelé modèle élève, beaucoup plus petit. Le modèle élève peut ainsi acquérir des connaissances similaires à celles de son professeur, tout en nécessitant beaucoup moins de ressources pour son exécution [@jiao-etal-2020-tinybert].
+
+#### Les modèles élagués (Pruning)
+
+L'élagage (pruning) consiste à supprimer des paramètres du modèle. Cette technique permet de réduire fortement la taille, et donc le coût d'exécution des modèles tout en conservant de bonnes performances [@ICLR2024_160adf2d]. Cette réduction du nombre de paramètres et du coût d'exécution constitue un levier de réduction de la consommation énergétique.
+
