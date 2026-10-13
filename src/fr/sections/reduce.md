@@ -1,57 +1,62 @@
-# Réduire l'impact environnemental de l'IA générative à l'aide de bonnes pratiques
+# Réduire l'impact environnemental de l'IA générative en mettant en place des bonnes pratiques
 
-Il existe deux types de bonnes pratiques pour réduire l'impact environnemental de l'IA et améliorer l'efficacité :
+Dans ce chapitre, vous allez découvrir quelles sont les bonnes pratiques à mettre en place pour rédure votre impact environnemental lié à l'IA, et pourquoi les appliquer peut même améliorer votre efficacité.
 
-- **Pour l'utilisateur** : Elles concernent la manière dont l'application IA est utilisée.
-- **Pour le développeur** : Elles influencent la manière dont l'application IA fonctionne.
+Il existe des bonnes pratiques adaptées à deux catégories de public :
 
-Dans les deux cas, ces bonnes pratiques visent à **minimiser l'empreinte écologique** tout en **optimisant les performances**.
+- **L'utilisateur final** : Elles concernent la manière dont l'application IA est utilisée.
+- **Le développeur d'IA** : Elles influencent la manière dont l'application IA fonctionne.
 
-Certains acteurs comme l'ONU proposent également des bonnes pratiques, dont certaines d'entre elles seront présentées dans cette section [@aczel2026environmental].
+Dans les deux cas, ces bonnes pratiques visent à **minimiser votre empreinte écologique** tout en **optimisant vos performances**.
+
+Certains acteurs comme l'ONU proposent également des leviers de réduction qui seront présentés dans ce chapitre [@aczel2026environmental].
 
 ## En tant qu'utilisateur d'un chatbot
 
-### Prioriser une recherche sur un moteur de recherche pour une question simple
+### Prioriser une recherche sur un moteur de recherche
 
-Si la réponse attendue à votre question est simple (par exemple : le nombre d'habitants d'une ville ou la famille d'une plante), privilégiez une recherche via un moteur de recherche (Google, Ecosia, Bing, Qwant, DuckDuckGo).
+Si la réponse attendue à votre question est simple (par exemple, le nombre d'habitants d'une ville ou la famille d'une plante), privilégiez une recherche sur un moteur de recherche (Google, Ecosia, Bing, Qwant, Brave, DuckDuckGo).
 
 Si vous avez le réflexe de formuler votre question dans votre chatbot avec des mots-clés pour gagner du temps, sachez que vous pouvez directement saisir ces mots-clés dans votre moteur de recherche. La réponse sera tout aussi rapide et accessible via plusieurs sources.
-*Exemples : « Plus grande planète », « vitesse de la lumière ».*
+*Exemples : « Plus grande planète système solaire », « vitesse de la lumière ».*
 
-Une recherche moyenne sur Google est estimée à consommer **0,3 Wh** d'énergie et à émettre 0,2 g de CO₂e émis en 2009 [@holzele2009powering], mais cette valeur n'est certainement plus valable. Une étude récente estime les nouvelles valeurs à 0,03 Wh et 0,02 g de CO₂e, soit 10x moins que précédemment [@vanderbauwhede2025estimatingincreaseemissionscaused].
-Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistral Large 2 avec 400 tokens en sortie émet 1,14 g de CO₂e [@mistralai2025environmental].
-Google estime ces valeurs à 0,24 Wh et 0,03 g de CO₂e pour une requête médiane à Gemini [@elsworth2025measuringenvironmentalimpactdelivering].
+Google estime qu'une recherche moyenne sur son moteur de recherche consomme **0,3 Wh** d'énergie et émet 0,2 gCO₂e en 2009 [@holzele2009powering], mais cette valeur n'est certainement plus valable. Une étude récente estime les nouvelles valeurs à 0,03 Wh et 0,02 gCO₂e, soit 10x moins que précédemment [@vanderbauwhede2025estimatingincreaseemissionscaused].
+Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistral Large 2 avec 400 tokens en sortie émet 1,14 gCO₂e [@mistralai2025environmental].
 
-**Attention** : comme indiqué dans les parties précédentes, il n'est pas pertinent de donner une valeur précise à l'impact environnemental d'une requête moyenne adressée à un LLM. Cet impact dépend en effet de nombreux facteurs, déjà mentionnés plus haut.
-
-Enfin, sachez que, dans vos recherches avec Google ou d'autres moteurs, la fonctionnalité de **recherche par IA automatique (AI Overview)** est activée par défaut. Vous pouvez la désactiver dans les paramètres pour réduire votre impact environnemental et choisir vous-même quand utiliser l'IA pour vos recherches.
+**Attention** : Dans vos recherches avec Google ou d'autres moteurs, la fonctionnalité de **recherche par IA automatique (AI Overview)** est activée par défaut. Vous devez la désactiver dans les paramètres pour que cette bonne pratique soit valable et choisir vous-même quand utiliser l'IA pour vos recherches.
 
 ### Utiliser un modèle avec peu de paramètres activés
 
-Lors de l'utilisation d'un chatbot ou de tout autre outil, privilégiez le modèle **avec le moins de paramètres** tout en restant capable de répondre à votre question avec précision.
+Lors de l'utilisation d'un chatbot, privilégiez **le plus petit modèle**, avec le moins de paramètres activés. Il est suffisant pour réaliser de nombreuses tâches avec précision [@chen2023frugalgptuselargelanguage, @cao2026taskspecificefficiencyanalysissmall].
 
-La plupart des fournisseurs d'IA ne communiquent ni le nom exact du modèle utilisé, ni le nombre de paramètres qu'il contient. Cependant, pour vous guider, sachez que les modèles portant des noms comme *« flash »*, *« lite »*, *« rapide »*, *« nano »*, *« mini »*, *« quick »*, *« small »* ou *« lite »* sont généralement ceux qui activent **le moins de paramètres par token traité**. Ces modèles sont largement suffisants pour approfondir un sujet, reformuler un texte simple, générer du code basique, résumer un texte, etc.
+La plupart des fournisseurs d'IA ne communiquent ni le nom exact du modèle utilisé, ni le nombre de paramètres qu'il contient. Cependant, pour vous guider, sachez que les modèles portant des noms comme *« flash »*, *« lite »*, *« rapide »*, *« nano »*, *« mini »*, *« quick »* ou *« small »* sont généralement ceux qui activent **le moins de paramètres par token traité**. 
 
-Il est recommandé d'**utiliser la fonctionnalité de raisonnement** uniquement lorsque la réponse à votre requête nécessite une analyse complexe, non triviale, et doit être décomposée en plusieurs étapes pour garantir la meilleure qualité possible.
-*Exemples :* rédiger un rapport et réaliser une analyse critique à partir de données, concevoir une architecture logicielle.
+**Recommandations pour choisir son modèle en fonction de la tâche à réaliser :**
+- Petit : approfondir un sujet, reformuler ou résumer un texte, générer un bout de code basique, classifier, extraire du texte.
+- Intermédiaire : planifier, concevoir une architecture, générer du code dans un projet, réaliser un traitement non standardisé.
+- Grand : résoudre un problème complexe en mathématiques, sciences ou ingénierie, concevoir une architecture complexe, réaliser une planification complexe, analyser des dossiers volumineux avec des sources contradictoires.
+
+Vous l'aurez compris : les grands modèles sont surdimensionnés pour beaucoup de cas d'usage.
 
 Avec les modèles GPT-5 sur ChatGPT, vous ne pouvez pas choisir manuellement le modèle utilisé. Un premier modèle, appelé *« routeur »*, détermine automatiquement la taille du modèle qui traitera votre message.
-Pour les utilisateurs gratuits, toutes les requêtes sont envoyées au modèle le plus petit [@openai2026gpt56sol].
+Pour les utilisateurs gratuits, toutes les requêtes sont envoyées au plus petit modèle [@openai2026gpt56sol].
 
-Pour inciter à utiliser un modèle en particulier, vous pouvez inclure des mots-clés comme :
-*« Réponds simplement »* ou *« Sans raisonner »* pour un modèle léger.
-*« Réfléchis étape par étape »* ou *« Raisonne avant de répondre »* pour un modèle plus puissant ou un raisonnement [@anthropic2025prompt].
+Pour inciter le routeur à vous addresser votre message à un modèle en particulier, vous pouvez inclure des mots-clés comme :
+*« Réponds simplement »* ou *« Sans raisonner »* pour utiliser un petit modèle.
+*« Réfléchis étape par étape »* ou *« Raisonne avant de répondre »* pour utiliser un modèle plus puissant ou un raisonnement [@anthropic2025prompt].
 
 ### Réduire l'effort de réflexion
 
-Certains modèles, comme GPT ou Claude, permettent de paramétrer différents niveaux d'effort. Ce paramètre détermine la quantité de ressources que le modèle consacre à une tâche, c'est-à-dire le nombre de tokens de raisonnement et de sortie qu'il génère. Si l'on considère souvent qu'un raisonnement plus long conduit à de meilleurs résultats, ce n'est pas toujours le cas. Les performances tendent d'abord à s'améliorer à mesure que l'effort augmente, avant d'atteindre un point optimal puis, dans certains cas, de diminuer au-delà de ce seuil [@wu2025lessunderstandingchainofthoughtlength].
-Il est donc recommandé de limiter le niveau d'effort du modèle.
+Il est recommandé d'**utiliser la fonctionnalité de raisonnement** uniquement lorsque la réponse à votre requête nécessite une analyse complexe, non triviale, et doit être décomposée en plusieurs étapes pour garantir la meilleure qualité possible. Vous pouvez choisir d'activer ou non le raisonnement sur les chatbot de Google, Deepseek et Mistral.
+
+Certains modèles, comme GPT ou Claude, permettent de paramétrer différents niveaux d'effort. Ce paramètre détermine le nombre de tokens de raisonnement et de sortie qu'il génère. Si l'on considère souvent qu'un raisonnement plus long conduit à de meilleurs résultats, ce n'est pas toujours le cas. Les performances tendent d'abord à s'améliorer à mesure que l'effort augmente, avant d'atteindre un point optimal puis, dans certains cas, de diminuer au-delà de ce seuil [@wu2025lessunderstandingchainofthoughtlength].
+Il est ainsi préférable de privilégier un niveau d’effort faible à modéré.
 
 ### Prompt engineering
 
-Cette section explique l'importance du *prompt/context engineering* : **comment fournir un contexte utile au chatbot tout en éliminant le bruit** (c'est-à-dire les informations superflues) pour qu'il accomplisse sa tâche avec précision et génère une réponse au format souhaité.
+Cette section explique l'importance du *prompt/context engineering* : **comment fournir un contexte utile au chatbot tout en éliminant le bruit** (c'est-à-dire les informations inutiles) pour qu'il accomplisse sa tâche avec précision et génère une réponse au format souhaité.
 
-D'après les principaux fournisseurs de LLM dont OpenAI [@openai_prompt_engineering], la structure optimale d'un prompt repose sur plusieurs éléments clés, notamment :
+D'après les principaux fournisseurs de modèle dont OpenAI [@openai_prompt_engineering], la structure optimale d'un prompt repose sur plusieurs éléments clés, notamment :
 
 1. **Contexte** : La partie souvent la plus longue, qui peut être **fortement réduite** pour minimiser le nombre de tokens en entrée et clarifier la demande.
 2. **Tâche** : Généralement formulée en une phrase.
@@ -63,88 +68,78 @@ Nous avons vu précédemment que les tokens en entrée ont également une influe
 
 #### Optimiser le livrable pour réduire les tokens en sortie
 
-Nous avons vu précédemment que **l'impact énergétique des tokens générés en sortie est plus important que celui des tokens en entrée** [@Caravaca2026]. Il est donc plus efficace, sur le plan énergétique, **d'allonger le prompt** pour tenter de réduire la taille de la réponse.
+Nous avons vu précédemment que **l'impact énergétique des tokens générés en sortie est plus important que celui des tokens en entrée** [@Caravaca2026]. Il est donc généralement plus efficace, sur le plan énergétique, d'**allonger le prompt envoyé** pour tenter de réduire la longueur de la réponse.
 
 Dans la plupart des cas, **une réponse courte et concise suffit** et évite de se perdre dans des explications inutiles.
 
-Exemples d'instructions pour limiter la sortie
-
-- Pour corriger les fautes d'orthographe dans un long texte :
-  *« Donne-moi uniquement les corrections à apporter, sans réécrire tout le texte »*
+**Exemples d'instructions pour limiter la longueur de la réponse :**
+- Pour corriger des fautes d'orthographe dans un long texte :
+  *« Indique uniquement les corrections à apporter, sans explications et sans recopier l'intégralité du texte. »*
 - Pour corriger du code :
-  *« Réécris uniquement les parties à modifier et pas tout le code. Ne donne aucune explication. »*
+  *« Réécris uniquement les parties à modifier sans reproduire l’intégralité du code. Ne fournit pas d’explications. »*
 - Pour reformuler un paragraphe dans un texte :
-  *« Réécris seulement le paragraphe à modifier et pas tout le texte. »*
+  *« Réécris uniquement le paragraphe à modifier, sans recopier le reste du texte. »*
 
 À vous de déterminer ce dont vous avez besoin pour obtenir **la réponse attendue, et rien de plus si ce n'est pas nécessaire**.
 
-**Astuce** : Certains chatbots, comme Claude, proposent de sélectionner le type de réponse. Privilégiez les options *« court »* ou *« concis »* pour optimiser l'efficacité.
+**Astuce** : Certains chatbots, comme Claude, proposent de sélectionner le type de réponse. Privilégiez les options *« courtes »* ou *« concises »*.
 
 Au contraire, l'utilisation de certains verbes d'action comme « justifie », « explique », « analyse » ou « recommande » a tendance à augmenter la quantité de texte généré [@adamska2026greenpromptingcharacterizingpromptdriven].
 
 ### Arrêter la génération
 
-Si, dès le début de la réponse du chatbot, vous constatez qu'elle ne correspond **absolument pas** à ce que vous attendiez, **interrompez-la immédiatement** en cliquant sur le bouton *« Stop »* (généralement représenté par un carré rempli dans un cercle).
+Si dès le début de la réponse du chatbot, vous constatez qu'elle ne correspond **absolument pas** à ce que vous attendez, **interrompez-la immédiatement** en cliquant sur le bouton *« Stop »* (généralement représenté par un carré rempli ⏹️).
 
-Cette action permet :
+Cette action simple permet de **réduire le nombre de tokens générés en sortie** en évitant une réponse inutile.
 
-- D'éviter une réponse inutile,
-- De **réduire le nombre de tokens générés en sortie**,
-- D'optimiser l'efficacité énergétique de votre conversation.
+### Modifier la demande initiale plutôt que d'envoyer un nouveau message
 
-### Modifier les messages plutôt que d'en envoyer un nouveau
+Lorsque la réponse générée est **incomplète, interrompue ou insatisfaisante** (un élément oublié dans le contexte, un détail imprécis, une partie à supprimer), **préférez modifier le message initial** plutôt que d'en envoyer un nouveau pour affiner votre demande.
 
-Lorsque la réponse générée est **incomplète, interrompue ou insatisfaisante** (un élément oublié dans le contexte, un détail imprécis, une partie à supprimer, etc.), **préférez modifier le message initial** plutôt que d'envoyer un nouveau message pour affiner votre demande.
+À chaque nouveau message envoyé, **tout l'historique de la conversation est réenvoyé** au modèle. Cela augmente considérablement le nombre de **tokens en entrée**, et donc l'impact environnemental.
+De plus, un historique trop long introduit du **bruit** (informations inutiles), réduisant la qualité des réponses. **Plus les tokens en entrée sont limités et pertinents, meilleure sera la réponse du chatbot**.
 
-**Pourquoi ?**
-
-- **Impact environnemental** : À chaque nouveau message envoyé, **tout l'historique de la conversation est réenvoyé** au modèle. Cela augmente considérablement le nombre de **tokens en entrée**, et donc l'impact énergétique.
-- **Performance** : Un historique trop long introduit du **bruit** (informations inutiles), ce qui réduit la qualité des réponses. **Moins un LLM a de tokens en entrée, plus chaque token est pertinent**, et meilleure sera la réponse.
-
-Pour optimiser une conversation avec un chatbot :
-
-- **Gardez un historique concis et précis** en utilisant **l'édition de messages** pour chaque itération, plutôt que d'ajouter de nouveaux messages.
-- **Exemple concret** :
-  Si la réponse du chatbot ne prend pas en compte un élément important, **ne lui envoyez pas un nouveau message** du type :
-  *« Je voudrais que tu me donnes une réponse en prenant en compte ce paramètre supplémentaire. ».* **Préférez modifier le message initial** pour y intégrer cette précision. Ainsi, la réponse sera régénérée avec un contexte plus complet, **sans alourdir l'historique**.
+**Exemple concret** :
+Si la réponse du chatbot ne prend pas en compte un élément important, **n'envoyez pas de nouveau message** en lui demandant de recommencer sa réponse en prenant en compte un paramètre supplémentaire.
+**Privilégiez la modification du message initial** pour y intégrer cette précision. Ainsi, la réponse sera regénérée avec un contexte plus complet, **sans alourdir l'historique**.
 
 **Cas particulier : les petites corrections**
 Si la réponse est **longue et ne nécessite qu'une petite modification** :
 
-- **Évitez de modifier le prompt initial** (ce qui régénérerait une réponse complète et consommerait plus d'énergie liée aux tokens en *sortie*).
-- **Préférez demander au chatbot de corriger uniquement la partie concernée** sans tout réécrire.
-  *Exemple :* *« Corrige uniquement le troisième paragraphe, sans réécrire le reste. »*
+- **Ne modifiez pas le prompt initial** : cela regénérerait une réponse complète et aurait un plus gros impact liée aux tokens en *sortie*.
+- **Demandez au chatbot de corriger uniquement la partie concernée** sans tout réécrire.
+  *Exemple :* *« Corrige uniquement le troisième paragraphe, sans recopier le reste du texte. »*
 
-L'objectif est de **trouver un juste milieu** :
+Cette bonne pratique demande de trouver le **meilleur compromis** entre :
 
-- **Régénérer une réponse** (en modifiant le message initial) permet de maintenir un contexte concis, mais peut consommer plus de **tokens en sortie** en régénérant toute la réponse ;
-- **Ajouter un message** peut réduire les **tokens en sortie**, mais alourdir le contexte et donc augmenter les **tokens en entrée** à chaque nouveau message.
+- **Regénérer une réponse** en modifiant le message initial, permettant de maintenir un contexte concis, mais pouvant générer plus de **tokens en sortie** ;
+- **Ajouter un message**, permettant de réduire les **tokens en sortie**, mais augmentant la quantité de **tokens en entrée** à chaque nouveau message.
 
 ### Conversations engineering : créer des branches
 
 Pour maintenir un contexte **minimal et utile**, une technique efficace consiste à **créer des branches dans une conversation**.
-En effet, toutes les informations échangées avec le chatbot ne sont pas toujours nécessaires pour répondre à une nouvelle demande.
+Toutes les informations échangées avec le chatbot ne sont pas nécessairement utiles pour répondre à une nouvelle demande.
 
-Si vous demandez une précision sur une réponse du chatbot, puis que votre prochaine question n'a **pas besoin de cette précision**, il est préférable de **modifier la question initiale** plutôt que de l'ajouter à la conversation. Cela permet de créer des **branches distinctes par sujet**, tout en conservant un contexte minimal.
+Si vous demandez au chatbot d'apporter une précision sur sa réponse, mais que votre prochain message **ne nécessite pas cette précision**, il est préférable de **modifier la question initiale** plutôt que de l'ajouter à la conversation. Vous pouvez ainsi créer des **branches distinctes pour chaque sujet** tout en limitant le contexte au strict nécessaire.
 
 **Exemple concret :**
 
-1. Vous posez une question à un chatbot sur un sujet spécifique.
+1. Vous posez une question à un chatbot sur un sujet précis.
 2. Il répond en abordant plusieurs points, dont certains ne sont pas clairs pour vous.
 3. Vous lui demandez d'approfondir le **point 1**.
-4. Ensuite, pour obtenir des précisions sur le **point 2**, au lieu d'ajouter une nouvelle question dans la conversation, vous **modifiez le prompt initial** pour demander directement une explication sur le **point 2**.
-5. Si vous souhaitez ensuite que le chatbot vous aide à avancer à partir de la réponse initiale, demandez-lui de **planifier le projet en éditant la question sur le point 2**, plutôt que d'envoyer une nouvelle question.
+4. Pour ensuite approfondir le **point 2**, vous **modifiez le prompt initial** afin de lui demander directement des explications sur ce point, plutôt que de poser une nouvelle question dans la conversation.
+5. Enfin, si vous souhaitez passer à l'action à partir de la réponse initiale, demandez-lui de **planifier le projet en modifiant le prompt consacré au point 2**, plutôt que d'envoyer une nouvelle question.
 
 À ce stade, votre conversation compte **3 branches** :
 
-- La **première** : votre question initiale sur le sujet, et la demande de planification.
-- La **seconde** : un approfondissement sur le **point 1** que vous n'aviez pas compris.
-- La **troisième** : un approfondissement sur le **point 2** que vous n'aviez pas compris.
+- La **première** : votre question initiale sur le sujet, et un approfondissement sur le **point 1** que vous n'aviez pas compris.
+- La **seconde** : votre question initiale sur le sujet, et un approfondissement sur le **point 2** que vous n'aviez pas compris.
+- La **troisième** : votre question initiale sur le sujet, et la demande de planification.
 
-Au fil de la conversation, plusieurs branches peuvent se créer à différents niveaux. Chaque branche traite d'un **aspect spécifique du projet**, ce qui permet :
+Chaque branche traite donc d'un **aspect spécifique du projet**, permettant :
 
 - De conserver une **seule conversation** pour l'ensemble du projet.
-- D'éviter que l'historique ne soit **pollué par des informations inutiles** (comme des explications supplémentaires).
+- D'éviter que le contexte ne soit **pollué par des informations inutiles**.
 - D'**économiser le nombre de tokens** envoyés au modèle.
 - De créer une **méthode de prompting hiérarchisée et spécialisée**.
 
@@ -152,21 +147,21 @@ Au fil de la conversation, plusieurs branches peuvent se créer à différents n
 
 ### Créer une nouvelle conversation pour chaque nouveau sujet
 
-Compte tenu de ce qui précède et de certains travaux [@Ruf_2025], il est **plus efficace de créer une nouvelle conversation** pour aborder un sujet sans lien avec le précédent.
+Nous avons constaté que chaque nouveau message envoyé, entraîne le **renvoi de l'intégralité de l'historique** de la conversation au chatbot. Il est donc préférable de **démarrer une nouvelle conversation** lorsqu'on souhaite aborder un sujet sans rapport avec le précédent [@Ruf_2025].
 
 Deux options s'offrent à vous :
 
 1. **Créer une nouvelle conversation** dédiée au nouveau sujet.
 2. **Modifier le premier message** de la conversation existante pour y introduire le nouveau sujet.
 
-Grâce à cette deuxième option, vous **réduisez le nombre de conversations** dans votre historique, ce qui permet de maintenir un **environnement propre et organisé**.
+En choisissant la deuxième option, vous **réduisez le nombre de conversations** dans votre historique, ce qui permet de maintenir un **environnement propre et organisé**.
 
-De même, vous pouvez **réutiliser la réponse d'un chatbot** en l'injectant dans une **nouvelle conversation** pour une tâche totalement différente, plutôt que de poursuivre dans la même discussion.
-Cela permet, **une fois de plus, de limiter la taille du contexte**.
+Vous pouvez également **réutiliser la réponse d'un chatbot** en l'injectant dans une **nouvelle conversation** dédiée à une autre tâche, plutôt que de poursuivre dans la discussion initiale.
+Cette approche permet encore une fois **de limiter la taille du contexte**.
 
 ### Supprimer les conversations inutiles
 
-En réalité, lorsque vous envoyez un message à un chatbot, c'est toute la conversation qui est retransmise à chaque fois. Qui plus est, avant même vos messages, plusieurs éléments sont inclus : le *prompt* du développeur, le *prompt* système, des informations contextuelles (pays, heure, langue, navigateur, etc.), ainsi qu'un **résumé de chacune de vos conversations sauvegardées** [@mane2026context]. Ces résumés ajoutent du contexte au chatbot, mais ils ne sont pas toujours utiles. **N'hésitez pas à supprimer vos anciennes conversations si vous ne les utilisez plus.**
+Lorsque vous envoyez un message à un chatbot, avant même l'historique de vos messages, plusieurs éléments sont inclus : le *prompt* du développeur, le *prompt* système, des informations contextuelles (pays, heure, langue, navigateur, etc.), ainsi qu'un **résumé de chacune de vos conversations sauvegardées** [@mane2026context]. Ces résumés ajoutent du contexte pas toujours utile pour le chatbot. **Supprimer vos anciennes conversations** lorsqu'elles ne vous sont plus utiles.
 
 ### Vider la mémoire à long terme
 
@@ -174,79 +169,72 @@ Lorsque vous demandez à un chatbot de retenir une information au cours d'une co
 
 ## En tant qu'entreprise développant un agent
 
-### Prioriser les algorithmes à l'IA classique
+### Prioriser les algorithmes et l'IA classique à l'IA générative
 
-Dans de nombreux cas, de simples algorithmes de décision ou des IA de prédiction ou classification classiques sont suffisants.
 Lorsque cela suffit, privilégiez l'utilisation de technologies moins complexes.
+Dans de nombreux cas, de simples algorithmes de décision ou des IA de prédiction ou classification classiques suffisent.
 
 ### Utiliser des petits modèles spécialisés.
 
-Nous avons vu plus tôt que le nombre de paramètres activés d'un modèle avait une grosse influence sur la consommation d'énergie pour le traitement d'un token.
+Nous avons vu plus tôt que le nombre de paramètres activés d'un modèle a une influence importante sur l'impact environnemental du traitement d'un token.
 
-Il faut prioriser l'utilisation de modèles petits et spécialisés. Certains développeurs ont mis à disposition sur Hugging Face des modèles qu'ils ont spécialisés sur une tâche à l'aide du fine-tuning. Il est mieux de récupérer des modèles déjà fine-tunés plutôt que de procéder à un fine-tuning à chaque fois.
-
-Hugging Face : <https://huggingface.co/>
+Priorisez l'utilisation de modèles petits et spécialisés. Cela permet même parfois d'obtenir des résultats d'une meilleure précision qu'avec des grands modèles généralistes [@cao2026taskspecificefficiencyanalysissmall, @li2024smalllanguagemodelsapplication]
+Des modèles déjà spécialisés sur une tâche à l'aide du fine-tuning sont mis à disposition sur Hugging Face. Privilégiez-les plutôt que de procéder à un nouveau fine-tuning.
 
 ### Prompt engineering pour réduire le nombre de tokens en sortie
 
-De la même manière que l'utilisateur peut limiter les tokens en sortie, le développeur de l'application IA joue un rôle clé dans la taille des réponses générées.
-
-Dans une application IA, le développeur intègre souvent un *prompt système*, pris en compte par le LLM avant même la première requête de l'utilisateur. **Ce *prompt système* doit préciser explicitement la forme attendue de la réponse**, afin de minimiser systématiquement le nombre de tokens en sortie.
+De la même manière que l'utilisateur peut limiter les tokens en sortie, le développeur peut préciser explicitement la forme attendue de la réponse dans le *prompt système*. Celui-ci est pris en compte par le modèle avant même la première requête de l'utilisateur et permet de systématiquement réduire le nombre de tokens en sortie.
 
 ### Context engineering pour réduire le nombre de tokens en entrée
 
-En tant que développeur, il est possible de concevoir des systèmes pour **réduire le contexte** en éliminant le bruit en ne conservant que les informations utiles.
-Par exemple :
+De nombreuses techniques existent pour **limiter le contexte** en ne conservant que les informations utiles.
 
-- Après une conversation de 10 messages, un LLM peut être sollicité pour **résumer ces échanges**. Ce résumé sera alors injecté dans les prochains messages, plutôt que l'intégralité des 10 messages initiaux.
-- Lors de l'utilisation de techniques comme le **RAG** (*Retrieval-Augmented Generation*) ou la mémoire long terme, il est possible de **filtrer et sélectionner uniquement les éléments pertinents** du contexte.
-- **Lors d'un processus multi-étapes**, il est essentiel de **bien décomposer les étapes** pour ne fournir au LLM **que les informations strictement nécessaires à chaque étape**. Si besoin, les logs ou résultats intermédiaires peuvent être conservés dans le contexte pour les étapes suivantes.
+**Exemples :**
+- Après une conversation de 10 messages, un petit modèle peut être sollicité pour **résumer les échanges**. Ce résumé peut remplacer l'historique lors des prochains échanges.
+- **Lors d'un processus multi-étapes**, les étapes peuvent êtres **décomposées** afin de ne fournir au modèle **que les informations strictement nécessaires** à chaque étape.
 
-Chaque développeur peut faire preuve de créativité pour **limiter le contexte envoyé au LLM**. Cela relève également du travail de l'ingénieur IA.
+Vous pouvez concevoir de nombreuses autres méthodes pour **limiter le contexte envoyé au modèle**.
 
 ### Fine-tuning vs Few-shots-exemples
 
-Pour qu'un LLM produise une sortie correspondant aux attentes, plusieurs méthodes existent, comme l'ajout d'exemples ou le *fine-tuning*.
-**Ajouter des exemples au contexte** (*one-shot* ou *few-shots*) est recommandé si l'agent ne sera pas utilisé de manière intensive. En revanche, pour une utilisation massive, il est préférable de réduire le nombre de tokens en entrée. Dans ce cas, le *fine-tuning* permet au modèle de comprendre le type de réponse attendu **sans avoir besoin de lui fournir des exemples à chaque requête**. Cependant, le *fine-tuning* a un **coût environnemental et financier élevé**. Il est donc recommandé uniquement si l'application sera utilisée à grande échelle.
+Pour qu'un modèle produise une sortie qui correspond aux attentes, il est possible d'ajouter d'exemples ou réaliser du *fine-tuning*.
+Si l'agent ne sera pas utilisé de manière intensive*, il est recommandé d'*ajouter des exemples au contexte** (*one-shot* ou *few-shots*). En revanche, pour une utilisation massive, il est préférable de réduire le nombre de tokens en entrée en passant par le *fine-tuning*. Il permet au modèle de comprendre le type de réponse attendu **sans avoir besoin de lui fournir des exemples à chaque requête**. Cependant, le *fine-tuning* a un **coût environnemental et financier élevé**.
 
-**Comment décider entre *few-shots* et *fine-tuning* ?**
-Pour déterminer le seuil à partir duquel le *fine-tuning* devient plus rentable, il faut :
-
-1. Convertir en tokens la partie du *prompt système* qui contient l'exemple du livrable.
+**Choisir entre le *few-shots* et le *fine-tuning***
+Pour déterminer le seuil à partir duquel le *fine-tuning* devient plus rentable, vous pouvez :
+1. Convertir en tokens les instructions pour la tâche et le *few-shots*.
 2. Estimer le coût par requête en fonction de ce nombre de tokens.
-3. Comparer ce coût cumulé au coût fixe du *fine-tuning* (prédictible).
+3. Comparer le coût cumulé de toutes les requêtes **avec** *few-shots* au coût de toutes celles **sans** *few-shots* additionné au coût fixe du *fine-tuning*.
 
-Dès que le coût total des requêtes avec un *prompt* long dépasse celui du *fine-tuning*, il devient plus avantageux d'opter pour cette dernière méthode.
+Lorsque le coût total des requêtes **sans** *few-shots* additionné au *fine-tuning* est inférieur à celui des requêtes **avec** *few-shots*, optez pour le *fine-tuning*.
 
-### Choisir un data center dans un pays à faible impact énergétique et hydrique
+### Hébergér le modèle dans un data center à faible impact énergétique et hydrique
 
-Lorsqu'on décide d'héberger soi-même son modèle dans le cloud public, il est recommandé de sélectionner une région dotée d'un **bon score énergétique et hydrique** (faible facteur d'émission et PUE faible toute l'année). Dans la majorité des cas, les data centers du cloud public sont mieux optimisés à grande échelle que ceux des infrastructures privées.
+Lorsque vous décidez d'héberger vous même votre modèle chez un fournisseur de cloud public, vous pouvez sélectionner une région dotée d'un **bon score énergétique et hydrique** : facteur d'émission bas, PUE et WUE faible toute l'année. 
 
-Selon l'ADEME (2013), il est préférable, du point de vue des émissions carbone, d'héberger un modèle dans un pays à faible facteur d'émission, comme la Suède, la France ou la Suisse.
+#### Point de vue des émissions carbone
+En vous référant aux données fournies par Ember Energy, présélectionnez un pays à faible facteur d'émission comme l'Islande, la Norvège, la Suisse ou la France.
 
 Les principaux fournisseurs de cloud indiquent la localisation de leurs data centers par région :
-
 - Amazon Web Service : [https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/](https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/)
 - Microsoft Azure : [https://learn.microsoft.com/en-us/azure/reliability/regions-list?tabs=all](https://learn.microsoft.com/en-us/azure/reliability/regions-list?tabs=all)
 - Google Cloud Platform : [https://datacenters.google/locations/](https://datacenters.google/locations/)
 - Salesforce : [https://help.salesforce.com/s/articleView?id=000396845&type=1](https://help.salesforce.com/s/articleView?id=000396845&type=1)
 - OVH : [https://www.ovhcloud.com/en/datacenter/](https://www.ovhcloud.com/en/datacenter/)
-- Hostinger : [https://www.hostinger.com/support/1583267-where-are-hostinger-servers-located/](https://www.hostinger.com/support/1583267-where-are-hostinger-servers-located/)
 
-Une fois la région du fournisseur de cloud pré-sélectionnée, il faut évaluer son PUE pour déterminer laquelle a la meilleure efficacité énergétique.
-
-Vous pouvez retrouver les valeurs de PUE par région publiées par les principaux fournisseurs de cloud :
+Une fois la région présélectionnée, prenez en compte le PUE du fournisseur.
+Vous pouvez retrouver ces valeurs par région pour les principaux fournisseurs de cloud :
 
 - **Amazon Web Services** : [https://sustainability.aboutamazon.com/products-services/aws-cloud](https://sustainability.aboutamazon.com/products-services/aws-cloud)
 - **Microsoft Azure** : [https://datacenters.microsoft.com/sustainability/efficiency/](https://datacenters.microsoft.com/sustainability/efficiency/)
 - **Google Cloud Platform** : [https://datacenters.google/efficiency/](https://datacenters.google/efficiency/)
 - **OVH** : [https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf](https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf)
 
-Une fois une région à faible facteur d'émission et faible PUE sélectionnée, il faut vérifier qu'elle ne se trouve pas dans une région à risque de sécheresse.
-Pour évaluer les risques liés à la disponibilité de l'eau, le **World Resources Institute (WRI)** propose une carte des régions à fort risque de sécheresse :
-[https://www.wri.org/aqueduct/tools](https://www.wri.org/aqueduct/tools).
+#### Point de vue de la consommation d'eau
+Vérifiez que la région préselectionnée n'est pas à risque de sécheresse.
+Pour évaluer les risques liés à la disponibilité de l'eau, le **World Resources Institute (WRI)** propose une carte des régions à fort risque de sécheresse : [https://www.wri.org/aqueduct/tools](https://www.wri.org/aqueduct/tools).
 
-Enfin, il faut regarder le WUE des data centers des fournisseurs. Bien qu'il ne soit pas toujours renseigné, il est possible de le récupérer sur le site des fournisseurs de cloud :
+Enfin, regardez le WUE. Lorsque cet indicateur est manquant, considérez le WUE de la région d'un autre fournisseur :
 
 - **Amazon Web Services** : [https://sustainability.aboutamazon.com/products-services/aws-cloud/](https://sustainability.aboutamazon.com/products-services/aws-cloud/)
 - **Microsoft Azure** : [https://datacenters.microsoft.com/sustainability/efficiency/](https://datacenters.microsoft.com/sustainability/efficiency/)
@@ -255,11 +243,11 @@ Enfin, il faut regarder le WUE des data centers des fournisseurs. Bien qu'il ne 
 
 ### Moteur d'inférence
 
-Certains fournisseurs optimisent leurs modèles pour certains moteurs d'inférence [@nvidia2026llminference]. Le moteur adéquat est généralement renseigné dans le document de présentation du modèle.
+Certains fournisseurs optimisent leurs modèles pour des moteurs d'inférence spécifiques [@nvidia2026llminference]. Le moteur adéquat peut être indiqué dans la carte de présentation du modèle.
 
 ### Utiliser le cache
 
-Dans certains cas, la fonctionnalité de **cache** permet de stocker et de réutiliser les calculs d'attention ainsi que les tokens d'un prompt déjà traité, évitant ainsi de tout recalculer à chaque requête.
+La fonctionnalité de **cache** permet de stocker et de réutiliser les calculs d'attention ainsi que les tokens d'un prompt déjà traité, évitant ainsi de tout recalculer à chaque requête.
 
 **Cas d'usage optimisés avec le cache** :
 
@@ -267,19 +255,19 @@ Dans certains cas, la fonctionnalité de **cache** permet de stocker et de réut
 - **Agents autonomes** : les agents effectuant des appels successifs en s'appuyant sur le même **prompt système** (instructions de base, outils disponibles, exemples de guidage) et un état partagé.
 - **Assistants de code** : analyse d'un dépôt de code volumineux et identique à chaque message.
 
-Pour qu'un cache soit efficace, le préfixe du prompt (la partie à mettre en cache) doit être **strictement identique** d'une requête à l'autre. Le moindre espace ou caractère modifié au début du texte invalidera tout ou partie du cache existant.
+Pour qu'un cache soit efficace, les requêtes doivent être peu espacées dans le temps et le préfixe du prompt (la partie à mettre en cache) doit être **strictement identique** d'une requête à l'autre. Le moindre espace ou caractère modifié au début du texte invalidera tout ou partie du cache existant.
 
 ### Traitement par lots (Batch processing)
 
-Le **batch processing** consiste à envoyer un grand nombre de requêtes à traiter simultanément. Cette méthode optimise l'inférence du LLM et permet de **réduire significativement** le coût énergétique et financier [@poddar2025sustainablenlpinsightsbenchmarking].
+Le **batch processing** consiste à envoyer un grand nombre de requêtes à traiter simultanément. Cette méthode optimise l'inférence du modèle et permet de **réduire significativement** le coût énergétique et financier [@poddar2025sustainablenlpinsightsbenchmarking].
 
-En général, les fournisseurs de LLM via API proposent le *batch processing* à **moitié prix** par rapport au traitement classique. Bien qu'il n'existe pas de données précises dans la littérature quantifiant cette réduction, on peut supposer que la variation du prix est corrélée à celle de l'impact énergétique.
+Les fournisseurs de modèle via API proposent généralement le *batch processing* à **moitié prix** par rapport au traitement classique. Bien qu'il n'existe pas de données précises dans la littérature quantifiant cette réduction, on peut supposer que la variation du prix est corrélée à celle de l'impact énergétique.
 
-Si vous n'avez pas besoin des réponses du LLM en temps réel et que vous avez un **volume important de requêtes quotidiennes**, il est préférable d'envoyer toutes les requêtes **en une seule fois**, par exemple à la fin de la journée.
+Envoyez périodiquement toutes les requêtes **en batch** si vous n'avez pas besoin des réponses du modèle en **temps réel**, que le **volume de requête est important** et qu'elles sont **indépendantes** les unes des autres.
 
 ### Modèles récents
 
-Il est essentiel de **rester informé** sur les nouveaux modèles, car certains peuvent offrir des performances équivalentes à celles de votre modèle actuel **tout en consommant significativement moins d'énergie**, grâce à une optimisation ou innovation.
+**Restez informés** sur les nouveaux modèles car certains peuvent offrir des performances équivalentes à celles de votre modèle actuel **tout en ayant un impact plus faible**, grâce à une optimisation ou une innovation.
 
 ![Principaux LLM classés selon leurs capacités, en fonction du nombre de paramètres utilisés pour leur entraînement](images/Major-Large-Language-Models.png){width=80%}
 
@@ -287,20 +275,20 @@ Il est essentiel de **rester informé** sur les nouveaux modèles, car certains 
 
 Pour la génération d'images par exemple, une étude suggère que les choix du type de modèle devraient tenir compte de la longueur prévue de la sortie : les modèles autorégressifs (les plus utilisés) restent préférables pour les réponses courtes (moins de 1024 tokens), tandis que les modèles de diffusion offrent des avantages indéniables pour les tâches de génération plus longues [@ruf2026diffusion].
 
-Attention, changer de modèle peut induire une nouvelle phase de développement (tests, fine-tuning) impliquant un impact environnemental significatif.
+Attention, changer de modèle peut induire une nouvelle phase de développement (évaluation, fine-tuning) impliquant un impact environnemental significatif.
+De plus, optimiser une technologie a plutôt tendance à augmenter son impact au global car elle devient peu coûteuse et est donc beaucoup plus utilisée. C'est l'effet rebond [@jevons1865coal].
 
 #### « La quantization » : Réduire la précision des calculs réduit les besoins en énergie
 
-« Quantizer » un modèle consiste à réduire la précision de ses calculs. On passe de nombres avec beaucoup de chiffres après la virgule à des nombres sans aucun chiffre après la virgule. En réduisant la précision des calculs, on peut, dans certaines conditions, réduire la quantité d'énergie consommée par le modèle [@delavande2026understandingefficiencyquantizationbatching; @poddar2025sustainablenlpinsightsbenchmarking].
-Bien sûr, cette réduction de chiffres après la virgule entraîne une perte de précision dans les calculs. Mais aujourd'hui, il est possible d'utiliser des modèles « quantizés » ayant de très bonnes performances, réduisant ainsi notre impact environnemental.
+« Quantizer » un modèle consiste à réduire la précision de ses calculs. On passe de nombres flotants à des nombres entiers. En réduisant la précision des calculs, on peut, dans certaines conditions, réduire la quantité d'énergie consommée par le modèle [@delavande2026understandingefficiencyquantizationbatching; @poddar2025sustainablenlpinsightsbenchmarking].
+Bien sûr, cette réduction de décimales entraîne une perte de précision dans les calculs. Mais aujourd'hui, il est possible d'utiliser des modèles « quantizés » tout en conservant de très bonnes performances.
 
 #### La distillation : quand l'élève dépasse le maître
 
-Une technique permettant de réduire la taille des modèles et, par conséquent, leur consommation énergétique à l'exécution, est la distillation des connaissances.
-C'est notamment cette technique qui a été utilisée pour créer DeepSeek, avec une fraction du coût énergétique de ChatGPT [@young2025deepseek].
+Une technique permettant de réduire la taille des modèles et, par conséquent leur impact à l'exécution, est la distillation des connaissances.
+C'est cette technique qui a été utilisée pour créer DeepSeek avec une fraction du coût énergétique de ChatGPT [@young2025deepseek].
 Elle consiste à utiliser un modèle professeur, de très grande taille, pour générer des données qui serviront ensuite à affiner l'entraînement d'un autre modèle, appelé modèle élève, beaucoup plus petit. Le modèle élève peut ainsi acquérir des connaissances similaires à celles de son professeur, tout en nécessitant beaucoup moins de ressources pour son exécution [@jiao-etal-2020-tinybert].
 
 #### Les modèles élagués (Pruning)
 
-L'élagage (pruning) consiste à supprimer des paramètres du modèle. Cette technique permet de réduire fortement la taille, et donc le coût d'exécution des modèles tout en conservant de bonnes performances [@ICLR2024_160adf2d]. Cette réduction du nombre de paramètres et du coût d'exécution constitue un levier de réduction de la consommation énergétique.
-
+L'élagage (*pruning*) consiste à supprimer des paramètres du modèle. Cette technique permet de réduire fortement la taille, et donc le coût d'exécution tout en conservant de bonnes performances [@ICLR2024_160adf2d]. 

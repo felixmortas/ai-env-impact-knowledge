@@ -1,4 +1,4 @@
-# Intro
+# Introduction
 
 On entend souvent qu’une requête ChatGPT consomme 2,9 Wh d’électricité, soit six fois plus qu’une recherche Google, et qu’il faut environ un demi-litre d’eau pour générer 10 à 50 réponses [@enault2025impactIA].
 
@@ -6,13 +6,13 @@ Mais ces chiffres reflètent-ils vraiment la réalité ?
 
 **Pas si vite !** Derrière ces affirmations se cachent des approximations et des raccourcis méthodologiques qui méritent d’être examinés de plus près.
 
-D’après mes calculs, ce simple message envoyé à DeepSeek a émis 0,28 gCO₂e et consommé 0,06 mL d’eau, soit environ x x et 1 goutte d'eau.
+D’après mes calculs, ce simple message envoyé à DeepSeek a émis 0,28 g de CO₂ équivalent (gCO₂e) et consommé 0,06 mL d’eau, soit environ x x et 1 goutte d'eau.
 
 ![Message court envoyé à DeepSeek : demande d'amélioration d'un paragraphe (1/3)](images/small-prompt-1.png){width=80%}
 ![Message court envoyé à DeepSeek : début de la réponse (2/3)](images/small-prompt-2.png){width=80%}
 ![Message court envoyé à DeepSeek : fin de la réponse et corrections apportées (3/3)](images/small-prompt-3.png){width=80%}
 
-Pourtant, ce message bien plus complexe envoyé à Claude a lui émis 3,23 g de CO₂e et consommé 0,8 mL d’eau, soit environ xx et 16 gouttes d'eau.
+Pourtant, ce message bien plus complexe envoyé à Claude a lui émis 3,23 gCO₂e et consommé 0,8 mL d’eau, soit environ xx et 16 gouttes d'eau.
 
 ![Message complexe envoyé à Claude : spécification du modèle de calcul (1/3)](images/big-prompt-1.png){width=80%}
 ![Message complexe envoyé à Claude : fin de la demande et début de la réponse (2/3)](images/big-prompt-2.png){width=80%}

@@ -51,7 +51,7 @@ Les tokens générés par le modèle de raisonnement sont parfois **non visibles
 Ainsi, nous comprenons que le nombre de tokens traités, en particulier les tokens de sortie, a un fort impact sur l'impact environnemental.
 Pour mesurer cet impact et quantifier son empreinte énergétique, carbone et hydrique, trois indicateurs clés peuvent être suivis :
 
-- les émissions de GES, exprimées en masse de dioxyde de carbone équivalent (g de CO₂e) ;
+- les émissions de GES, exprimées en masse de dioxyde de carbone équivalent (gCO₂e) ;
 - la consommation d'énergie, exprimée en watt-heures (Wh) ;
 - la consommation d'eau, exprimée en volume (L ou m³).
 
@@ -59,7 +59,7 @@ Ces indicateurs s'appliquent aussi bien pour les tokens d'entrée que pour les t
 
 ## Le rôle majeur du centre de données
 
-Une IA générative, comme un LLM (*Large Language Model*), est un programme exécuté sur un ordinateur. Cela peut être votre machine personnelle, mais cela se fait généralement dans des centres de données (data centers). Son fonctionnement nécessite de l'énergie, ce qui engendre un impact environnemental, mesuré ici en **g de CO₂e/kWh**.
+Une IA générative, comme un LLM (*Large Language Model*), est un programme exécuté sur un ordinateur. Cela peut être votre machine personnelle, mais cela se fait généralement dans des centres de données (data centers). Son fonctionnement nécessite de l'énergie, ce qui engendre un impact environnemental, mesuré ici en **gCO₂e/kWh**.
 
 Les différents services permettant d'utiliser un LLM, et consommant de l'énergie, sont les suivants :
 
@@ -72,13 +72,13 @@ Les différents services permettant d'utiliser un LLM, et consommant de l'énerg
 
 Chaque pays produit de l'électricité avec un impact environnemental variable. Pour générer **1 kWh**, une centrale émet des GES et consomme de l'eau. 
 
-Certains organismes fournissent les facteurs d'émission de carbone de chaque pays (CO2e/kWh) :
+Certains organismes fournissent les facteurs d'émission de carbone de chaque pays (g de CO2e/kWh) :
 - l'**International Energy Agency** (IEA), normalement payant mais accessible gratuitement sur demande, 
 - l'**ADEME**, gratuit mais reprend les données de l'IEA de 2011 [@ademe2026],
-- Ember Energy, gratuit et reprend des données de 2025 de l'IEA, Eurostat, BP et UN) [@ember_yearly_electricity_data] 
+- Ember Energy, gratuit et reprend des données de 2025 de l'IEA, Eurostat, BP et UN [@ember_yearly_electricity_data] 
 - Spectrum IEEE, gratuit et par pays ou type de production [@jones2008water].
 
-D'après Ember Energy, ces facteurs peuvent aller d'un peu plus de 20 (Island) à plus de 800 g de CO2e / kWh (Mongolie) La **localisation des serveurs** joue un rôle principal dans l'impact environnemental de l'IA.
+D'après Ember Energy, ces facteurs peuvent aller d'un peu plus de 20 (Island) à plus de 800 gCO2e / kWh (Mongolie) La **localisation des serveurs** joue un rôle principal dans l'impact environnemental de l'IA.
 
 ### Les data centers doivent être refroidits
 
