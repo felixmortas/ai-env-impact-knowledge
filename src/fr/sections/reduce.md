@@ -1,4 +1,4 @@
-# Réduire l'impact environnemental de l'IA générative en mettant en place des bonnes pratiques
+# Réduire son impact environnemental en mettant en place des bonnes pratiques
 
 Dans ce chapitre, vous allez découvrir quelles sont les bonnes pratiques à mettre en place pour rédure votre impact environnemental lié à l'IA, et pourquoi les appliquer peut même améliorer votre efficacité.
 
