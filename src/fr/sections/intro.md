@@ -23,14 +23,14 @@ Dans cet article, nous allons décrypter ce qui se cache derrière ces chiffres 
 Dans un contexte de changement climatique lié aux activités humaines [@IPCC2021SPM], même le pape s'inquiète des risques engendrés par l'IA [@leoXIV2026MagnificaHumanitas].
 
 Le rapport « Energy and AI » publié par l’IEA en avril 2025 prévoit que la demande mondiale en énergie pour les centres de données va doubler et passer à environ 945 TWh d’ici 2030 — soit un niveau comparable à la consommation annuelle d’électricité du Japon —, et qui devrait atteindre environ 1 200 TWh d’ici 2035 [@iea2025energy].
-Les Nations Unies ont récemment publié un rapport sur l'impact environnemental de l'IA au niveau des émissions carbones et de la consommation d'eau [@aczel2026environmental].
+Les Nations Unies ont récemment publié un rapport sur l'impact environnemental de l'IA au niveau des émissions carbone et de la consommation d'eau [@aczel2026environmental].
 
-Les organisations ainsi que les particuliers doivent contrôler leur empreinte environnementale. Des conseils concrets et réels pour la réduction de cet impact sont nécessaires au niveau des utilisateurs et des développeurs. Mais pour agir de manière effiace, il faut premièrement comprendre certains aspects du fonctionnement de l'IA. 
+Les organisations ainsi que les particuliers doivent contrôler leur empreinte environnementale. Des conseils concrets et réels pour la réduction de cet impact sont nécessaires au niveau des utilisateurs et des développeurs. Mais pour agir de manière efficace, il faut premièrement comprendre certains aspects du fonctionnement de l'IA. 
 
-J'ai réalisé des travaux de recherche sur l'impact environnemental de l'IA générative pendant 18 mois chez AXA, ce qui m'a permis d'accumuler de nombreuses connaissances sur le sujet que je souhaite aujourd'hui vous partager.
+J'ai réalisé des travaux de recherche sur l'impact environnemental de l'IA générative pendant 18 mois chez AXA, ce qui m'a permis d'accumuler de nombreuses connaissances sur le sujet que je souhaite aujourd'hui partager avec vous.
 
-A travers cet article, [vous comprendez](#facteurs-influençant-limpact-environnemental-de-lia-générative) quels sont les facteurs qui influencent le plus l'impact environnemental de l'IA, comment [le mesurer](#mesurer-limpact-environnemental-de-lia-générative) lorsque c'est possible, et comment [le réduire](#réduire-son-impact-environnemental-en-mettant-en-place-des-bonnes-pratiques) en tant qu'utilisateur final et développeur. 
+À travers cet article, [vous comprendrez](#facteurs-influençant-limpact-environnemental-de-lia-générative) quels sont les facteurs qui influencent le plus l'impact environnemental de l'IA, comment [le mesurer](#mesurer-limpact-environnemental-de-lia-générative) lorsque c'est possible, et comment [le réduire](#réduire-son-impact-environnemental-en-mettant-en-place-des-bonnes-pratiques) en tant qu'utilisateur final et développeur. 
 
-Vous découvrirez également [ce calculateur](https://felixmortas.com/ai-inf-calculator/) vous permettant de mesurer l'impact d'une de vos conversations avec un chatbot (ChatGPT, Claude, Gemini, mais aussi Mistral, Deepseek, etc.). Vous pourrez également simuler l'application de certaines bonnes pratiques sur cette même conversation, et ainsi vous rendre compte de la pertinence de celles-ci.
+Vous découvrirez également [ce calculateur](https://felixmortas.com/ai-inf-calculator/) vous permettant de mesurer l'impact d'une de vos conversations avec un chatbot (ChatGPT, Claude, Gemini, mais aussi Mistral, DeepSeek, etc.). Vous pourrez également simuler l'application de certaines bonnes pratiques sur cette même conversation, et ainsi vous rendre compte de la pertinence de celles-ci.
 
 *Ce calculateur **n'a pas pour objectif** de concurrencer les méthodes d'estimation existantes, ni de fournir une mesure certaine. Il a pour objectif d'illustrer l'efficacité des bonnes pratiques présentées dans cet article.*

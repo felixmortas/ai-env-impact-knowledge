@@ -1,11 +1,11 @@
 # Réduire son impact environnemental en mettant en place des bonnes pratiques
 
-Dans ce chapitre, vous allez découvrir quelles sont les bonnes pratiques à mettre en place pour rédure votre impact environnemental lié à l'IA, et pourquoi les appliquer peut même améliorer votre efficacité.
+Dans ce chapitre, vous allez découvrir quelles sont les bonnes pratiques à mettre en place pour réduire votre impact environnemental lié à l'IA, et pourquoi les appliquer peut même améliorer votre efficacité.
 
 Il existe des bonnes pratiques adaptées à deux catégories de public :
 
-- **L'utilisateur final** : Elles concernent la manière dont l'application IA est utilisée.
-- **Le développeur d'IA** : Elles influencent la manière dont l'application IA fonctionne.
+- **L'utilisateur final** : elles concernent la manière dont l'application IA est utilisée.
+- **Le développeur d'IA** : elles influencent la manière dont l'application IA fonctionne.
 
 Dans les deux cas, ces bonnes pratiques visent à **minimiser votre empreinte écologique** tout en **optimisant vos performances**.
 
@@ -29,7 +29,7 @@ Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistr
 
 Lors de l'utilisation d'un chatbot, privilégiez **le plus petit modèle**, avec le moins de paramètres activés. Il est suffisant pour réaliser de nombreuses tâches avec précision [@chen2023frugalgptuselargelanguage ; @cao2026taskspecificefficiencyanalysissmall].
 
-La plupart des fournisseurs d'IA ne communiquent ni le nom exact du modèle utilisé, ni le nombre de paramètres qu'il contient. Cependant, pour vous guider, sachez que les modèles portant des noms comme *« flash »*, *« lite »*, *« rapide »*, *« nano »*, *« mini »*, *« quick »* ou *« small »* sont généralement ceux qui activent **le moins de paramètres par token traité**. 
+La plupart des fournisseurs d'IA ne communiquent ni le nom exact du modèle utilisé, ni le nombre de paramètres qu'il contient. Cependant, pour vous guider, sachez que les modèles portant des noms comme *« flash »*, *« lite »*, *« rapide »*, *« nano »*, *« mini »*, *« quick »* ou *« small »* sont généralement ceux qui activent **le moins de paramètres par token traité**.
 
 **Recommandations pour choisir son modèle en fonction de la tâche à réaliser :**
 - Petit : approfondir un sujet, reformuler ou résumer un texte, générer un bout de code basique, classifier, extraire du texte.
@@ -41,13 +41,13 @@ Vous l'aurez compris : les grands modèles sont surdimensionnés pour beaucoup d
 Avec les modèles GPT-5 sur ChatGPT, vous ne pouvez pas choisir manuellement le modèle utilisé. Un premier modèle, appelé *« routeur »*, détermine automatiquement la taille du modèle qui traitera votre message.
 Pour les utilisateurs gratuits, toutes les requêtes sont envoyées au plus petit modèle [@openai2026gpt56sol].
 
-Pour inciter le routeur à vous addresser votre message à un modèle en particulier, vous pouvez inclure des mots-clés comme :
+Pour inciter le routeur à vous adresser votre message à un modèle en particulier, vous pouvez inclure des mots-clés comme :
 *« Réponds simplement »* ou *« Sans raisonner »* pour utiliser un petit modèle.
 *« Réfléchis étape par étape »* ou *« Raisonne avant de répondre »* pour utiliser un modèle plus puissant ou un raisonnement [@anthropic2025prompt].
 
 ### Réduire l'effort de réflexion
 
-Il est recommandé d'**utiliser la fonctionnalité de raisonnement** uniquement lorsque la réponse à votre requête nécessite une analyse complexe, non triviale, et doit être décomposée en plusieurs étapes pour garantir la meilleure qualité possible. Vous pouvez choisir d'activer ou non le raisonnement sur les chatbot de Google, Deepseek et Mistral.
+Il est recommandé d'**utiliser la fonctionnalité de raisonnement** uniquement lorsque la réponse à votre requête nécessite une analyse complexe, non triviale, et doit être décomposée en plusieurs étapes pour garantir la meilleure qualité possible. Vous pouvez choisir d'activer ou non le raisonnement sur les chatbots de Google, DeepSeek et Mistral.
 
 Certains modèles, comme GPT ou Claude, permettent de paramétrer différents niveaux d'effort. Ce paramètre détermine le nombre de tokens de raisonnement et de sortie qu'il génère. Si l'on considère souvent qu'un raisonnement plus long conduit à de meilleurs résultats, ce n'est pas toujours le cas. Les performances tendent d'abord à s'améliorer à mesure que l'effort augmente, avant d'atteindre un point optimal puis, dans certains cas, de diminuer au-delà de ce seuil [@wu2025lessunderstandingchainofthoughtlength].
 Il est ainsi préférable de privilégier un niveau d’effort faible à modéré.
@@ -56,7 +56,7 @@ Il est ainsi préférable de privilégier un niveau d’effort faible à modér�
 
 Cette section explique l'importance du *prompt/context engineering* : **comment fournir un contexte utile au chatbot tout en éliminant le bruit** (c'est-à-dire les informations inutiles) pour qu'il accomplisse sa tâche avec précision et génère une réponse au format souhaité.
 
-D'après les principaux fournisseurs de modèle dont OpenAI [@openai_prompt_engineering], la structure optimale d'un prompt repose sur plusieurs éléments clés, notamment :
+D'après les principaux fournisseurs de modèles dont OpenAI [@openai_prompt_engineering], la structure optimale d'un prompt repose sur plusieurs éléments clés, notamment :
 
 1. **Contexte** : La partie souvent la plus longue, qui peut être **fortement réduite** pour minimiser le nombre de tokens en entrée et clarifier la demande.
 2. **Tâche** : Généralement formulée en une phrase.
@@ -115,7 +115,7 @@ Cette bonne pratique demande de trouver le **meilleur compromis** entre :
 - **Regénérer une réponse** en modifiant le message initial, permettant de maintenir un contexte concis, mais pouvant générer plus de **tokens en sortie** ;
 - **Ajouter un message**, permettant de réduire les **tokens en sortie**, mais augmentant la quantité de **tokens en entrée** à chaque nouveau message.
 
-### Conversations engineering : créer des branches
+### Conversation engineering : créer des branches
 
 Pour maintenir un contexte **minimal et utile**, une technique efficace consiste à **créer des branches dans une conversation**.
 Toutes les informations échangées avec le chatbot ne sont pas nécessairement utiles pour répondre à une nouvelle demande.
@@ -143,11 +143,11 @@ Chaque branche traite donc d'un **aspect spécifique du projet**, permettant :
 - D'**économiser le nombre de tokens** envoyés au modèle.
 - De créer une **méthode de prompting hiérarchisée et spécialisée**.
 
-![Exemple d'arborescence des branches d'une conversation avec un chatbot.](images/conv-branching-diagram.png){width=80%}
+![Exemple d'arborescence des branches d'une conversation avec un chatbot](images/conv-branching-diagram.png){width=80%}
 
 ### Créer une nouvelle conversation pour chaque nouveau sujet
 
-Nous avons constaté que chaque nouveau message envoyé, entraîne le **renvoi de l'intégralité de l'historique** de la conversation au chatbot. Il est donc préférable de **démarrer une nouvelle conversation** lorsqu'on souhaite aborder un sujet sans rapport avec le précédent [@Ruf_2025].
+Nous avons constaté que chaque nouveau message envoyé entraîne le **renvoi de l'intégralité de l'historique** de la conversation au chatbot. Il est donc préférable de **démarrer une nouvelle conversation** lorsqu'on souhaite aborder un sujet sans rapport avec le précédent [@Ruf_2025].
 
 Deux options s'offrent à vous :
 
@@ -174,7 +174,7 @@ Lorsque vous demandez à un chatbot de retenir une information au cours d'une co
 Lorsque cela suffit, privilégiez l'utilisation de technologies moins complexes.
 Dans de nombreux cas, de simples algorithmes de décision ou des IA de prédiction ou classification classiques suffisent.
 
-### Utiliser des petits modèles spécialisés.
+### Utiliser des petits modèles spécialisés
 
 Nous avons vu plus tôt que le nombre de paramètres activés d'un modèle a une influence importante sur l'impact environnemental du traitement d'un token.
 
@@ -191,13 +191,13 @@ De nombreuses techniques existent pour **limiter le contexte** en ne conservant 
 
 **Exemples :**
 - Après une conversation de 10 messages, un petit modèle peut être sollicité pour **résumer les échanges**. Ce résumé peut remplacer l'historique lors des prochains échanges.
-- **Lors d'un processus multi-étapes**, les étapes peuvent êtres **décomposées** afin de ne fournir au modèle **que les informations strictement nécessaires** à chaque étape.
+- **Lors d'un processus multi-étapes**, les étapes peuvent être **décomposées** afin de ne fournir au modèle **que les informations strictement nécessaires** à chaque étape.
 
 Vous pouvez concevoir de nombreuses autres méthodes pour **limiter le contexte envoyé au modèle**.
 
 ### Fine-tuning vs Few-shots-exemples
 
-Pour qu'un modèle produise une sortie qui correspond aux attentes, il est possible d'ajouter d'exemples ou réaliser du *fine-tuning*.
+Pour qu'un modèle produise une sortie qui correspond aux attentes, il est possible d'ajouter des exemples ou de réaliser du *fine-tuning*.
 Si l'agent ne sera pas utilisé de manière intensive*, il est recommandé d'*ajouter des exemples au contexte** (*one-shot* ou *few-shots*). En revanche, pour une utilisation massive, il est préférable de réduire le nombre de tokens en entrée en passant par le *fine-tuning*. Il permet au modèle de comprendre le type de réponse attendu **sans avoir besoin de lui fournir des exemples à chaque requête**. Cependant, le *fine-tuning* a un **coût environnemental et financier élevé**.
 
 **Choisir entre le *few-shots* et le *fine-tuning***
@@ -208,15 +208,15 @@ Pour déterminer le seuil à partir duquel le *fine-tuning* devient plus rentabl
 
 Lorsque le coût total des requêtes **sans** *few-shots* additionné au *fine-tuning* est inférieur à celui des requêtes **avec** *few-shots*, optez pour le *fine-tuning*.
 
-### Hébergér le modèle dans un data center à faible impact énergétique et hydrique
+### Héberger le modèle dans un data center à faible impact énergétique et hydrique
 
-Lorsque vous décidez d'héberger vous même votre modèle chez un fournisseur de cloud public, vous pouvez sélectionner une région dotée d'un **bon score énergétique et hydrique** : facteur d'émission bas, PUE et WUE faible toute l'année. 
+Lorsque vous décidez d'héberger vous-même votre modèle chez un fournisseur de cloud public, vous pouvez sélectionner une région dotée d'un **bon score énergétique et hydrique** : facteur d'émission bas, PUE et WUE faible toute l'année. 
 
 #### Point de vue des émissions carbone
 En vous référant aux données fournies par Ember Energy, présélectionnez un pays à faible facteur d'émission comme l'Islande, la Norvège, la Suisse ou la France.
 
 Les principaux fournisseurs de cloud indiquent la localisation de leurs data centers par région :
-- Amazon Web Service : [https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/](https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/)
+- Amazon Web Services : [https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/](https://aws.amazon.com/fr/about-aws/global-infrastructure/regions_az/)
 - Microsoft Azure : [https://learn.microsoft.com/en-us/azure/reliability/regions-list?tabs=all](https://learn.microsoft.com/en-us/azure/reliability/regions-list?tabs=all)
 - Google Cloud Platform : [https://datacenters.google/locations/](https://datacenters.google/locations/)
 - Salesforce : [https://help.salesforce.com/s/articleView?id=000396845&type=1](https://help.salesforce.com/s/articleView?id=000396845&type=1)
@@ -231,15 +231,15 @@ Vous pouvez retrouver ces valeurs par région pour les principaux fournisseurs d
 - **OVH** : [https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf](https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf)
 
 #### Point de vue de la consommation d'eau
-Vérifiez que la région préselectionnée n'est pas à risque de sécheresse.
+Vérifiez que la région présélectionnée n'est pas à risque de sécheresse.
 Pour évaluer les risques liés à la disponibilité de l'eau, le **World Resources Institute (WRI)** propose une carte des régions à fort risque de sécheresse : [https://www.wri.org/aqueduct/tools](https://www.wri.org/aqueduct/tools).
 
 Enfin, regardez le WUE. Lorsque cet indicateur est manquant, considérez le WUE de la région d'un autre fournisseur :
 
-- **Amazon Web Services** : [https://sustainability.aboutamazon.com/products-services/aws-cloud/](https://sustainability.aboutamazon.com/products-services/aws-cloud/)
-- **Microsoft Azure** : [https://datacenters.microsoft.com/sustainability/efficiency/](https://datacenters.microsoft.com/sustainability/efficiency/)
-- **Google Cloud Platform** : lien [https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf](https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf)
-- **OVH** : [https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf](https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf)
+- **Amazon Web Services** : [https://sustainability.aboutamazon.com/products-services/aws-cloud/](https://sustainability.aboutamazon.com/products-services/aws-cloud/) ;
+- **Microsoft Azure** : [https://datacenters.microsoft.com/sustainability/efficiency/](https://datacenters.microsoft.com/sustainability/efficiency/) ;
+- **Google Cloud Platform** : lien [https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf](https://services.google.com/fh/files/misc/measuring_the_environmental_impact_of_delivering_ai_at_google_scale.pdf) ;
+- **OVH** : [https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf](https://www.ovhcloud.com/sites/default/files/external_files/kpis_fy25.pdf).
 
 ### Moteur d'inférence
 
@@ -261,9 +261,9 @@ Pour qu'un cache soit efficace, les requêtes doivent être peu espacées dans l
 
 Le **batch processing** consiste à envoyer un grand nombre de requêtes à traiter simultanément. Cette méthode optimise l'inférence du modèle et permet de **réduire significativement** le coût énergétique et financier [@poddar2025sustainablenlpinsightsbenchmarking].
 
-Les fournisseurs de modèle via API proposent généralement le *batch processing* à **moitié prix** par rapport au traitement classique. Bien qu'il n'existe pas de données précises dans la littérature quantifiant cette réduction, on peut supposer que la variation du prix est corrélée à celle de l'impact énergétique.
+Les fournisseurs de modèles via API proposent généralement le *batch processing* à **moitié prix** par rapport au traitement classique. Bien qu'il n'existe pas de données précises dans la littérature quantifiant cette réduction, on peut supposer que la variation du prix est corrélée à celle de l'impact énergétique.
 
-Envoyez périodiquement toutes les requêtes **en batch** si vous n'avez pas besoin des réponses du modèle en **temps réel**, que le **volume de requête est important** et qu'elles sont **indépendantes** les unes des autres.
+Envoyez périodiquement toutes les requêtes **en batch** si vous n'avez pas besoin des réponses du modèle en **temps réel**, que le **volume de requêtes est important** et qu'elles sont **indépendantes** les unes des autres.
 
 ### Modèles récents
 
@@ -271,24 +271,24 @@ Envoyez périodiquement toutes les requêtes **en batch** si vous n'avez pas bes
 
 ![Principaux LLM classés selon leurs capacités, en fonction du nombre de paramètres utilisés pour leur entraînement](images/Major-Large-Language-Models.png){width=80%}
 
-*Global landscape of LLMs and their performance. Reprinted under open access from David et al. [@david2025llm]*
+*Panorama mondial des LLM et de leurs performances [@david2025llm]*
 
 Pour la génération d'images par exemple, une étude suggère que les choix du type de modèle devraient tenir compte de la longueur prévue de la sortie : les modèles autorégressifs (les plus utilisés) restent préférables pour les réponses courtes (moins de 1024 tokens), tandis que les modèles de diffusion offrent des avantages indéniables pour les tâches de génération plus longues [@ruf2026diffusion].
 
 Attention, changer de modèle peut induire une nouvelle phase de développement (évaluation, fine-tuning) impliquant un impact environnemental significatif.
 De plus, optimiser une technologie a plutôt tendance à augmenter son impact au global car elle devient peu coûteuse et est donc beaucoup plus utilisée. C'est l'effet rebond [@jevons1865coal].
 
-#### « La quantization » : Réduire la précision des calculs réduit les besoins en énergie
+#### « La quantization » : réduire la précision des calculs réduit les besoins en énergie
 
-« Quantizer » un modèle consiste à réduire la précision de ses calculs. On passe de nombres flotants à des nombres entiers. En réduisant la précision des calculs, on peut, dans certaines conditions, réduire la quantité d'énergie consommée par le modèle [@delavande2026understandingefficiencyquantizationbatching; @poddar2025sustainablenlpinsightsbenchmarking].
+« Quantizer » un modèle consiste à réduire la précision de ses calculs. On passe de nombres flottants à des nombres entiers. En réduisant la précision des calculs, on peut, dans certaines conditions, réduire la quantité d'énergie consommée par le modèle [@delavande2026understandingefficiencyquantizationbatching; @poddar2025sustainablenlpinsightsbenchmarking].
 Bien sûr, cette réduction de décimales entraîne une perte de précision dans les calculs. Mais aujourd'hui, il est possible d'utiliser des modèles « quantizés » tout en conservant de très bonnes performances.
 
 #### La distillation : quand l'élève dépasse le maître
 
-Une technique permettant de réduire la taille des modèles et, par conséquent leur impact à l'exécution, est la distillation des connaissances.
+Une technique permettant de réduire la taille des modèles et, par conséquent, leur impact à l'exécution, est la distillation des connaissances.
 C'est cette technique qui a été utilisée pour créer DeepSeek avec une fraction du coût énergétique de ChatGPT [@young2025deepseek].
 Elle consiste à utiliser un modèle professeur, de très grande taille, pour générer des données qui serviront ensuite à affiner l'entraînement d'un autre modèle, appelé modèle élève, beaucoup plus petit. Le modèle élève peut ainsi acquérir des connaissances similaires à celles de son professeur, tout en nécessitant beaucoup moins de ressources pour son exécution [@jiao-etal-2020-tinybert].
 
 #### Les modèles élagués (Pruning)
 
-L'élagage (*pruning*) consiste à supprimer des paramètres du modèle. Cette technique permet de réduire fortement la taille, et donc le coût d'exécution tout en conservant de bonnes performances [@ICLR2024_160adf2d]. 
+L'élagage (*pruning*) consiste à supprimer des paramètres du modèle. Cette technique permet de réduire fortement la taille, et donc le coût d'exécution, tout en conservant de bonnes performances [@ICLR2024_160adf2d].

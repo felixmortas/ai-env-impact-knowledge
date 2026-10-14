@@ -2,16 +2,16 @@
 
 ## Synthèse
 
-Avant de réduire son impact environnental liés à l'IA générative, il faut comprendre les facteurs qui l'influencent.
+Avant de réduire son impact environnemental lié à l'IA générative, il faut comprendre les facteurs qui l'influencent.
 On peut les regrouper en 3 catégories : le modèle, son hébergement, et les tokens.
 
 Des outils existent pour mesurer celui des modèles ouverts avec précision et certitude.
 Les modèles propriétaires les plus puissants comme ceux d'OpenAI, Google ou Anthropic sont des boîtes noires et ne permettent pas d'établir une mesure certaine.
-Des organismes indépendants développent des méthodes d'estimation basées sur de nombreuses hypothèses non vérifiables, mais sur lesquels on peut s'appuyer pour obtenir des ordres de grandeur.
+Des organismes indépendants développent des méthodes d'estimation basées sur de nombreuses hypothèses non vérifiables, mais sur lesquelles on peut s'appuyer pour obtenir des ordres de grandeur.
 
-La calculatrice que j'ai développé en parallèle de cet article permet à l'utilisateur final d'un chatbot de quantifier la réduction de son impact en mettant en place des bonnes pratiques : [Calculatrice Impact Env. de l'IA](https://felixmortas.com/ai-inf-calculator)
+La calculatrice que j'ai développée en parallèle de cet article permet à l'utilisateur final d'un chatbot de quantifier la réduction de son impact en mettant en place des bonnes pratiques : [Calculatrice Impact Environnemental de ma conversation avec l'IA](https://felixmortas.com/ai-inf-calculator)
 
-A son niveau, les trois principaux leviers qu'il peut actionner instantanément sont :
+À son niveau, les trois principaux leviers qu'il peut actionner instantanément sont :
 
 - la priorisation d'une recherche web classique, en désactivant les recherches par IA automatiques.
 - le choix d'un modèle de petite taille avec un effort faible, adapté à la tâche à réaliser
@@ -19,7 +19,7 @@ A son niveau, les trois principaux leviers qu'il peut actionner instantanément 
 
 En tant que développeur, l'amplitude d'action est plus large et touche des concepts invisibles pour l'utilisateur final.
 
-A tous les niveaux, il est possible de drastiquement réduire l'impact environnemental liée à son utilisation de l'IA, tout en augmentant la qualité des réponses produites.
+À tous les niveaux, il est possible de drastiquement réduire l'impact environnemental lié à son utilisation de l'IA, tout en augmentant la qualité des réponses produites.
 
 ## Ouverture
 

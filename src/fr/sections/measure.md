@@ -1,10 +1,10 @@
 # Mesurer l'impact environnemental de l'IA générative
 
-## Etat de l'art
+## État de l'art
 
-Aujourd'hui, des modèles d'IA sont mis à disposition de manière open-source ou open-weights (téléchargeables mais processus de conception confidentielles) par des organismes privés comme Meta, Mistral, Google, Deepseek ou Alibaba. Il est donc théoriquement possible de mesurer leur empreinte environnementale avec certitude.
+Aujourd'hui, des modèles d'IA sont mis à disposition de manière open-source ou open-weights (téléchargeables, mais dont le processus de conception est confidentiel) par des organismes privés comme Meta, Mistral, Google, DeepSeek ou Alibaba. Il est donc théoriquement possible de mesurer leur empreinte environnementale avec certitude.
 
-Par exemple, le ML.ENERGY leaderboard [@chung2025mlenergybenchmarkautomatedinference] mesure directement la consommation électrique des modèles à l'aide de son outil Zeus [@zeus-nsdi23]. Cette initiative est même citée par OpenAI [@openai_academy_environmental_impact_ai].
+Par exemple, le ML.ENERGY Leaderboard [@chung2025mlenergybenchmarkautomatedinference] mesure directement la consommation électrique des modèles à l'aide de son outil Zeus [@zeus-nsdi23]. Cette initiative est même citée par OpenAI [@openai_academy_environmental_impact_ai].
 
 Cependant, les modèles les plus performants sont aujourd'hui détenus par OpenAI, Google et Anthropic. 
 Ces modèles propriétaires sont principalement accessibles via des API qui empêchent la mesure directe de l'énergie par des organismes externes.
@@ -12,14 +12,14 @@ Google estime qu'une requête médiane sur Gemini consomme 0,24 Wh d'énergie, �
 Le PDG d’OpenAI affirme qu’une requête moyenne adressée à ChatGPT consomme environ 0,34 Wh d’énergie et 0,3 mL (6 gouttes) d'eau [@altman2025gentle]. 
 Cependant, aucun des deux fournisseurs ne précise le nombre exact de tokens par prompt, ni le nombre de paramètres des modèles utilisés. Ce manque de transparence ne permet donc pas d'interpéter ces valeurs avec rigueur ni de comparer l’impact des modèles.
 
-Certains acteurs tentent d'estimer l'impact environnemental des modèles fermés en recourant à des approximations [@Luccioni_2024]. Des analyses indépendantes estiment qu'une requête consomme entre **~0,3 et 29 Wh** [@epoch_gradient_updates ; @jegham2025hungryaibenchmarkingenergy].
+Certains acteurs tentent d'estimer l'impact environnemental des modèles fermés en recourant à des approximations [@Luccioni_2024]. Des analyses indépendantes estiment qu'une requête consomme entre **0,3 et 29 Wh** [@epoch_gradient_updates ; @jegham2025hungryaibenchmarkingenergy].
 
-D'autres acteurs non lucratifs ont développé des méthode d'estimation couvrant un large périmètre, basée sur des estimations pour les modèles fermés [@Rince2025 ; @sncf_impactia_2026] ou sur des données réelles mesurées sur des modèles ouverts [@huggingface_llm_perf_leaderboard].
+D'autres acteurs non lucratifs ont développé des méthodes d'estimation couvrant un large périmètre, basées sur des estimations pour les modèles fermés [@Rince2025 ; @sncf_impactia_2026] ou sur des données réelles mesurées sur des modèles ouverts [@huggingface_llm_perf_leaderboard].
 
 Cependant, bien que le professionnalisme de ces organismes ne soit pas remis en cause, ces estimations doivent être interprétées avec prudence car elles reposent en grande partie sur des hypothèses difficilement vérifiables.
 Par exemple, une étude [@DEVRIES20232191] citée 526 fois, notamment dans des articles de revues scientifiques sérieuses comme Nature [@Xiao2025], se base sur une citation d'un membre de la direction d'Alphabet (Google) sans preuve à l'appui [@dastin2023focus].
 
-## Outils et Calculateurs
+## Outils et calculateurs
 
 Pour vous aider à tenter de mesurer l'impact environnemental de l'IA générative, des outils et calculateurs ont été développés :
 
@@ -28,7 +28,7 @@ Pour vous aider à tenter de mesurer l'impact environnemental de l'IA générati
 Développée spécialement pour illustrer les bonnes pratiques partagées dans le prochain chapitre de cet article, cette calculatrice est conçue pour être simple d’utilisation et accessible au grand public.
 Elle est basée sur un périmètre restreint de la méthodologie d'Ecologits dans lequel certaines valeurs hypothétiques ont été remplacées par des valeurs mesurées. Des variables supplémentaires ont également été ajoutées afin de mettre en évidence les leviers permettant de réduire l’empreinte environnementale de l'utilisateur.
 
-**Testez-la dès maintenant** en copiant-collant quelques extraits de votre dernière conversation avec une IA : <https://felixmortas.com/ai-inf-calculator>
+**Testez-la dès maintenant** en copiant-collant quelques extraits de votre dernière conversation avec une IA : [https://felixmortas.com/ai-inf-calculator](https://felixmortas.com/ai-inf-calculator)
 
 Cette calculatrice, comme toute méthode d’estimation, présente des limites :
 
@@ -44,5 +44,5 @@ Cette calculatrice, comme toute méthode d’estimation, présente des limites :
 - EcoLogits par CodeCarbon : un calculateur web et une bibliothèque Python pour estimer l'empreinte carbone de l'IA générative à travers les API, en utilisant le token comme unité de mesure [@ecologits_calculator]. L'outil synergise bien avec CodeCarbon.
 - Impact'IA par la SNCF : un calculateur avec un périmètre plus large qu'Ecologits, mais avec de nombreuses hypothèses qui augmentent considérablement l’incertitude [@sncf_impactia_2026].
 - LLM Perf Leaderboard par Hugging Face : un comparateur des performances de modèles ouverts, incluant l'énergie par token généré [@huggingface_llm_perf_leaderboard].
-- D'autres ressources comme des outils ou articles sont regroupés sur le dépôt Github [@rince_awesome_green_ai] d'un membre de l'organisation CodeCarbon : <https://github.com/samuelrince/awesome-green-ai>
+- D'autres ressources comme des outils ou articles sont regroupés sur le dépôt GitHub [@rince_awesome_green_ai] d'un membre de l'organisation CodeCarbon : [https://github.com/samuelrince/awesome-green-ai](https://github.com/samuelrince/awesome-green-ai)
 - Parfois, il est impossible de mesurer directement la consommation énergétique des machines. Cependant, celle-ci est très liée au temps d'exécution du modèle [@Zschache2026], ce qui en fait un paramètre utilisable pour mesurer l'impact environnemental d'un LLM hébergé.
