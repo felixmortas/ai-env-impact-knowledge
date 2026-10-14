@@ -1,10 +1,10 @@
 ---
-date: 14-09-2026
+date: 14-10-2026
 model: DeepSeek-V4.1-Flash
 limits: "As full reasoning is hidden, only reasoning task names are taken into account. Conversational agent is probably looping so input is processed several times, but we consider a one-shot response and omit input reprocessing. Artifacts are considered into output tokens count."
 ---
 <input>
-Améliore la syntaxe de ce paragraphe :
+Améliore la syntaxe de ce texte :
 
 ```
 Bonjour,
@@ -26,13 +26,13 @@ Bien cordialement,
 </input>
 
 <output>
-Voici une version améliorée de votre paragraphe :
+Voici une version améliorée de votre texte :
 
 ---
 
 Bonjour,
 
-Je me permets de vous solliciter cette fois-ci avec mon adresse professionnelle. Je suis la nouvelle adhérente de l'association 😊
+Je me permets de vous solliciter cette fois-ci via mon adresse professionnelle. Je suis une nouvelle adhérente de l'association 😊
 
 Nous lançons notre deuxième grande enquête auprès des jardiniers amateurs de France !
 
@@ -42,7 +42,7 @@ Aujourd'hui, certaines pratiques comme le paillage sont devenues des habitudes b
 
 Ce questionnaire s'adresse à toute personne disposant d'un espace de jardinage : balcon, terrasse ou jardin (ornemental, potager ou verger).
 
-Nous ne manquerons pas de vous tenir informés des résultats afin que vous puissiez également les exploiter en fonction de vos besoins : un dossier complet vous sera transmis à l'issue de l'enquête, d'ici la fin de l'année 2025.
+Nous ne manquerons pas de vous tenir informés des résultats afin que vous puissiez également les exploiter selon vos besoins : un dossier complet vous sera transmis à l'issue de l'enquête, d'ici la fin de l'année 2025.
 
 En vous remerciant par avance pour votre aide précieuse,
 
@@ -52,9 +52,9 @@ Bien cordialement,
 
 **Corrections apportées :**
 
-- « Je suis une la nouvelle adhérente » → « Je suis la nouvelle adhérente » (suppression du doublon).
-- « produits phytosanitaire » → « produits phytosanitaires » (accord au pluriel).
+- « Je suis une la nouvelle adhérente » → « Je suis une nouvelle adhérente » (suppression du doublon).
+- « phytosanitaire » → « phytosanitaires » (accord au pluriel).
 - « cette nouvelle édition quatre ans plus tard, vise » → « cette nouvelle édition, quatre ans plus tard, vise » (ajout des virgules pour encadrer l'incise).
-- « faire un état des lieux » → « dresser un état des lieux » (formulation plus idiomatique, bien que « faire » soit acceptable).
-- Ajout d'un saut de ligne entre les paragraphes pour aérer le texte et en faciliter la lecture.
+- « faire un état des lieux » → « dresser un état des lieux » (formulation plus idiomatique).
+- « en fonction de vos besoins » → « selon vos besoins » (légère amélioration stylistique).
 </output>

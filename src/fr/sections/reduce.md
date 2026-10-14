@@ -27,7 +27,7 @@ Pour comparer, Mistral AI estime qu'une requête adressée à leur modèle Mistr
 
 ### Utiliser un modèle avec peu de paramètres activés
 
-Lors de l'utilisation d'un chatbot, privilégiez **le plus petit modèle**, avec le moins de paramètres activés. Il est suffisant pour réaliser de nombreuses tâches avec précision [@chen2023frugalgptuselargelanguage, @cao2026taskspecificefficiencyanalysissmall].
+Lors de l'utilisation d'un chatbot, privilégiez **le plus petit modèle**, avec le moins de paramètres activés. Il est suffisant pour réaliser de nombreuses tâches avec précision [@chen2023frugalgptuselargelanguage ; @cao2026taskspecificefficiencyanalysissmall].
 
 La plupart des fournisseurs d'IA ne communiquent ni le nom exact du modèle utilisé, ni le nombre de paramètres qu'il contient. Cependant, pour vous guider, sachez que les modèles portant des noms comme *« flash »*, *« lite »*, *« rapide »*, *« nano »*, *« mini »*, *« quick »* ou *« small »* sont généralement ceux qui activent **le moins de paramètres par token traité**. 
 
@@ -178,7 +178,7 @@ Dans de nombreux cas, de simples algorithmes de décision ou des IA de prédicti
 
 Nous avons vu plus tôt que le nombre de paramètres activés d'un modèle a une influence importante sur l'impact environnemental du traitement d'un token.
 
-Priorisez l'utilisation de modèles petits et spécialisés. Cela permet même parfois d'obtenir des résultats d'une meilleure précision qu'avec des grands modèles généralistes [@cao2026taskspecificefficiencyanalysissmall, @li2024smalllanguagemodelsapplication]
+Priorisez l'utilisation de modèles petits et spécialisés. Cela permet même parfois d'obtenir des résultats d'une meilleure précision qu'avec des grands modèles généralistes [@cao2026taskspecificefficiencyanalysissmall ; @li2024smalllanguagemodelsapplication]
 Des modèles déjà spécialisés sur une tâche à l'aide du fine-tuning sont mis à disposition sur Hugging Face. Privilégiez-les plutôt que de procéder à un nouveau fine-tuning.
 
 ### Prompt engineering pour réduire le nombre de tokens en sortie

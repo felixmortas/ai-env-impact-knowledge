@@ -6,17 +6,15 @@ Mais ces chiffres reflètent-ils vraiment la réalité ?
 
 **Pas si vite !** Derrière ces affirmations se cachent des approximations et des raccourcis méthodologiques qui méritent d’être examinés de plus près.
 
-D’après mes calculs, ce simple message envoyé à DeepSeek a émis 0,28 g de CO₂ équivalent (gCO₂e) et consommé 0,06 mL d’eau, soit environ x x et 1 goutte d'eau.
+La [calculatrice développée pour illustrer cet article](https://felixmortas.com/ai-inf-calculator) estime que ce simple message envoyé à DeepSeek a émis 0,28 g de CO₂ équivalent (gCO₂e) et consommé 0,06 mL d’eau. C'est l'équivalent d'une ampoule allumée 6 minutes, et d'1 goutte d'eau.
 
-![Message court envoyé à DeepSeek : demande d'amélioration d'un paragraphe (1/3)](images/small-prompt-1.png){width=80%}
-![Message court envoyé à DeepSeek : début de la réponse (2/3)](images/small-prompt-2.png){width=80%}
-![Message court envoyé à DeepSeek : fin de la réponse et corrections apportées (3/3)](images/small-prompt-3.png){width=80%}
+*L'estimation prend en compte le texte visible du chatbot, l'électricité utilisée pour faire fonctionner l'IA, et l'eau pour refroidir le data center. Elle ne prend pas en compte le raisonnement de l'IA, les boucles d'action, l'entraînement du modèle, la fabrication du matériel informatique et du data center, l'utilisation du réseau, l'eau consommée pour produire l'électricité*
 
-Pourtant, ce message bien plus complexe envoyé à Claude a lui émis 3,23 gCO₂e et consommé 0,8 mL d’eau, soit environ xx et 16 gouttes d'eau.
+![Conversation courte avec DeepSeek](images/small-prompt.png){width=60%}
 
-![Message complexe envoyé à Claude : spécification du modèle de calcul (1/3)](images/big-prompt-1.png){width=80%}
-![Message complexe envoyé à Claude : fin de la demande et début de la réponse (2/3)](images/big-prompt-2.png){width=80%}
-![Message complexe envoyé à Claude : pipeline de calcul et document livré (3/3)](images/big-prompt-3.png){width=80%}
+Pourtant, [la calculatrice](https://felixmortas.com/ai-inf-calculator) estime que ce message bien plus complexe envoyé à Claude a lui émis 7,48 gCO₂e et consommé 2 mL d’eau. C'est l'équivalent d'une ampoule allumée 3 heures et 53 minutes, et de 40 gouttes d'eau.
+
+![Conversation plus complexe avec Claude](images/big-prompt.png){width=60%}
 
 **Comment expliquer une telle différence ?**
 
@@ -29,6 +27,6 @@ Dans un contexte de changement climatique lié aux activités humaines [@IPCC202
 Le rapport « Energy and AI » publié par l’IEA en avril 2025 prévoit que la demande mondiale en énergie pour les centres de données va doubler et passer à environ 945 TWh d’ici 2030 — soit un niveau comparable à la consommation annuelle d’électricité du Japon —, et qui devrait atteindre environ 1 200 TWh d’ici 2035 [@iea2025energy].
 Les Nations Unies ont récemment publié un rapport sur l'impact environnemental de l'IA au niveau des émissions carbones et de la consommation d'eau [@aczel2026environmental].
 
-Les organisations ainsi que les particuliers doivent contrôler leur empreinte environnementale. Mais pour agir de manière effiace, il faut premièrement comprendre quelques aspects de son fonctionnement. Des conseils concrets et réels pour la réduction de cet impact sont nécessaires au niveau des utilisateurs et des développeurs.
+Les organisations ainsi que les particuliers doivent contrôler leur empreinte environnementale. Des conseils concrets et réels pour la réduction de cet impact sont nécessaires au niveau des utilisateurs et des développeurs. Mais pour agir de manière effiace, il faut premièrement comprendre certains aspects de son fonctionnement. 
 
-A travers cet article, vous allez également vous rendre compte qu'adopter de bonnes pratiques environnementales conduit généralement à une utilisation plus efficace de l'outil.
+A travers cet article, vous allez également vous rendre compte qu'adopter de bonnes pratiques environnementales conduit généralement à une utilisation plus efficace de l'IA.
