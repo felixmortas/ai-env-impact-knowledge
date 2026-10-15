@@ -29,7 +29,7 @@ Les organisations ainsi que les particuliers doivent contrôler leur empreinte e
 
 J'ai réalisé des travaux de recherche sur l'impact environnemental de l'IA générative pendant 18 mois chez AXA, ce qui m'a permis d'accumuler de nombreuses connaissances sur le sujet que je souhaite aujourd'hui partager avec vous.
 
-À travers cet article, [vous comprendrez](#facteurs-influençant-limpact-environnemental-de-lia-générative) quels sont les facteurs qui influencent le plus l'impact environnemental de l'IA, comment [le mesurer](#mesurer-limpact-environnemental-de-lia-générative) lorsque c'est possible, et comment [le réduire](#réduire-son-impact-environnemental-en-mettant-en-place-des-bonnes-pratiques) en tant qu'utilisateur final et développeur. 
+À travers cet article, [vous comprendrez](#understand) quels sont les facteurs qui influencent le plus l'impact environnemental de l'IA, comment [le mesurer](#measure) lorsque c'est possible, et comment [le réduire](#reduce) en tant qu'utilisateur final et développeur. 
 
 Vous découvrirez également [ce calculateur](https://felixmortas.com/ai-inf-calculator/) vous permettant de mesurer l'impact d'une de vos conversations avec un chatbot (ChatGPT, Claude, Gemini, mais aussi Mistral, DeepSeek, etc.). Vous pourrez également simuler l'application de certaines bonnes pratiques sur cette même conversation, et ainsi vous rendre compte de la pertinence de celles-ci.
 

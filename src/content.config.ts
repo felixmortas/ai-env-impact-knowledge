@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { fileURLToPath } from 'node:url';
-import { assembleArticle } from './lib/assemble-article';
+import { applySectionAnchors, assembleArticle } from './lib/assemble-article';
 import { applyTableCaptions } from './lib/tables';
 import { formatEntry, loadBibliography } from './lib/bibliography';
 import { createCitations } from './lib/citations';
@@ -19,7 +19,7 @@ const article = defineCollection({
       for (const lang of languages) {
         const mainPath = fileURLToPath(new URL(`./${lang}/main.md`, import.meta.url));
         const citations = createCitations(bibliography);
-        const { title, markdown } = assembleArticle(
+        const { title, markdown, anchors } = assembleArticle(
           mainPath,
           {
             root: fileURLToPath(new URL('../', import.meta.url)),
@@ -32,7 +32,9 @@ const article = defineCollection({
           if (!bibEntry) throw new Error(`Entrée absente de references.bib : "${ref.key}"`);
           return { ...ref, ...formatEntry(bibEntry) };
         });
-        const rendered = await renderMarkdown(markdown);
+        const first = await renderMarkdown(markdown);
+        const anchored = applySectionAnchors(first.html, first.metadata.headings ?? [], anchors);
+        const rendered = { ...first, html: anchored.html, metadata: { ...first.metadata, headings: anchored.headings } };
         // Sépare le h1 du reste pour insérer le bloc auteur juste en dessous.
         const h1End = rendered.html.indexOf('</h1>');
         if (h1End === -1) throw new Error(`Titre h1 introuvable dans le rendu (langue "${lang}")`);

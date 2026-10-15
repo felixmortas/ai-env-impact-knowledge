@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { assembleArticle, shiftHeadings, stripComments } from './assemble-article.ts';
+import { applySectionAnchors, assembleArticle, shiftHeadings, stripComments } from './assemble-article.ts';
 
 function fixture(main: string, sections: Record<string, string>) {
   const dir = mkdtempSync(join(tmpdir(), 'article-'));
@@ -40,4 +40,17 @@ test('commentaires HTML retirés (mono et multi-ligne, dans main et sections)', 
   assert.equal(stripComments('a <!-- x\ny --> b'), 'a  b');
   const path = fixture('# T\n\n<!-- note -->\n[sections/a](sections/a.md)\n', { 'a.md': '# A\n<!-- c\nd -->\ntexte\n' });
   assert.doesNotMatch(assembleArticle(path).markdown, /<!--|-->/);
+});
+
+test('le titre principal de chaque section reçoit le nom du fichier comme ancre (HTML et table des matières)', () => {
+  const path = fixture('# T\n\n[sections/understand](sections/understand.md)\n', {
+    'understand.md': "# Facteurs d'impact\n\n## Sous-partie\n",
+  });
+  const { markdown, anchors } = assembleArticle(path);
+  assert.deepEqual(anchors, [{ text: "Facteurs d'impact", id: 'understand' }]);
+  assert.match(markdown, /^## Facteurs d'impact$/m);
+  const headings = [{ depth: 2, slug: 'facteurs-dimpact', text: "Facteurs d'impact" }, { depth: 3, slug: 'sous-partie', text: 'Sous-partie' }];
+  const out = applySectionAnchors('<h2 id="facteurs-dimpact">x</h2><h3 id="sous-partie">y</h3>', headings, anchors);
+  assert.equal(out.html, '<h2 id="understand">x</h2><h3 id="sous-partie">y</h3>');
+  assert.deepEqual(out.headings.map((h) => h.slug), ['understand', 'sous-partie']);
 });
