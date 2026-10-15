@@ -2,13 +2,15 @@
 import '../styles/article.css';
 
 import type { HeadLink } from '../lib/language-links';
+import type { PageMetadata } from '../lib/metadata';
 
 interface Props {
   title: string;
   lang: string;
   links?: HeadLink[];
+  metadata?: PageMetadata;
 }
-const { title, lang, links = [] } = Astro.props;
+const { title, lang, links = [], metadata } = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -17,6 +19,9 @@ const { title, lang, links = [] } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
+    {metadata && <meta name="description" content={metadata.description} />}
+    {metadata && <meta name="author" content={metadata.author} />}
+    {metadata?.og.map((o) => <meta property={o.property} content={o.content} />)}
     {links.map((l) => <link rel={l.rel} href={l.href} hreflang={l.hreflang} />)}
     <slot name="head" />
   </head>

@@ -20,11 +20,11 @@ test('gras et italique', () => {
 
 test('titres de paragraphe : <strong> dans un <p>, jamais un titre', () => {
   const titres = [
-    'Pourquoi ?',
+    'Pas si vite !',
     'Cas particulier : les petites corrections',
     'Exemple concret :',
     "Cas d'usage optimisés avec le cache",
-    'Exemple',
+    'Exemple :',
     'Modèle simplifié',
     'Règle générale',
     'Formule :',
@@ -44,9 +44,9 @@ test('listes ul / ol conservées, items présents', () => {
   assert.equal(obtenus, attendus, 'nombre de <li> différent du nombre d\'items source');
 });
 
-test('20 liens avec href identique à la source', () => {
+test('21 liens avec href identique à la source', () => {
   const attendus = [...sources.matchAll(/\]\((https?:[^)\s]+)\)|<(https?:[^>\s]+)>/g)].map((m) => m[1] ?? m[2]);
-  assert.equal(attendus.length, 20);
+  assert.equal(attendus.length, 21);
   const obtenus = [...html.matchAll(/<a [^>]*href="(https?:[^"]+)"/g)].map((m) => decode(m[1]));
   assert.deepEqual(obtenus.sort(), attendus.sort());
 });
@@ -58,9 +58,9 @@ test('URL longue présente, avec règle anti-débordement', () => {
 });
 
 test('caractères spéciaux littéraux', () => {
-  for (const s of ['CO₂e', 'm³', '~0,3 Wh']) assert.ok(html.includes(s), s);
+  for (const s of ['CO₂e', 'm³', '0,3 Wh']) assert.ok(html.includes(s), s);
   const typo = (t: string) => (t.match(/[‘’“”]/g) ?? []).length;
-  assert.equal(typo(html), typo(sources), 'guillemets typographiques ajoutés ou perdus');
+  assert.equal(typo(html.replace(/<head>[\s\S]*?<\/head>/, '')), typo(sources), 'guillemets typographiques ajoutés ou perdus');
 });
 
 test('tableaux : légende en <caption>, identifiant retiré, Source juste après', () => {
@@ -85,13 +85,15 @@ test('tableaux : conteneur à défilement horizontal local', () => {
   assert.match(readFileSync('src/styles/article.css', 'utf8'), /\.table-scroll\s*{[^}]*overflow-x:\s*auto/);
 });
 
-test('images : 8 figure, alt = figcaption, largeur 80 %, fichiers publiés, pas de {width', () => {
+test('images : 4 figure, alt = figcaption, largeur de la source, fichiers publiés, pas de {width', () => {
   assert.doesNotMatch(html, /\{width/);
   const figures = [...html.matchAll(/<figure class="figure" style="width: (\d+)%"><img src="([^"]+)" alt="([^"]*)"[^>]*><figcaption>([^<]*)<\/figcaption><\/figure>/g)];
-  assert.equal(figures.length, 8);
-  assert.equal((html.match(/<figure/g) ?? []).length, 8);
-  for (const [, width, src, alt, legende] of figures) {
-    assert.equal(width, '80');
+  assert.equal(figures.length, 4);
+  assert.equal((html.match(/<figure/g) ?? []).length, 4);
+  const largeurs = [...sources.matchAll(/^!\[.*\]\(.*\)\{width=(\d+)%\}$/gm)].map((m) => m[1]);
+  assert.equal(largeurs.length, figures.length);
+  for (const [i, [, width, src, alt, legende]] of figures.entries()) {
+    assert.equal(width, largeurs[i]);
     assert.equal(alt, legende);
     assert.ok(src.startsWith('/ai-env-impact-knowledge/images/'), src);
     const fichier = join('dist', src.replace('/ai-env-impact-knowledge/', ''));
@@ -137,7 +139,7 @@ const sourceNue = sources
   .replace(/^!\[.*$/gm, '')
   .replace(/^Table: .*$/gm, '')
   .replace(/\[@[^\]]*\]/g, '')
-  .replace(/\]\(https?:[^)]*\)/g, ']')
+  .replace(/\]\((?:https?:|#)[^)]*\)/g, ']')
   .replace(/<https?:[^>]*>/g, '');
 
 test('complétude : chaque paragraphe de la source est présent dans le HTML', () => {
@@ -173,9 +175,9 @@ test('complétude : chaque nombre de la source est présent dans le HTML', () =>
   assert.deepEqual(manquants, [], `nombres manquants : ${manquants.join(', ')}`);
 });
 
-test('complétude : 2 tableaux, 8 images, titres de section', () => {
+test('complétude : 2 tableaux, 4 images, titres de section', () => {
   assert.equal((html.match(/<table/g) ?? []).length, 2);
-  assert.equal((html.match(/<figure/g) ?? []).length, 8);
+  assert.equal((html.match(/<figure/g) ?? []).length, 4);
   assert.equal((html.match(/<h1/g) ?? []).length, 1);
 });
 
@@ -234,7 +236,7 @@ test('citation : bloc <details> avec entrée @misc lisible sans JavaScript', () 
   const m = /<details class="cite-block"[\s\S]*?<\/details>/.exec(full);
   assert.ok(m);
   assert.match(m[0], /<pre[^>]*><code>@misc\{mortas2026impact,/);
-  assert.match(m[0], /author = \{Mortas, Felix\}/);
+  assert.match(m[0], /author = \{MORTAS, Félix\}/);
   assert.match(m[0], /url = \{https:\/\/[^}]*\/fr\/\}/);
   assert.match(m[0], /note = \{Consulté en ligne/);
   assert.doesNotMatch(m[0], /@felixmortas|contact@/);
@@ -310,4 +312,20 @@ test('head : canonical, alternate par langue et x-default dans chaque page const
     for (const l of langs) assert.match(page, new RegExp(`<link rel="alternate" href="[^"]*/${l}/" hreflang="${l}">`));
     assert.match(page, /<link rel="alternate" href="[^"]*\/fr\/" hreflang="x-default">/);
   }
+});
+
+test('métadonnées du <head> : présentes une seule fois, URL absolues', () => {
+  const head = full.split('</head>')[0];
+  const count = (re: RegExp) => (head.match(re) ?? []).length;
+  const { siteUrl } = JSON.parse(readFileSync('src/config.json', 'utf8'));
+  assert.equal(count(/<title>[^<]+<\/title>/g), 1);
+  assert.equal(count(/<meta name="description" content="[^"]+"/g), 1);
+  assert.equal(count(/<meta name="author" content="[^"]+"/g), 1);
+  for (const p of ['og:title', 'og:description', 'og:type', 'og:url', 'og:locale', 'og:site_name', 'article:published_time', 'article:modified_time']) {
+    assert.equal(count(new RegExp(`<meta property="${p}" content="[^"]+"`, 'g')), 1, p);
+  }
+  assert.equal(count(/<link rel="canonical"/g), 1);
+  assert.match(head, /<meta property="og:locale" content="fr"/);
+  assert.ok(head.includes(`<meta property="og:url" content="${siteUrl}/fr/"`));
+  assert.ok(!head.includes('og:image'));
 });

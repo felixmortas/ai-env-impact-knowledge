@@ -32,11 +32,11 @@ before(() => {
 });
 after(() => rmSync(tmp, { recursive: true, force: true }));
 
-test('fr seul, puis ajout de en sans changer le code, puis chaîne manquante', () => {
+test('fr, en et es existent ; fixture en recopiée du français, puis chaîne manquante', () => {
   let r = build();
   assert.equal(r.status, 0, r.stderr + r.stdout);
   assert.match(readFileSync(join(tmp, 'dist/fr/index.html'), 'utf8'), /<html lang="fr"/);
-  assert.ok(!existsSync(join(tmp, 'dist/en/index.html')));
+  assert.ok(existsSync(join(tmp, 'dist/en/index.html')));
 
   const en = addEnglish();
   r = build();
@@ -68,4 +68,16 @@ test('locale sans Markdown : le build échoue en nommant la langue', () => {
   const r = build();
   assert.notEqual(r.status, 0);
   assert.match(r.stderr + r.stdout, /"en"/);
+});
+
+test('description retirée : le build échoue en nommant la clé et la langue', () => {
+  rmSync(join(tmp, 'src'), { recursive: true, force: true });
+  cpSync(join(root, 'src'), join(tmp, 'src'), { recursive: true });
+  const file = join(tmp, 'src/locales/fr.json');
+  const fr = JSON.parse(readFileSync(file, 'utf8'));
+  delete fr['meta.description'];
+  writeFileSync(file, JSON.stringify(fr));
+  const r = build();
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr + r.stdout, /fr\.json : "meta\.description"/);
 });

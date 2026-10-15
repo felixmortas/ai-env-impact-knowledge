@@ -26,6 +26,16 @@ Autres commandes :
 - `npm run test:rendu` : construit le site puis vérifie le HTML de `dist/fr/index.html` (gras/italique, titres de paragraphe, listes, liens, caractères spéciaux) ;
 - `npm run check:idempotence` : deux builds successifs, comparaison octet par octet de `dist/`.
 
+## Métadonnées de page
+
+`src/lib/metadata.ts` construit `description`, `author` et les balises Open Graph (`og:*`, `article:published_time`, `article:modified_time`) ; `Base.astro` les émet avec le `canonical` et les `hreflang` de `src/lib/language-links.ts`. Où modifier :
+
+- **titre** : le `#` de `src/<lang>/main.md` (titre de page et `og:title`) ; nom du site (`og:site_name`) : clé `meta.siteName` de `src/locales/<lang>.json` ;
+- **description** : clé `meta.description` de `src/locales/<lang>.json`, à rédiger par l'auteur dans chaque langue ; le build échoue si elle manque ;
+- **auteur et dates** : `firstName`, `lastName`, `publishedDate`, `modifiedDate` dans `src/config.json` ; URL absolues : `siteUrl`.
+
+Aucune image `og:image` n'est déclarée (le dépôt n'en a pas).
+
 ## Contenu de l'article
 
 `src/content.config.ts` charge `src/fr/main.md` via `src/lib/assemble-article.ts` : chaque lien `[sections/x](sections/x.md)` est remplacé par le contenu du fichier (titres `#`→`h2`, `##`→`h3`…), les commentaires HTML sont retirés, une inclusion introuvable fait échouer le build. Le rendu est fait par Astro, sans conversion typographique (`smartypants: false`) pour rester fidèle à la source.

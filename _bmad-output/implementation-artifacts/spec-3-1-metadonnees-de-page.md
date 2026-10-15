@@ -2,8 +2,8 @@
 title: 'Story 3.1 : Métadonnées de page'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
-baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
+status: 'in-review'
+baseline_commit: '2caeb94ad14973d9f3de92786f547ea38075780d'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
   - '{project-root}/_bmad-output/specs/spec-article-web-statique/SPEC.md'
@@ -48,11 +48,11 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/metadata.ts` -- construire et valider les métadonnées -- FR7
-- [ ] `src/layouts/Base.astro` -- émettre les balises ; ne pas dupliquer `canonical` -- FR7
-- [ ] `src/locales/fr.json` -- description de l'article (à faire valider par l'auteur) -- FR7
-- [ ] Tests : présence de chaque balise dans `dist/fr/index.html`, échec sans description -- FR7
-- [ ] `README.md` -- indiquer où modifier titre, description et auteur
+- [x] `src/lib/metadata.ts` -- construire et valider les métadonnées -- FR7
+- [x] `src/layouts/Base.astro` -- émettre les balises ; ne pas dupliquer `canonical` -- FR7
+- [x] `src/locales/fr.json` -- description de l'article (à faire valider par l'auteur) -- FR7
+- [x] Tests : présence de chaque balise dans `dist/fr/index.html`, échec sans description -- FR7
+- [x] `README.md` -- indiquer où modifier titre, description et auteur
 
 **Acceptance Criteria:**
 - Given `dist/fr/index.html`, when on lit le `<head>`, then `title`, `meta description`, `og:title`, `og:description`, `og:type`, `og:url`, `og:locale` et `link rel="canonical"` sont présents, une seule fois chacun.

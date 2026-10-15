@@ -7,6 +7,8 @@ import TocProgress from '../../components/TocProgress';
 import { buildToc } from '../../lib/toc';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
 import { discoverLanguages } from '../../lib/languages';
+import { buildMetadata } from '../../lib/metadata';
+import { getConfig } from '../../lib/config';
 import { headLinks, languageLinks } from '../../lib/language-links';
 
 export function getStaticPaths() {
@@ -29,10 +31,11 @@ const infos = await Promise.all(
     return { lang: l, name: t(l, 'language.name'), sections: hs.filter((h) => h.depth === 2).map((h) => h.slug) };
   }),
 );
+const metadata = buildMetadata(getConfig(), lang, entry.data.title, (key) => t(lang, key));
 const links = languageLinks(infos, lang, import.meta.env.BASE_URL);
 const sections = infos.find((i) => i.lang === lang)!.sections;
 ---
-<Base title={entry.data.title} lang={lang} links={headLinks(languages, lang)}>
+<Base title={entry.data.title} lang={lang} links={headLinks(languages, lang)} metadata={metadata}>
       <LanguageSwitcher client:load links={links} label={t(lang, 'language.switcher.label')} trackedIds={[...sections, 'references']} />
       <Fragment set:html={entry.data.h1Html} />
       <AuthorBlock title={entry.data.title} lang={lang} />
