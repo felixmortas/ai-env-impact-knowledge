@@ -255,3 +255,25 @@ figcaption {
 
 .lang-switcher ul { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; gap: 1rem; justify-content: flex-end; }
 .lang-switcher [aria-current="page"] { font-weight: 700; }
+
+/* ---- Accessibilité ---- */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+  color: var(--link);
+  border: 2px solid var(--link);
+  border-radius: 0.25rem;
+}
+.skip-link:focus { top: 0.5rem; }
+
+main:focus { outline: none; }
+
+/* Cibles tactiles confortables pour les boutons et le résumé « Citer ». */
+.share-button { min-height: 2.75rem; }
+.cite-block summary { min-height: 2.75rem; display: flex; align-items: center; }
+.author-links a, .lang-switcher a { display: inline-block; padding: 0.4rem 0; }
+.references-list .backlink { display: inline-block; min-width: 1.5rem; text-align: center; }

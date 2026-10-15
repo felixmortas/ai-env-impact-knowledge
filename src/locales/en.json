@@ -23,5 +23,6 @@
   "cite.failed": "Unable to copy the entry. Select it manually.",
   "cite.accessNote": "Accessed online; last modified: {date}",
   "language.name": "English",
-  "language.switcher.label": "Language"
+  "language.switcher.label": "Language",
+  "a11y.skip": "Skip to content"
 }

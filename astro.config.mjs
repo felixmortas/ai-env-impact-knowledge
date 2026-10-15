@@ -18,6 +18,8 @@ export default defineConfig({
   site: 'https://felixmortas.com',
   base: '/ai-env-impact-knowledge',
   output: 'static',
+  // Feuille de style unique intégrée à la page : aucune requête supplémentaire.
+  build: { inlineStylesheets: 'always' },
   trailingSlash: 'always',
   // Le Markdown est la source de vérité : aucune conversion typographique.
   markdown: { smartypants: false },

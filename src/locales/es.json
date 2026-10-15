@@ -23,5 +23,6 @@
   "cite.failed": "No se ha podido copiar la entrada. Selecciónela manualmente.",
   "cite.accessNote": "Consultado en línea; última modificación: {date}",
   "language.name": "Español",
-  "language.switcher.label": "Idioma"
+  "language.switcher.label": "Idioma",
+  "a11y.skip": "Saltar al contenido"
 }

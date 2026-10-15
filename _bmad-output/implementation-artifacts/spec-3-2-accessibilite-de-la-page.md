@@ -2,7 +2,7 @@
 title: 'Story 3.2 : Accessibilité de la page'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -52,10 +52,10 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/a11y.test.ts` -- contrôles automatiques : hiérarchie de titres, `alt`, `main` unique, ressources externes -- FR7, NFR8
-- [ ] Lien d'évitement, landmarks et focus visible dans le gabarit et les styles -- FR7
-- [ ] Revue clavier complète et lecteur d'écran des composants des epics 1 et 2 ; corrections -- FR7
-- [ ] Mesure Lighthouse (accessibilité) sur `/fr/` en clair et en sombre ; consigner le score dans le README -- NFR3
+- [x] `src/a11y.test.ts` -- contrôles automatiques : hiérarchie de titres, `alt`, `main` unique, ressources externes -- FR7, NFR8
+- [x] Lien d'évitement, landmarks et focus visible dans le gabarit et les styles -- FR7
+- [x] Revue clavier complète et lecteur d'écran des composants des epics 1 et 2 ; corrections -- FR7
+- [x] Mesure Lighthouse (accessibilité) sur `/fr/` en clair et en sombre ; consigner le score dans le README -- NFR3
 - [ ] Vérification finale 375 px sans défilement horizontal -- UX-DR5
 
 **Acceptance Criteria:**
@@ -77,3 +77,32 @@ Le déploiement GitHub Pages n'est pas une story : l'audit Lighthouse s'exécute
 - `npm test` -- expected: tests verts
 - `npm run test:a11y` -- expected: contrôles verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Lien d'évitement et repères**
+
+- Lien d'évitement en premier élément focalisable, cible `main` focalisable.
+  [`Base.astro:30`](../../src/layouts/Base.astro#L30)
+
+- Style du lien masqué hors focus, visible au focus.
+  [`article.css:259`](../../src/styles/article.css#L259)
+
+- Chaîne traduite `a11y.skip` en fr, en, es.
+  [`fr.json:27`](../../src/locales/fr.json#L27)
+
+**Contrôles automatiques**
+
+- Contrôles sur `dist/` : titres, `alt`, `main`, ancres, ressources externes.
+  [`a11y.test.ts:76`](../../src/a11y.test.ts#L76)
+
+- Script `test:a11y`.
+  [`package.json:11`](../../package.json#L11)
+
+**Périphériques**
+
+- Feuille de style toujours intégrée pour garder le test de rendu vert.
+  [`astro.config.mjs:22`](../../astro.config.mjs#L22)
+
+- Procédure manuelle et scores Lighthouse (100 clair et sombre).
+  [`README.md:110`](../../README.md#L110)

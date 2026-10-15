@@ -23,5 +23,6 @@
   "cite.failed": "Impossible de copier l'entrée. Sélectionnez-la manuellement.",
   "cite.accessNote": "Consulté en ligne ; dernière modification : {date}",
   "language.name": "Français",
-  "language.switcher.label": "Langue"
+  "language.switcher.label": "Langue",
+  "a11y.skip": "Aller au contenu"
 }

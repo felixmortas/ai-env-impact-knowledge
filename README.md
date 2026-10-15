@@ -108,3 +108,17 @@ Le bloc « Citer » (`src/components/CiteBlock.astro`, `<details>` lisible sans 
 ## Table des matières
 
 La table (`src/components/Toc.astro`, `<nav>` étiqueté par `toc.label`) est générée à la compilation depuis les titres `h2` à `h5` rendus (`src/lib/toc.ts`), avec les mêmes `id` que le contenu, plus l'entrée « Références ». Le `h1` et les titres de paragraphe en gras n'y figurent pas. Liste `ol` imbriquée de liens ancrés, placée sous le bloc auteur, fonctionnelle sans JavaScript. Tests : `src/lib/toc.test.ts` et `src/rendu.test.ts`.
+
+## Accessibilité
+
+`npm run test:a11y` construit le site puis `src/a11y.test.ts` contrôle tout `dist/**/*.html` : un seul `h1` et aucun saut de niveau de titre, `alt` non vide sur chaque image, un seul `main` ciblé par le lien d'évitement (`Aller au contenu`, clé `a11y.skip`, premier élément focalisable), ids uniques et ancres résolues, aucune ressource externe (script, image, feuille de style, `url()`) et aucun accès à `document.cookie`. Les défauts se corrigent dans les gabarits, composants et styles, jamais dans le Markdown.
+
+Ordre de tabulation attendu sur `/fr/` : lien d'évitement, langue, partager, citer, table des matières, contenu. Le focus est visible partout (`:focus-visible` dans `src/styles/article.css`). Les confirmations de copie passent par une région `aria-live`, l'entrée active de la table par `aria-current`.
+
+Vérification manuelle (à consigner ci-dessous) :
+
+1. Clavier : `npm run build && npm run preview`, ouvrir `/fr/`, parcourir la page avec Tab / Maj+Tab et vérifier ordre et focus visible.
+2. 375 px : mode appareil, console : `document.documentElement.scrollWidth <= window.innerWidth` doit valoir `true`.
+3. Lighthouse (catégorie Accessibilité uniquement, clair puis sombre) sur `/fr/` servie par `npm run preview` : `npx lighthouse http://localhost:4321/ai-env-impact-knowledge/fr/ --only-categories=accessibility --view` (outil non ajouté aux dépendances) ; émuler `prefers-color-scheme: dark` pour le thème sombre. Objectif : >= 95.
+
+Scores Lighthouse accessibilité mesurés le 2026-10-15 sur `/fr/` (lighthouse@12, `astro preview`) : clair : 100, sombre : 100 (thème sombre forcé via les options Chrome, application effective non confirmée visuellement).
