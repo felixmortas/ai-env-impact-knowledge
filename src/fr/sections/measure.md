@@ -10,7 +10,7 @@ Cependant, les modèles les plus performants sont aujourd'hui détenus par OpenA
 Ces modèles propriétaires sont principalement accessibles via des API qui empêchent la mesure directe de l'énergie par des organismes externes.
 Google estime qu'une requête médiane sur Gemini consomme 0,24 Wh d'énergie, émet 0,03 gCO₂e et consomme 0,26 mL (soit environ cinq gouttes) d'eau. L'impact énergétique par requête équivaut à regarder la télévision pendant moins de neuf secondes [@elsworth2025measuringenvironmentalimpactdelivering].
 Le PDG d’OpenAI affirme qu’une requête moyenne adressée à ChatGPT consomme environ 0,34 Wh d’énergie et 0,3 mL (6 gouttes) d'eau [@altman2025gentle]. 
-Cependant, aucun des deux fournisseurs ne précise le nombre exact de tokens par prompt, ni le nombre de paramètres des modèles utilisés. Ce manque de transparence ne permet donc pas d'interpéter ces valeurs avec rigueur ni de comparer l’impact des modèles.
+Cependant, aucun des deux fournisseurs ne précise le nombre exact de tokens par prompt, ni le nombre de paramètres des modèles utilisés. Ce manque de transparence ne permet donc pas d'interpréter ces valeurs avec rigueur ni de comparer l’impact des modèles.
 
 Certains acteurs tentent d'estimer l'impact environnemental des modèles fermés en recourant à des approximations [@Luccioni_2024]. Des analyses indépendantes estiment qu'une requête consomme entre **0,3 et 29 Wh** [@epoch_gradient_updates ; @jegham2025hungryaibenchmarkingenergy].
 

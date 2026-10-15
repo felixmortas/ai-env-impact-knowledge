@@ -1,0 +1,23 @@
+{
+  "page.title": "Impacto ambiental de la IA",
+  "toc.label": "Índice de contenidos",
+  "toc.progress": "Progreso de lectura",
+  "references.title": "Referencias",
+  "references.backlink": "Volver a la cita",
+  "author.by": "Por",
+  "author.published": "Publicado el",
+  "author.modified": "Última modificación el",
+  "author.license": "Licencia:",
+  "author.contact": "Escribir al autor",
+  "author.github": "GitHub",
+  "author.linkedin": "LinkedIn",
+  "share.label": "Compartir",
+  "share.copied": "Enlace copiado",
+  "share.failed": "No se ha podido copiar el enlace. Cópielo manualmente:",
+  "share.url": "Enlace del artículo",
+  "cite.label": "Citar",
+  "cite.copy": "Copiar",
+  "cite.copied": "Entrada copiada",
+  "cite.failed": "No se ha podido copiar la entrada. Selecciónela manualmente.",
+  "cite.accessNote": "Consultado en línea; última modificación: {date}"
+}

@@ -1,0 +1,23 @@
+{
+  "page.title": "Environmental Impact of AI",
+  "toc.label": "Table of contents",
+  "toc.progress": "Reading progress",
+  "references.title": "References",
+  "references.backlink": "Back to citation",
+  "author.by": "By",
+  "author.published": "Published on",
+  "author.modified": "Last modified on",
+  "author.license": "License:",
+  "author.contact": "Write to the author",
+  "author.github": "GitHub",
+  "author.linkedin": "LinkedIn",
+  "share.label": "Share",
+  "share.copied": "Link copied",
+  "share.failed": "Unable to copy the link. Copy it manually:",
+  "share.url": "Article link",
+  "cite.label": "Cite",
+  "cite.copy": "Copy",
+  "cite.copied": "Entry copied",
+  "cite.failed": "Unable to copy the entry. Select it manually.",
+  "cite.accessNote": "Accessed online; last modified: {date}"
+}
