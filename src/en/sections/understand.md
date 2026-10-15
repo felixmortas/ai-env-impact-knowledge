@@ -73,7 +73,7 @@ The different services for using an LLM, which consume energy, are as follows:
 Each country produces electricity with a different environmental impact. To generate **1 kWh**, a power plant emits GHGs and consumes water. 
 
 Some organizations provide the carbon emission factors of each country (in gCO₂e/kWh produced):
-- the **International Energy Agency** (IEA), normally paid but available free of charge on request;
+- the **International Energy Agency** (IEA), normally paid but available free of charge on request [@iea2025emissions];
 - the **ADEME**, free but uses 2011 IEA data [@ademe2026];
 - Ember Energy, free and uses 2025 data from the IEA, Eurostat, BP, and UN [@ember_yearly_electricity_data];
 - Spectrum IEEE, free and by country or type of production [@jones2008water].

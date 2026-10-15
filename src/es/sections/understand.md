@@ -73,7 +73,7 @@ Los distintos servicios que permiten utilizar un LLM, y que consumen energía, s
 Cada país produce electricidad con un impacto ambiental variable. Para generar **1 kWh**, una central emite GEI y consume agua. 
 
 Algunos organismos proporcionan los factores de emisión de carbono de cada país (en gCO₂e/kWh producido):
-- la **International Energy Agency** (IEA), normalmente de pago pero accesible gratuitamente previa solicitud;
+- la **International Energy Agency** (IEA), normalmente de pago pero accesible gratuitamente previa solicitud [@iea2025emissions];
 - la **ADEME**, gratuita pero que recoge los datos de la IEA de 2011 [@ademe2026];
 - Ember Energy, gratuita y que recoge datos de 2025 de la IEA, Eurostat, BP y UN [@ember_yearly_electricity_data];
 - Spectrum IEEE, gratuita y por país o tipo de producción [@jones2008water].
