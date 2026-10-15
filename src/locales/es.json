@@ -19,5 +19,7 @@
   "cite.copy": "Copiar",
   "cite.copied": "Entrada copiada",
   "cite.failed": "No se ha podido copiar la entrada. Selecciónela manualmente.",
-  "cite.accessNote": "Consultado en línea; última modificación: {date}"
+  "cite.accessNote": "Consultado en línea; última modificación: {date}",
+  "language.name": "Español",
+  "language.switcher.label": "Idioma"
 }

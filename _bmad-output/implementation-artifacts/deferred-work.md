@@ -60,3 +60,7 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-2-6-arborescence-multilingue.md`
   summary: `test:langues` (builds réels, environ 40 s) n'est pas inclus dans `npm test`, et `check:idempotence` ne couvre qu'une langue dans le dépôt.
   evidence: `package.json` ; aucune langue autre que `fr` n'est versionnée.
+
+- source_spec: `_bmad-output/implementation-artifacts/spec-2-7-selecteur-de-langue-et-hreflang.md`
+  summary: 7 tests de `npm run test:rendu` (2, 4, 6, 10, 14, 16, 22) et `npm run test:langues` échouent, périmés par rapport au contenu actuel.
+  evidence: ils échouaient déjà avant la story 2.7 (comptes d'images, format de l'auteur BibTeX, absence supposée de `dist/en/`) ; contenu en/es réel depuis le commit « traduit l'article en anglais ».

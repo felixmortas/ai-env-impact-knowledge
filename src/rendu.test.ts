@@ -6,7 +6,7 @@ import { join } from 'node:path';
 const full = readFileSync('dist/fr/index.html', 'utf8');
 // `html` = corps de l'article, sans la section « Références » (générée depuis le .bib).
 assert.ok(full.includes('<section class="references"'), 'section Références absente');
-const html = full.split('<section class="references"')[0].replace(/<aside class="author-block"[\s\S]*?<\/aside>/, '').replace(/<nav class="toc"[\s\S]*?<\/nav>/, '');
+const html = full.split('<section class="references"')[0].replace(/<aside class="author-block"[\s\S]*?<\/aside>/, '').replace(/<nav class="toc"[\s\S]*?<\/nav>/, '').replace(/<nav class="lang-switcher"[\s\S]*?<\/nav>/, '');
 const sources = ['src/fr/main.md', ...readdirSync('src/fr/sections').map((f) => join('src/fr/sections', f))]
   .map((f) => readFileSync(f, 'utf8'))
   .join('\n');
@@ -180,8 +180,10 @@ test('complétude : 2 tableaux, 8 images, titres de section', () => {
 });
 
 test('sans JavaScript : seuls les îlots de partage, de copie et de suivi de la table sont scriptés, aucun bouton rendu, aucune ressource tierce', () => {
-  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; les îlots sont les boutons Partager et Copier et la table des matières (rendue au build, liste de liens présente sans JS).
-  assert.equal((full.match(/<astro-island/g) ?? []).length, 3);
+  // Astro n'injecte ses scripts d'hydratation que pour l'îlot ; les îlots sont les boutons Partager et Copier, le sélecteur de langue et la table des matières (rendue au build, liste de liens présente sans JS).
+  assert.equal((full.match(/<astro-island/g) ?? []).length, 4);
+  assert.match(full, /<astro-island[^>]*LanguageSwitcher[^>]*client="load"/);
+  assert.match(full, /<nav class="lang-switcher"[^>]*><ul>/);
   assert.match(full, /component-export="default"[^>]*client="only"/);
   assert.match(full, /<astro-island[^>]*TocProgress[^>]*client="load"/);
   assert.match(full, /<nav class="toc"[^>]*><ol>/);
@@ -297,4 +299,15 @@ test('table des matières : correspond exactement aux titres h2 à h5 de l\'arti
     prev = n;
   }
   assert.equal(heads.find((x) => x.depth === 3) && nesting.get(heads.find((x) => x.depth === 3)!.id), 2);
+});
+
+test('head : canonical, alternate par langue et x-default dans chaque page construite', () => {
+  const langs = readdirSync('dist').filter((d) => /^[a-z]{2}$/.test(d));
+  assert.ok(langs.length >= 2);
+  for (const lang of langs) {
+    const page = readFileSync(`dist/${lang}/index.html`, 'utf8');
+    assert.match(page, new RegExp(`<link rel="canonical" href="[^"]*/${lang}/">`));
+    for (const l of langs) assert.match(page, new RegExp(`<link rel="alternate" href="[^"]*/${l}/" hreflang="${l}">`));
+    assert.match(page, /<link rel="alternate" href="[^"]*\/fr\/" hreflang="x-default">/);
+  }
 });

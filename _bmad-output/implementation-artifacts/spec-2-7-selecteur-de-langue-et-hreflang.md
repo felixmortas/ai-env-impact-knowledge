@@ -2,7 +2,7 @@
 title: 'Story 2.7 : Sélecteur de langue et hreflang'
 type: 'feature'
 created: '2026-10-10'
-status: 'ready-for-dev'
+status: 'done'
 baseline_commit: 'deae351a893b409ace3e6a49f9228fc9a196e522'
 context:
   - '{project-root}/_bmad-output/planning-artifacts/epics.md'
@@ -50,12 +50,12 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `src/lib/language-links.ts` -- liens statiques et calcul du lien par rang de section -- FR8, UX-DR4
-- [ ] `src/components/LanguageSwitcher.tsx` -- sélecteur accessible, amélioration par la section visible -- UX-DR4
-- [ ] `src/layouts/Base.astro` -- `canonical`, `alternate` / `hreflang`, `x-default` -- FR8
-- [ ] Vérifier que la citation BibTeX et les dates sont localisées dans chaque langue (fixtures de 2.6) -- FR8
-- [ ] Tests : correspondance par rang, section absente, une seule langue, balises `head` -- FR8
-- [ ] `README.md` -- documenter la règle de correspondance par rang
+- [x] `src/lib/language-links.ts` -- liens statiques et calcul du lien par rang de section -- FR8, UX-DR4
+- [x] `src/components/LanguageSwitcher.tsx` -- sélecteur accessible, amélioration par la section visible -- UX-DR4
+- [x] `src/layouts/Base.astro` -- `canonical`, `alternate` / `hreflang`, `x-default` -- FR8
+- [x] Vérifier que la citation BibTeX et les dates sont localisées dans chaque langue (fixtures de 2.6) -- FR8
+- [x] Tests : correspondance par rang, section absente, une seule langue, balises `head` -- FR8
+- [x] `README.md` -- documenter la règle de correspondance par rang
 
 **Acceptance Criteria:**
 - Given une page quelconque, when on lit son `<head>`, then elle contient un `canonical` vers sa propre URL et un `alternate hreflang` pour chaque langue plus `x-default`.
@@ -75,3 +75,37 @@ context:
 **Commands:**
 - `npm test` -- expected: tests verts
 - `npm run check:idempotence` -- expected: « OK : builds identiques »
+
+## Suggested Review Order
+
+**Correspondance par rang (cœur de la story)**
+
+- Logique pure : liens statiques, lien par rang, rang visible, balises `head`.
+  [`language-links.ts:30`](../../src/lib/language-links.ts#L30)
+
+- Îlot : liens statiques au rendu serveur, enrichis par la section `h2` visible.
+  [`LanguageSwitcher.tsx:46`](../../src/components/LanguageSwitcher.tsx#L46)
+
+**Branchement dans la page**
+
+- Ids des `h2` de chaque langue, sélecteur monté avant l'article.
+  [`index.astro:24`](../../src/pages/[lang]/index.astro#L24)
+
+- `canonical`, `alternate hreflang` et `x-default` émis dans le `<head>`.
+  [`Base.astro:20`](../../src/layouts/Base.astro#L20)
+
+**Libellés, style, documentation**
+
+- Autonymes et libellé du sélecteur par langue.
+  [`fr.json:22`](../../src/locales/fr.json#L22)
+
+- Règle de correspondance par rang documentée.
+  [`README.md:92`](../../README.md#L92)
+
+**Tests**
+
+- Rang, section absente, une seule langue, balises `head`.
+  [`language-links.test.ts:151`](../../src/lib/language-links.test.ts#L151)
+
+- Balises `head` vérifiées sur les pages construites.
+  [`rendu.test.ts:304`](../../src/rendu.test.ts#L304)

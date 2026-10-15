@@ -1,11 +1,13 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import { t } from '../../i18n';
 import Base from '../../layouts/Base.astro';
 import AuthorBlock from '../../components/AuthorBlock.astro';
 import TocProgress from '../../components/TocProgress';
 import { buildToc } from '../../lib/toc';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 import { discoverLanguages } from '../../lib/languages';
+import { headLinks, languageLinks } from '../../lib/language-links';
 
 export function getStaticPaths() {
   return discoverLanguages().map((lang) => ({ params: { lang } }));
@@ -16,8 +18,22 @@ const entry = await getEntry('article', lang);
 if (!entry) throw new Error(`Article introuvable pour la langue "${lang}" (src/${lang}/main.md)`);
 const { Content, headings } = await render(entry);
 const referencesHeading = { depth: 2, slug: 'references', text: t(lang, 'references.title') };
+// Sections `h2` de chaque langue, dans l'ordre des fichiers (références exclues) : base de la correspondance par rang.
+const languages = discoverLanguages();
+const articles = await getCollection('article');
+const infos = await Promise.all(
+  languages.map(async (l) => {
+    const e = articles.find((x) => x.id === l);
+    if (!e) throw new Error(`Article introuvable pour la langue "${l}" (src/${l}/main.md)`);
+    const { headings: hs } = await render(e);
+    return { lang: l, name: t(l, 'language.name'), sections: hs.filter((h) => h.depth === 2).map((h) => h.slug) };
+  }),
+);
+const links = languageLinks(infos, lang, import.meta.env.BASE_URL);
+const sections = infos.find((i) => i.lang === lang)!.sections;
 ---
-<Base title={entry.data.title} lang={lang}>
+<Base title={entry.data.title} lang={lang} links={headLinks(languages, lang)}>
+      <LanguageSwitcher client:load links={links} label={t(lang, 'language.switcher.label')} trackedIds={[...sections, 'references']} />
       <Fragment set:html={entry.data.h1Html} />
       <AuthorBlock title={entry.data.title} lang={lang} />
       <TocProgress client:load nodes={buildToc(headings, [referencesHeading])} label={t(lang, 'toc.label')} progressLabel={t(lang, 'toc.progress')} />

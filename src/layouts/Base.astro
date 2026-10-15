@@ -1,11 +1,14 @@
 ---
 import '../styles/article.css';
 
+import type { HeadLink } from '../lib/language-links';
+
 interface Props {
   title: string;
   lang: string;
+  links?: HeadLink[];
 }
-const { title, lang } = Astro.props;
+const { title, lang, links = [] } = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -14,6 +17,7 @@ const { title, lang } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
+    {links.map((l) => <link rel={l.rel} href={l.href} hreflang={l.hreflang} />)}
     <slot name="head" />
   </head>
   <body>

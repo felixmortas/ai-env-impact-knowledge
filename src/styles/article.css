@@ -252,3 +252,6 @@ figcaption {
   .toc a[aria-current]::before { background: var(--link); box-shadow: 0 0 0 2px var(--link); }
   h2, h3, h4, h5 { scroll-margin-top: 3rem; }
 }
+
+.lang-switcher ul { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; gap: 1rem; justify-content: flex-end; }
+.lang-switcher [aria-current="page"] { font-weight: 700; }

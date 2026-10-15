@@ -19,5 +19,7 @@
   "cite.copy": "Copy",
   "cite.copied": "Entry copied",
   "cite.failed": "Unable to copy the entry. Select it manually.",
-  "cite.accessNote": "Accessed online; last modified: {date}"
+  "cite.accessNote": "Accessed online; last modified: {date}",
+  "language.name": "English",
+  "language.switcher.label": "Language"
 }
